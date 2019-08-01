@@ -1,0 +1,280 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+<link rel="stylesheet" href="<?=JS_URL?>jquery-ui.css" />
+
+<script src="<?=JS_URL?>jquery-ui.js"></script>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>-->
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+ 
+ <script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+		  
+</script>
+<!--======================================== Loading Forms vai Ajax ===================================-->
+<script type="text/javascript" src="<?=JS_URL?>ddaccordion.js"></script>
+<script type="text/javascript">
+
+
+ddaccordion.init({
+	headerclass: "submenuheader", //Shared CSS class name of headers group
+	contentclass: "submenu", //Shared CSS class name of contents group
+	revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+	mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+	collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+	defaultexpanded: [], //index of content(s) open by default [index1, index2, etc] [] denotes no content
+	onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
+	animatedefault: false, //Should contents open by default be animated into view?
+	persiststate: true, //persist state of opened contents within browser session?
+	toggleclass: ["", ""], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+	togglehtml: ["suffix", "<img src='images/drop-down-erro2.jpg' class='statusicon' />", "<img src='images/drop-down-erro.jpg' class='statusicon' />"], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+	animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+	oninit:function(headers, expandedindices){ //custom code to run when headers have initalized
+		//do nothing
+	},
+	onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+		//do nothing
+	}
+})
+
+
+</script>
+
+
+
+
+<script>
+	$(function() {
+<? 
+	foreach($this->Job_Keyword as $akash)
+	{
+?>
+	var availableTags = [<?=$akash['job_key_word']?>];
+
+<? } ?>
+	function split( val ) {
+	return val.split( /,\s*/ );
+	}
+	function extractLast( term ) {
+	return split( term ).pop();
+	}
+	$( "#tags" )
+	// don't navigate away from the field on tab when selecting an item
+	.bind( "keydown", function( event ) {
+	if ( event.keyCode === $.ui.keyCode.TAB &&
+	$( this ).data( "ui-autocomplete" ).menu.active ) {
+	event.preventDefault();
+	}
+	})
+	.autocomplete({
+	minLength: 0,
+	source: function( request, response ) {
+	// delegate back to autocomplete, but extract the last term
+	response( $.ui.autocomplete.filter(
+	availableTags, extractLast( request.term ) ) );
+	},
+	focus: function() {
+	// prevent value inserted on focus
+	return false;
+	},
+	select: function( event, ui ) {
+	var terms = split( this.value );
+	// remove the current input
+	terms.pop();
+	// add the selected item
+	terms.push( ui.item.value );
+	// add placeholder to get the comma-and-space at the end
+	terms.push( "" );
+	this.value = terms.join( ", " );
+	return false;
+	}
+	});
+	});
+</script>
+
+		<div class="container static_page">
+        
+        	<h1 class="title">Advanced search</h1>
+<form name="search" id="search" action="<?=BASE_PATH?>job/search" method="get">
+				<?php // echo $this->url(array('controller'=>'job', 'action'=>'search'), 'default', true)?>
+            <div class="content_full">
+            	<div class="form advanced-search-from selectForm">
+                	<div class="col col1 ui-widget">
+                    	<span class="label">Keywords</span>
+                        <input type="text" value="" class="inputbox" id="tags"/>
+                    </div>
+                    
+                    <?	
+						/*$job_qry="select * from tbl_jobs";
+						$job_relult=$db->runQuery("$job_qry");
+						prd($job_relult);*/
+						
+						$qry="select * from tbl_countries";
+						$country=$db->runQuery("$qry");
+						//prd($country);
+					?>
+
+                    <div class="col col2">
+                    	<span class="label">Country</span>
+                        	<select id="job_country" name="job_country" class="selectbox">
+                                <option value="">Select</option>
+                                    <?				
+                                    foreach($country as $countrylist)
+                                    {
+                                    ?>
+                                <option value="<?=$countrylist['country_id']?>"><?=$countrylist['country_name']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <div class="col col3">
+					<?
+						$Employment_types_Qry="select * from tbl_employment_type";
+						$Employment_types=$db->runQuery("$Employment_types_Qry");
+						//prd($Employment_types);
+					?>
+                    	<span class="label">Employment Type</span>
+                        
+                        <select id="employment_id" name="employment_id" class="selectbox">
+                                <option value="">Select Job Type</option>
+                                    <?				
+                                    foreach($Employment_types as $My_Employment_types)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Employment_types['employment_id']?>"><?=$My_Employment_types['employment_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                        
+                    </div>
+                    <div class="clr"></div>
+                    <?
+						$Career_Level_Qry="select * from tbl_career_levels";
+						$Career_Level=$db->runQuery("$Career_Level_Qry");
+						//prd($Career_Level);
+					?>
+                    <div class="col col1">
+                    	<span class="label">Career Level</span>
+                        <select id="Career_Level" name="Career_Level" class="selectbox">
+                                <option value="">Select Career Level</option>
+                                    <?				
+                                    foreach($Career_Level as $My_Career_Level)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Career_Level['id']?>"><?=$My_Career_Level['career_level_title']?></option>
+                                <?
+                                }
+                                ?>
+                        </select>
+                    </div>
+                    <?
+						$Education_Qry="select * from tbl_job_educations";
+						$Education=$db->runQuery("$Education_Qry");
+						//prd($Education);
+					?>
+                    <div class="col col2">
+                    	<span class="label">Degree</span>
+                        <select id="Career_Level" name="Career_Level" class="selectbox">
+                                <option value="">Select Career Level</option>
+                                    <?				
+                                    foreach($Education as $My_Education)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Education['id']?>"><?=$My_Education['education_title']?></option>
+                                <?
+                                }
+                                ?>
+                        </select>
+                    </div>
+                    <div class="col col3 rangeSelect">
+                    	<span class="label">Salary Range</span>
+                        <select class="selectbox1">
+                        	<option>$0</option>
+                        </select> 
+                        	<span class="mdl_text">to</span> 
+                        <select class="selectbox2">
+                        	<option>$120,000</option>
+                        </select>
+                    </div>
+                    <div class="clr"></div>
+                    <?
+						$job_types_Qry="select * from tbl_job_types";
+						$job_types=$db->runQuery("$job_types_Qry");
+						//prd($job_types);
+					?>
+                    <div class="col col1">
+                    	<span class="label">Job Type</span>
+                        <select id="job_types" name="job_types" class="selectbox">
+                                <option value="">Select Job Type</option>
+                                    <?				
+                                    foreach($job_types as $My_job_typ)
+                                    {
+                                    ?>
+                                <option value="<?=$My_job_typ['id']?>"><?=$My_job_typ['job_type_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <?
+						$Job_categories_Qry="select * from tbl_job_categories";
+						$Job_categories=$db->runQuery("$Job_categories_Qry");
+						//prd($Job_categories);
+					?>
+                    <div class="col col2">
+                    	<span class="label">Industry</span>
+                        <select id="job_industry" name="job_industry" class="selectbox">
+                                <option value="">Select Job Type</option>
+                                    <?				
+                                    foreach($Job_categories as $My_Job_categories)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Job_categories['cat_id']?>"><?=$My_Job_categories['category_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <div class="col col3">
+                    	<span class="label">Posted Date</span>
+                        <select class="selectbox" id="post_with_in" name="post_with_in">
+                        	<option value="">Posted within 24 Hours</option>
+                            <option value="">Posted within 3 days</option>
+                           	<option value="">Posted within 7 days</option>
+                            <option value="">Any Posted Date</option>
+                        </select>
+                    </div>
+                    <div class="clr"></div>
+                    <div class="btns"></div>
+                </div>
+            	<span class="btns">
+          	    	<input type="submit" class="find_job_btn" value="Find Jobs" >
+                   <!-- <input class="submit" id="search_submit" name="commit" value="" type="submit">-->
+                </span></div>
+            		<div class="clr"></div>
+             
+        </div>
+        	</form>
+	
+ 
+

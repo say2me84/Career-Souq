@@ -1,0 +1,62 @@
+<div id="big_box" align="center" >
+ <form name="frm_Member" id="frm_Member" action="" method="post">      
+ <table width="100%" border="0" cellspacing="5" cellpadding="0" class="frmtable">
+  <tr>
+  <td width="21%" align="left" valign="top">Name:</td>
+  <td width="79%" align="left" valign="top"><? echo $this->myform->name?></td>
+  </tr>   
+  <tr>
+  <td align="left" valign="top">Father's Name:</td>
+  <td align="left" valign="top"><? echo $this->myform->fathername?></td>
+  </tr>
+  <tr>
+  	<td align="left" valign="top">Address:<span class="errormsg">*</span></td>
+  	<td align="left" valign="top"><? echo $this->myform->address?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Occupation:<span class="errormsg">*</span></td>
+  <td align="left" valign="top"><? echo $this->myform->occupation?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Nomini Name:</td>
+  <td align="left" valign="top"><? echo $this->myform->nomini_name?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Relation:<span class="errormsg">*</span></td>
+  <td align="left" valign="top"><? echo $this->myform->relation?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Age:<span class="errormsg">*</span></td>
+  <td align="left" valign="top" id="CityIdDiv"><? echo $this->myform->age?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Withness Name:<span class="errormsg">*</span></td>
+  <td align="left" valign="top"><? echo $this->myform->withness_name?></td>
+  </tr>  
+  <tr>
+  <td align="left" valign="top">Withness Father's Name:<span class="errormsg">*</span></td>
+  <td align="left" valign="top"><? echo $this->myform->withness_fname?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Withness Address:<span class="errormsg">*</span></td>
+  <td align="left" valign="top"><? echo $this->myform->withness_add?></td>
+  </tr>
+  <?php /*?> <tr>
+  <td align="left" valign="top">Username:</td>
+  <td align="left" valign="top"><?php echo $this->Form->username?> <span class="errormsg">Keep Blank for default generated username</span></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Password:</td>
+  <td align="left" valign="top"><?php echo $this->Form->user_password?> <span class="errormsg">Keep Blank for default password (Phone Number)</span></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Confirm Password:</td>
+  <td align="left" valign="top"><?php echo $this->Form->user_confirm_password?></td>
+  </tr> <?php */?>
+  <tr>
+  <td align="left" valign="top" style="font-size:11px;"><input type="reset" name="" id="mySubmit" value="rest" /></td>
+  <td align="left" valign="top"><input type="submit" name="mySubmit" id="mySubmit" value="Submit" /></td>
+  </tr>  
+</table>
+</form>
+</div>

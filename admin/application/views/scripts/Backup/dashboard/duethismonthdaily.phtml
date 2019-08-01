@@ -1,0 +1,187 @@
+	<script>
+		function getdetail(typ,param,divid)
+		{
+		urlval='';
+			if(typ==1)
+			{
+				urlval="<?=BASE_PATH?>dashboard/dueold/"+param;
+			} 
+			
+			if(typ==2) {
+				urlval="<?=BASE_PATH?>dashboard/duetoday/"+param;
+			}
+			if(typ==3) {
+				urlval="<?=BASE_PATH?>dashboard/duethismonth/"+param;
+			}
+			if(typ==4) {
+				urlval="<?=BASE_PATH?>dashboard/duethismonthdaily/"+param;
+			}
+			if(urlval!='')
+			{
+				/*document.getElementById(divid).innerHTML="<img src='<?=APPLICATION_URL_ADMIN?>images/load.gif' border='0'>";
+				$.ajax({ url: urlval,
+				type: "POST",
+				success: function(data){			
+				$("#"+divid).html(data);			
+				}});*/
+				window.location=urlval;
+			}
+		}
+		
+		function prntthis(prdiv)
+		{
+		
+			obj_win = window.open('about:blank', 'new_win','toolbars=no,maximize=no,scrollbars=yes,menubar=no,width=950,height=680,directories=no,resizable=0,screenX=0,screenY=0,left=0,top=0'  ) ; 
+		 //alert obj_win;
+			obj_win.document.write('<html><title>RBI</title><head>');
+		
+			obj_win.document.write('</head><link rel="stylesheet" type="text/css" href="<? echo CSS_URL?>mainprint.css"/>');
+			obj_win.document.write('<body style="background-color:#ffffff"><div style="width:900px; color:#000000; margin:5px; border:0px solid #999999;font-size:12px; font-family:Arial, Helvetica, sans-serif;background-repeat:no-repeat">');
+		
+			obj_win.document.write(document.getElementById(prdiv).innerHTML);
+		
+			obj_win.document.write("</div></body></html>");
+		
+			obj_win.document.close();
+		
+		
+		
+			obj_win.focus();
+		
+			obj_win.print();
+		
+			obj_win.close();
+		
+		}
+	</script>
+	<?
+	$File = "Reports/dashboard.txt";
+	$Handle = fopen($File, 'r');
+	$tbcontent =  fread($Handle,filesize($File));
+	fclose($Handle);
+	echo $tbcontent;
+	?>
+	<div id="showdetail">
+		
+	
+	<?
+$resultarray = $this->resultarray;
+
+$headbranch_or_agent = $this->headbranch_or_agent;
+$sel_1 = $this->sel_1;
+$sel_2 = $this->sel_2;
+$reporthead = $this->reporthead;
+$summery_sub_wise = $this->summery_sub_wise;
+echo '<div style="padding:15px 5px;">
+		<div style="float:left;"><label for="summery_sub_wise1"><input name="summery_sub_wise" id="summery_sub_wise1" type="radio" value="1"  onclick="getdetail(4,\'\',\'showdetail\')" '.$sel_1.' />&nbsp;According Branch</label>&nbsp;&nbsp;<label for="summery_sub_wise2"><input name="summery_sub_wise" id="summery_sub_wise2" type="radio" value="2"  onclick="getdetail(4,\'summery_sub_wise/2\',\'showdetail\')" '.$sel_2.' />&nbsp;According Agent</label></div>
+		<div style="float:right;"><span style="cursor:pointer" onclick="prntthis(\'printdiv\')">Print</span></div>
+		<div style="clear:both" id="printdiv">
+			<div style="text-align:left;font-weight:bold;padding:2px">This Month (Daily) Due Report '.$reporthead.' ('.count($resultarray).' Installment)</div>			
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="adminlist">
+		  <tr>
+			<td><strong>'.$headbranch_or_agent.'</strong></td>
+			<td><strong>Month</strong></td>
+			<td><strong>Due Amount</strong></td>
+		  </tr>';
+		 
+		
+		$duemonth = '';
+		$branch = '';
+		$totalamount=0;
+		$monthamount=0;
+		$oldbranch=0;
+		$oldbranchcode=0;
+		
+		$i=0;
+		$kk=0;
+		foreach($resultarray as $res) {
+			$monthamount = $monthamount + $res['InstallmentAmount'];
+			$totalamount = $totalamount + $res['InstallmentAmount'];
+			
+		  if($summery_sub_wise==2) {
+		  
+			  if($branch!=$res['agentid']) {
+				if($branch!='') {
+					echo '<tr>
+						<td>'.getusername($oldbranch).' ['.$oldbranchcode.']'.'</td>
+						<td>'.$duemonth.'</td>
+						<td>'.($monthamount-$res['InstallmentAmount']).'/- </td>
+					  </tr>';
+					echo '<tr><td style="background-color:#FFFF99"><strong>'.getusername($branch).'</strong></td><td style="background-color:#FFFF99"><strong>Total</strong></td><td style="background-color:#FFFF99"><strong>'.($totalamount-$res['InstallmentAmount']).'/-</strong></td></tr>';
+					$totalamount=$res['InstallmentAmount'];
+					
+					$monthamount=$res['InstallmentAmount'];
+					$duemonth='';
+				}
+				$branch = $res['agentid'];
+			  }
+			  
+			  if($duemonth!=$res['duemonth']) {
+				if($duemonth!='') {
+				
+					 echo '<tr>
+						<td>'.getusername($res['agentid']).' ['.getprofileid($res['agentid']).']'.'</td>
+						<td>'.$duemonth.'</td>
+						<td>'.($monthamount-$res['InstallmentAmount']).'/- </td>
+					  </tr>';
+					  $monthamount=$res['InstallmentAmount'];
+				} 
+				$duemonth = $res['duemonth'];
+			  } 
+			  
+			  
+			$oldbranch = $res['agentid'];
+			$oldbranchcode = getprofileid($res['agentid']);
+				
+				//echo '<tr><td colspan="3">'.$res['user_installment_Id'].' aaa : '.$res['InstallmentAmount'].'   bbb : '.$monthamount.'   ccc : '.$totalamount.'</td></tr>';	
+		} else {
+			if($branch!=$res['branchid']) {
+				if($branch!='') {
+					 echo '<tr>
+						<td>'.getusername($res['branchid']).' ['.$oldbranchcode.']'.'</td>
+						<td>'.$duemonth.'</td>
+						<td>'.($monthamount-$res['InstallmentAmount']).'/-</td>
+					  </tr>';
+					  
+					echo '<tr><td style="background-color:#FFFF99"><strong>'.getusername($branch).'</strong></td><td style="background-color:#FFFF99"><strong>Total</strong></td><td style="background-color:#FFFF99"><strong>'.($totalamount-$res['InstallmentAmount']).'/-</strong></td></tr>';
+					$totalamount=$res['InstallmentAmount'];
+					
+					$monthamount=$res['InstallmentAmount'];
+					$duemonth='';
+				}
+			
+				
+				$branch = $res['branchid'];
+			  }
+			 if($duemonth!=$res['duemonth']) {
+				if($duemonth!='') {
+				
+					 echo '<tr>
+						<td>'.getusername($res['branchid']).' ['.getprofileid($res['branchid']).']'.'</td>
+						<td>'.$duemonth.'</td>
+						<td>'.($monthamount-$res['InstallmentAmount']).'/-</td>
+					  </tr>';
+					    $monthamount=$res['InstallmentAmount'];
+				}
+				$duemonth = $res['duemonth'];
+				
+				
+				
+			  } 
+
+			  $oldbranch = $res['branchid'];
+			$oldbranchcode = getprofileid($res['branchid']);
+				
+				//echo '<tr><td colspan="3">'.$res['user_installment_Id'].' aaa : '.$res['InstallmentAmount'].'   bbb : '.$monthamount.'   ccc : '.$totalamount.'</td></tr>';	
+		}
+		 
+		}
+		echo '<tr>
+				<td>'.getusername($branch).' ['.getprofileid($branch).']'.'</td>
+				<td>'.$duemonth.'</td>
+				<td>'.$monthamount.'/-</td>
+			  </tr>';
+		echo '<tr><td style="background-color:#FFFF99"><strong>'.getusername($branch).'</strong></td><td style="background-color:#FFFF99"><strong>Total</strong></td><td style="background-color:#FFFF99"><strong>'.$totalamount.'/-</strong></td></tr>';
+		echo '</table></div>';
+?></div>

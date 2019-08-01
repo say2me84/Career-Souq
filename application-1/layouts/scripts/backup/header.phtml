@@ -1,0 +1,62 @@
+<div id="mainHead" align="left">
+	<div align="left" id="headLogo11">
+		<div style="float:left;"><img src="<?=IMAGES_URL?>logo_amar.png" style="width:249px;" border="0" /></div>
+		<div style="float:right;font-size:12px; padding-top:15px">
+			<div id="TimeDiv"></div>
+			<?
+			if(isLogged())
+			{
+			?>
+			<div style="padding-top:3px;float:right;"><a href="<?=APPLICATION_URL?>index/changepassword" class="headerlink">Change Password</a>&nbsp;|&nbsp;<a href="<?=APPLICATION_URL?>index/logout" class="headerlink">Logout</a></div>
+			<? 
+			}
+			?>
+		</div>		
+	</div>
+	
+	<div class="clr"></div>	
+</div>
+<?
+if(isLogged())
+{
+?>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td align="left" valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+     <tr>
+       <td width="1%" height="43" align="right" valign="top" >&nbsp;</td>
+       <td width="100%" align="center" style="&nbsp;"><? include "menu.phtml"; ?></td>
+       <td width="1%" align="left" valign="top">&nbsp;</td>
+     </tr>
+   </table></td>
+</tr>
+
+</table>
+<?
+} else { 
+?>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td align="left" valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+     <tr>
+       <td width="1%" height="43" align="right" valign="top" >&nbsp;</td>
+       <td width="100%" align="center" ><?php /*?><img src="<?=IMAGES_URL?>new_animated3.gif" style="position:absolute; z-index:50; left:657px; margin-top:-6px" /><?php */?><? include "frontmenu.phtml"?></td>
+       <td width="1%" align="left" valign="top">&nbsp;</td>
+     </tr>
+   </table></td>
+</tr>
+
+</table>
+<? } ?>
+
+<script language="javascript" type="text/javascript">
+function run_timer(){
+	var today = new Date();
+	var ndate=today.toString();	//April 23, 2009, 02:04:25 pm
+	ndate=ndate.split('GMT');
+	document.getElementById("TimeDiv").style.border='transparent';
+	document.getElementById("TimeDiv").innerHTML=ndate[0];	
+	setTimeout(run_timer,1000);
+}
+run_timer();
+</script>

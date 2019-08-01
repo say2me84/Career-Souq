@@ -1,0 +1,140 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+if($mySessionFront->user['userRole']=='Job Seeker') { 
+		$i=1;
+		//$res=$this->UserExperienceData;
+		//$MyUser_Experience=$this->UserExperienceData;
+		
+?>
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+<h2 class="floatleft title">Education</h2>
+<a href="javascript:void(0)" onclick="getajax('<?=BASE_PATH?>dashboard/addeducation','education');" class="floatright edit_btn2" >Add New</a>
+                        <div class="floatright">
+						</div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        	<ul class="bullet2">
+                            <?php 
+									$i=1;
+									foreach($this->Education_Dashboard as $User_Education) {
+								?>
+                              <li>
+                                	<div class="number"><?=$i++;?></div>
+                                    <div class="info1">
+                                    	<h2><?php echo $User_Education['university']?></h2>
+                                        <h3><?php echo $User_Education['education_title']?></h3>
+<div style="float:right;">
+<a href="javascript:void(0)" onclick="getajax('<?=BASE_PATH?>dashboard/education/id/<?=$User_Education['id']?>','education');" class="edit_btn2" >Edit</a>
+</div>
+					<p class="font12">From <?php echo $User_Education['starting_year']?> to <?php echo $User_Education['finishing_year']?></p>
+					<?php 
+										if($User_Education['is_heighest']=='1')
+										{
+									?>
+									<p class="font12">Is Heighest  <b><?php echo 'Yes';?></b></p>
+                       				 <?php }else{ ?>
+										<p class="font12">Is Heighest  <b><?php echo 'No';?></b></p>
+									<? }?>
+                                    </div>
+                                    
+                                    <div class="clr"></div>
+                                </li>
+                             <?php } ?>   
+                            </ul>
+                        </div>
+   <? } else {?>
+  
+ <h2 class="floatleft title">Education</h2>
+                        <div class="floatright">
+						</div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        	<ul class="bullet2">
+                            <?php 
+									$i=1;
+									foreach($this->Education_Dashboard as $User_Education) {
+								?>
+                              <li>
+                                	<div class="number"><?=$i++;?></div>
+                                    <div class="info1">
+                                    	<h2><?php echo $User_Education['university']?></h2>
+                                        <h3><?php echo $User_Education['education_title']?></h3>
+<div style="float:right;">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/education/id/<?=$User_Education['id']?>','education');" href="#" class="edit_btn2" >Edit</a>
+</div>
+                                  <p class="font12">
+                                  	From <?php echo $User_Education['starting_year']?> to <?php echo $User_Education['finishing_year']?>
+                                  </p>
+									
+                                    <?php 
+										if($User_Education['is_heighest']=='1')
+										{
+									?>
+									<p class="font12">Is Heighest  <b><?php echo 'Yes';?></b></p>
+                       				 <?php }else{ ?>
+										<p class="font12">Is Heighest  <b><?php echo 'No';?></b></p>
+									<? }?>	
+                                 </div>
+                                    
+                                    <div class="clr"></div>
+                                </li>
+                             <?php } ?>   
+                            </ul>
+                        </div>
+<? } ?>
+

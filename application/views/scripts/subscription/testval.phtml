@@ -1,0 +1,68 @@
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+
+
+<div class="block">
+<input onClick="" type="radio" name="button2" value="1-5"  /><label>Others</label>
+<input onClick="" type="radio" name="button2" value="6-10" /><label>HP-UNIX</label>
+</div>
+
+
+<script>
+$("input:radio[name=button2]").click(function() {
+   // var value = $(this).val();
+	var value=$('input:radio[name=button2]:checked').val();
+	
+	//console.log(value);
+	//alert(value);
+	 
+	 var fm = document.getElementById('fm');
+	 var arrival_arro = value;
+  		 fm.value =arrival_arro;
+});
+</script>
+
+
+<form action='' method='get' name='frmPayPal1'>
+
+   <input type="text" id="fm" name="fm" value="">
+
+    <input type='submit' value='Send' />
+</form>
+
+<?php
+
+global $mySessionFront;
+		$db=new Db();
+	//$arr=$this->getRequest()->getParams();
+		
+		//if(isset($arr['fm'])) {
+		if(isset($_REQUEST['fm'])) {
+		
+			//prd($arr['user_id']);
+
+$Job_Plan_Combo_Qry= "select * from job_posting_plan where Package/Days ='".$_POST['fm']."'";
+prd ($Job_Plan_Combo_Qry);
+$Job_Plan_Combo_Val = $db->runQuery($Job_Plan_Combo_Qry);
+
+//$this->view->Job_Plan_Combo_Data = $Job_Plan_Combo_Val[0];
+$res=$this->Job_Plan_Combo_Data = $Job_Plan_Combo_Val[0];
+			
+	//$qry="select * from `job_posting_plan` where Package/Days ='".$_POST['fm']."'";
+			//prd($qry);
+	//$user_id = $db->runQuery("$qry");
+			//prd($user_id);
+			//$this->view->user_id=$user_id[0];
+		
+		}	
+		
+		
+$res=$this->Job_Plan_Combo_Data;		
+echo $res['Price'];
+?>
+
+
+<?
+echo $res['Price'];
+?>

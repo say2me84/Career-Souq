@@ -1,0 +1,74 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="adminlist">
+  <tr>
+  	<th height="25"><strong>S.NO.</strong></th>
+  	<th><strong>Agent</strong></th>
+	<th><strong>Branch</strong></th>
+    <th><strong>New Amount</strong></th>
+	<th><strong>Inst. Amount</strong></th>
+    <th><strong>Commission</strong></th>
+	<th><strong>TDS 10%</strong></th>
+	<th><strong>T Commission</strong></th>
+  </tr><tr>
+		<td>1</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>51.84/-</td>
+		<td>5.184/-</td>
+		<td>46.656/-</td>
+	  </tr><tr>
+		<td>2</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>798.00/-</td>
+		<td>79.8/-</td>
+		<td>718.2/-</td>
+	  </tr><tr>
+		<td>3</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>1013.40/-</td>
+		<td>101.34/-</td>
+		<td>912.06/-</td>
+	  </tr><tr>
+		<td>4</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>198.00/-</td>
+		<td>19.8/-</td>
+		<td>178.2/-</td>
+	  </tr><tr>
+		<td>5</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>555.00/-</td>
+		<td>55.5/-</td>
+		<td>499.5/-</td>
+	  </tr><tr>
+		<td>6</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>154.00/-</td>
+		<td>15.4/-</td>
+		<td>138.6/-</td>
+	  </tr><tr>
+		<td>7</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>70.00/-</td>
+		<td>7/-</td>
+		<td>63/-</td>
+	  </tr></table> 

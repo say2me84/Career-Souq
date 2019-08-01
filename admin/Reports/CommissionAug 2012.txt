@@ -1,0 +1,12 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="adminlist">
+  <tr>
+  	<th height="25"><strong>S.NO.</strong></th>
+  	<th><strong>Agent</strong></th>
+	<th><strong>Branch</strong></th>
+	<th><strong>Scheme</strong></th>
+	<th><strong>Month</strong></th>
+	<th><strong>New Amount</strong></th>
+	<th><strong>Inst. Amount</strong></th>
+    <th><strong>Commission</strong></th>
+	
+  </tr></table> 

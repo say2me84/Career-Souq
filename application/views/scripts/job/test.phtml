@@ -1,0 +1,21 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$MyCnty_Qry="SELECT tbl_job_sub_categories.sub_cat_id, tbl_job_sub_categories.sub_category_title  FROM tbl_job_sub_categories";
+
+$MyCnty_Data = $db->runQuery($MyCnty_Qry);
+//prd($MyCnty_Data);
+foreach($MyCnty_Data as $My_Name)
+{ 
+
+$Total_User_Qry= "Select count(job_sub_category) as Total_Cont FROM tbl_jobs  WHERE job_status = '1' and job_sub_category = '".$My_Name['sub_cat_id']."' ";
+$Total_User_Qry_Data = $db->runQuery($Total_User_Qry);
+?>
+
+
+
+
+<?=$My_Name['sub_category_title']?> (<?=$Total_User_Qry_Data[0]['Total_Cont']?>)
+
+<?php } ?>

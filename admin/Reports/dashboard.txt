@@ -1,0 +1,62 @@
+<div style="padding:10px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+ 	 <tr>
+    	<td class="desboardboxheading">Due </td>
+		<td class="desboardboxvalue" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="20" style="border-bottom:1px dashed #CCCCCC;" width="20%">Today</td>
+    <td style="border-bottom:1px dashed #CCCCCC;" width="20%">This (M)</td>
+	<td style="border-bottom:1px dashed #CCCCCC;" width="20%">Daily (M)</td>
+    <td style="border-bottom:1px dashed #CCCCCC;" width="20%">Old</td>
+    <td style="border-bottom:1px dashed #CCCCCC;" width="20%">Total</td>
+	
+  </tr>
+  <tr>
+    <td height="20"><span style="cursor:pointer;" onclick="getdetail(2,'','showdetail')">0<span style="color:#FFCC00"> Inst.</span><br />/-</span></td>
+    <td><span style="cursor:pointer;" onclick="getdetail(3,'','showdetail')">0<span style="color:#FFCC00"> Inst.</span><br />/-</span></td>
+	<td ><span style="cursor:pointer;" onclick="getdetail(4,'','showdetail')">48<span style="color:#FFCC00"> Inst.</span><br />22600.00/-</span></td>
+    <td><span style="cursor:pointer;" onclick="getdetail(1,'','showdetail')">1822<span style="color:#FFCC00"> Inst.</span><br />1628268.00</span></td>
+    <td>1870<span style="color:#FFCC00"> Inst.</span><br />1650868/-</td>
+	
+  </tr>
+</table>
+</td>
+	</tr>
+	<tr>
+    	<td class="desboardboxheading">Collection of this month</td>
+		<td class="desboardboxvalue" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td style="border-bottom:1px dashed #CCCCCC; height:20px" width="20%">New </td>
+    <td style="border-bottom:1px dashed #CCCCCC" width="20%">Installment</td>
+    <td style="border-bottom:1px dashed #CCCCCC" width="20%">Old Installment</td>
+    <td style="border-bottom:1px dashed #CCCCCC" width="20%">Advance</td>
+	<td style="border-bottom:1px dashed #CCCCCC" width="20%">Total</td>
+  </tr>
+  <tr>
+    <td height="20">0/-</td>
+    <td>0/-</td>
+    <td>0/-</td>
+    <td>0/-</td>
+	<td>0/-</td>
+  </tr>
+</table>
+</td>
+	</tr>
+
+	  <tr>
+    	<td class="desboardboxheading">Maturity of this month</td>
+		<td class="desboardboxvalue" >0</td>
+	  </tr>
+	  <tr>
+   		 <td class="desboardboxheading">Customer of this month</td>
+		 <td class="desboardboxvalue" >88</td>
+	  </tr>
+	  <tr>
+    	<td class="desboardboxheading">Agent of this month</td>
+		<td class="desboardboxvalue" >0</td>
+	  </tr>
+	  
+	</table>
+</div>
+	<div id="showdetail">
+		
+	</div>

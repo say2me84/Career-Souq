@@ -1,0 +1,44 @@
+<?php /*?><ul>
+<?
+	if($mySession->user['userRole']=='A') { ?>
+	<li class="active"><a class="" href="<?=APPLICATION_URL?>index/index">Home</a></li>
+    <li><a href="<?=APPLICATION_URL?>Video/viewvideo">Video</a></li>
+    <li><a href="<?=APPLICATION_URL?>Video/add">Add</a></li>
+	<li><span class="qmdivider qmdividery"></span></li>
+<? } 
+	else if($mySession->user['userRole']=='C') { ?>
+	<li class="active"><a class="" href="<?=APPLICATION_URL?>index/index">Home</a></li>
+    <li><a href="<?=APPLICATION_URL?>Video/viewvideo">Video</a></li>
+    <li><a href="<?=APPLICATION_URL?>Video/add">Add</a></li>
+	<li><span class="qmdivider qmdividery"></span></li>
+<? }
+
+ else { ?>
+ 		<li class="active"><a class="" href="<?=APPLICATION_URL?>index/welcome">Home</a></li>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Solutions</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contacts</a></li>
+<? } ?>
+</ul><?php */?>
+
+
+<ul>
+<?
+	if($mySession->user['userRole']=='A') { ?>
+<li class="active"><a class="" href="<?=APPLICATION_URL?>index/index">Home</a></li>
+<li><a href="<?=APPLICATION_URL?>Video/viewvideo">All Video</a></li>
+<li><a href="<?=APPLICATION_URL?>Video/add">Video Add</a></li>
+<? }
+
+ else { ?>
+ 	<li class="active"><a class="" href="<?=APPLICATION_URL?>index/index">Home</a></li>
+    <li><a href="#">Comedian Event</a></li>
+    <li><a href="#">Marketing</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact Us</a></li>
+<? } ?>
+</ul>

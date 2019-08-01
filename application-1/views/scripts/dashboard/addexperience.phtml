@@ -1,0 +1,119 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$user_experience=$this->experience;
+?>
+
+
+<script language = "Javascript">
+function summeryedit(){
+	var position=$("#position").val();
+	//alert(position);
+	
+	var company=$("#company").val();
+	//alert(company);
+	
+	var location=$("#location").val();
+	//alert(location);
+	
+	var employment_period_from=$("#employment_period_from").val();
+	//alert(employment_period_from);
+	
+	var employment_period_to=$("#employment_period_to").val();
+	//alert(employment_period_to);
+	
+	var employment_year=$("#employment_year").val();
+	//alert(employment_year);
+	
+	var employment_month=$("#employment_month").val();
+	//alert(employment_month);
+	
+	var responsibility=$("#responsibility").val();
+	//alert(responsibility);
+	
+	var salary=$("#salary").val();
+	//alert(salary);
+	
+	var is_current=$("#is_current").val();
+	//alert(is_current);
+	
+	document.getElementById('experience').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'addnewexperience'),'default',false);?>",
+	type: "POST",
+	data: ({position:position, company:company, location:location,employment_period_from:employment_period_from,employment_period_to:employment_period_to,		employment_year:employment_year,employment_month:employment_month,	responsibility:responsibility,	salary:salary,is_current:is_current}),
+		success: function(data){			
+		$("#experience").html(data);			
+		}
+	});
+
+}
+</script>
+<script type="text/javascript">       
+	//CKEDITOR.replace('responsibility');
+</script>
+
+<div class="ftrd_form selectForm jqtransformdone">
+    <div class="full">
+        <div class="label">Position</div>
+        <div class="field">
+        	<input type="text" class="inputbox"  id="position" name="position">
+        </div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Company Name</div>
+        <div class="field">
+            <input type="text" class="inputbox"  id="company" name="company"></div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Location</div>
+        <div class="field">
+            <input type="text" class="inputbox"  id="location" name="location"></div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Employment Period From</div>
+        <div class="field field1"><input type="text" class="inputbox" id="employment_period_from" name="employment_period_from"></div>
+        <div class="label">Employment Period To</div>
+        <div class="field field1"><input type="text" class="inputbox"  id="employment_period_to" name="employment_period_to"></div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Year</div>
+        <div class="field field1"><input type="text" class="inputbox" id="employment_year" name="employment_year"></div>
+        <div class="label">Month</div>
+        <div class="field field1"><input type="text" class="inputbox"  id="employment_month" name="employment_month"></div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Responsibility</div>
+        <div class="field">
+            <textarea cols="80" id="responsibility" name="responsibility" rows="10" class="textarea"><?php echo $user_experience['responsibility']?></textarea>							 		</div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Salary</div>
+        <div class="field">
+            <input type="text" class="inputbox"  id="salary" name="salary"></div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Is Your Current</div>
+        <div class="field">
+        	<select name="is_current" id="is_current" class="inputbox">
+				<option value="0">No</option>
+                <option value="1">Yes</option>
+			</select>
+        </div>
+    </div>
+    <div class="clr"></div>
+</div>
+<?php /*?>getajax('<?=BASE_PATH?>dashboard/reloadexperience','experience');<?php */?>
+<div class="form_btns form_btns1 floatright">
+	<input type="button" class="save_job_btn" value="Update" onclick="summeryedit(); ">
+    <input type="submit" class="post_job_btn" value="Cancel" onclick="getajax('<?=BASE_PATH?>dashboard/reloadexperience','experience');">
+</div>
+
+<br />

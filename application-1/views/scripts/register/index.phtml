@@ -1,0 +1,151 @@
+<?php global $mySessionFront;?>
+
+<!--============================================ Java Script & Css ===========================================-->	
+<script type="text/javascript" language="javascript">
+	//$(document).ready(function() {
+         // $('body').addClass('home');
+        //});
+		
+	$(document).ready(function() {
+        $('li').removeClass('active');
+        });	   
+</script>
+<!--============================================ End Java Script & Css ===========================================-->  
+
+<div class="container register_page">
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+	<h1 class="title">Create a Free Account</h1>
+		<p class="font16">Get instant access to the tools necessary for finding a job in the Middle East.</p>
+		<div class="social_register">
+    	<label>SOCIAL SING UP</label>
+        	<a href="#"><img src="<?=IMAGES_URL?>login_facebook.png" alt=""></a> 
+            <a href="#"><img src="<?=IMAGES_URL?>login_twitter.png" alt=""></a>
+	</div>
+    	<div class="seperator">
+    	<span class="or">or</span>
+    </div>
+ 		<h2 class="title">Register Using Your Email (it will only take a minute!)<span class="floatright orng">* Required Fields</span>.</h2>
+	
+
+            <div class="form">
+<form name="sq_login" id="sq_login" action="<?php echo $this->url(array('controller'=>'register', 'action'=>'index'), 'default', true)?>" method="post">	
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>FIRST NAME <span class="red">*</span><br><?php echo $this->myform->user_fname?></td>
+        <td>LAST NAME <span class="red">*</span><br><?php echo $this->myform->user_lname?></td>
+        <td>EMAIL <span class="red">*</span><br><?php echo $this->myform->user_email?></td>
+      </tr>
+      <tr>
+        <td>COUNTRY <span class="red">*</span><br>
+        		
+       		 <input type="text" name="user_type" value="<?php echo $_POST['user_type']?>" />
+             <?php echo $this->myform->Country_id?>
+        </td>
+       
+   
+           
+        <td>City <span class="red">*</span><br><?php echo $this->myform->user_city?></td>
+        <td>Your Nationality <span class="red">*</span><br><?php echo $this->myform->Nationality_id?></td>
+      </tr>
+      <tr>
+        <td>Your Birth Date <span class="red">*</span><br>
+            <?php echo $this->myform->user_dob?>
+            <!--<input type="text" value="" placeholder="YY/MM/DD" class="inputbox">-->
+        </td>
+        <td>GENDER <br><?php echo $this->myform->user_gender?>
+            <!--<select class="selectbox"><option>-Select-</option></select>-->
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="radios">What's your language preference? <span class="red">*</span><br><br />
+            <?php echo $this->myform->user_language_preference?>
+            <!--<label><input type="radio" name="user_language_preference" value=""> English</label> 
+            <label><input type="radio" name="user_language_preference" value=""> Arabic</label> 
+            <label><input type="radio" name="user_language_preference" value=""> French</label>-->
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+            <h3 class="blue">Login Information</h3>
+        </td>
+      </tr>
+      <tr>
+        <td>PASSWORD <span class="red">*</span><br>
+            <?php echo $this->myform->user_password?>
+            <!--<input type="text" value="" class="inputbox">-->
+        </td>
+        <td>CONFIRM PASSWORD <br>
+            <?php echo $this->myform->confirm_user_password?>
+            <!--<input type="text" value="" class="inputbox">-->
+        </td>
+        
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+                <p>By creating an account, you agree to our Terms of Use and Privacy Policy.</p>
+            </div>
+            <div class="block_footer">
+                <div class="floatleft">
+                	<input type="button" class="back" value="BACK">
+                </div>
+                <div class="floatright">
+                	<input type="submit" value="CREATE AN ACCOUNT" class="submit">
+                </div>
+                <div class="clr"></div>
+            </div>
+            <div class="clr"></div>
+        </div>

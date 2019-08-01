@@ -1,0 +1,25 @@
+<?php global $mySession;?>
+
+<aside class="login-prt">
+<aside class="Login-C">
+<h1>Login / <a href="<?=APPLICATION_URL?>Register/add" style="text-decoration:none;">Register</a></h1>
+<form name="sq_login" id="sq_login" action="<?php echo $this->url(array('controller'=>'index', 'action'=>'index'), 'default', true)?>" method="post">							  <?php //echo $this->url(array('controller'=>'index', 'action'=>'index'), 'default', true)?>
+
+<fieldset>
+<label1>Nmae:</label1>
+	<?php echo $this->loginform->_uname?><!--<input name="" class="in-text1" type="text" value="Login">-->
+</fieldset>
+
+<fieldset>
+<label2>Password:</label2>
+<input type="hidden" name="ptype" value="login" />
+	<?php echo $this->loginform->_pass?><!--<input name="" class="in-text1" type="text" value="Password">-->
+</fieldset>
+<aside class="But"> 
+<input name="Submit" class="but2" type="submit" value="Submit">
+
+</aside>
+
+</form>
+</aside>
+</aside>

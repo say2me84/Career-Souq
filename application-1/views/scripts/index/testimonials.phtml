@@ -1,0 +1,91 @@
+<?
+global $mySession;
+$db = new Db();
+	$footer_links = $this->Footer_Data;
+?>
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+		$('li#<?=$footer_links['page_id']?>').addClass('active');
+		});
+	
+</script>
+
+<div class="container static_page">
+        	<h1 class="title">Testimonials</h1>
+        	
+            <div class="content_left">
+           	  	<div class="page_content">
+                    <div class="testimonials_list">
+                    <? 	global $mySessionFront; 
+						 $db=new Db();
+						 
+						$Testimonials_Data= $db->runQuery ("SELECT * FROM tbl_admin_messages limit 0,5");
+						//prd($Testimonials_Data);
+						if(is_array($Testimonials_Data) && count($Testimonials_Data) > 0) 
+                            {
+								$i=1;
+                            foreach($Testimonials_Data as $My_Testimonials)
+                                {
+					?>
+                    	<div class="block1 font12">
+                        	<div class="img">
+                            <?php 
+								if($My_Testimonials['avator']=='')
+								{
+							?>
+								<img width="100" height="70"  src="<?=IMAGES_URL?>no-avator.png" >
+								
+							<?php }else{ ?>
+								<img width="100" height="70" src="<?=ADMIN_PIC?>testimonial_pic/<?php echo $My_Testimonials['avator']?>">
+							<? }?>
+                            
+                            </div>
+                            <div class="info">
+                            	<p><strong><?php echo $My_Testimonials['company']?></strong>, United Arab Emirates</p>
+                                <p><?php echo $My_Testimonials['message']?></p>
+                                <p><strong><?php echo $My_Testimonials['designation']?></strong></p>
+                            </div>
+                        </div>
+                        
+                      <?php } } ?>
+                        <div class="clr"></div>
+                    </div>
+              </div>
+          	</div>
+            
+            <div class="content_right">
+            
+            	<div class="block page_link">
+                    <ul>
+                    <li id="" class="active">
+                    <a href="<? echo APPLICATION_URL?>index/testimonials">Testimonials</a>
+                    </li>
+                       
+					<? 	global $mySessionFront; 
+						 $db=new Db();
+						 
+						$Footer_Data= $db->runQuery ("SELECT * FROM tbl_static_page_detail where status='1'");
+						if(is_array($Footer_Data) && count($Footer_Data) > 0) 
+                            {
+								$i=1;
+                            foreach($Footer_Data as $res)
+                                {
+					?>
+                    	<li id="<?=$res['page_id']?>"><a href="<? echo APPLICATION_URL.'Cmspage/index/page_id/'.$res['page_id']?>"><?=$res['title']?></a></li>
+                        <? } } ?>
+                        <!--<li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li class="active"><a href="#">Privacy Policies</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Company Blog</a></li>-->
+                    </ul>
+                </div>
+            </div>
+            
+            
+            <div class="clr"></div>
+        </div>
+
+
+
+					

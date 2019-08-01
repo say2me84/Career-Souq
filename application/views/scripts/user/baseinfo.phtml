@@ -1,0 +1,118 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+if($mySessionFront->user['userRole']=='Job Seeker') { 
+		$res=$this->UserData;
+?>
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+		<div class="profile_head">
+                	<div class="img">
+                    	<?php 
+						if($res['user_image']=='')
+						{
+						?>
+							<img width="170" height="130"  src="<?=USER_PIC?>no-avator.png" >
+							
+						<?php }else{ ?>
+							<img width="124" height="118" src="<?=USER_PIC?><?php echo $res['user_image']?>" alt="">
+						<? }?>
+                    </div>
+                    <div class="info">
+                    	<h1 class="title captl"><? echo $res['user_fname'].' '.$res['user_lname']?></h1>
+                        <h3>Sr.Software Engineer at T3 Media</h3>
+                        <div class="floatright edit_btn1">
+				<a onclick="getajax('<?=BASE_PATH?>user/userprofile/user_id/<?=$mySessionFront->user['FrontUserId']?>','pro_edit');" href="#" >Edit</a>
+                        </div>
+                        <p class="font12 exp_edu1">San Francisco, California <span>|</span> Information Technologies and Services</p>
+                        <!--<ul class="exp_edu font12">
+                        	<li><span>Current</span> T3 Media</li>
+                            <li><span>Current</span> T3 Media</li>
+                            <li><span>Current</span> T3 Media</li>
+                        </ul>-->
+                    </div>
+                    <div class="clr"></div>
+                </div>
+   <? 
+		//echo "Hello Job Seeker";
+	} else { 
+	
+	?>
+    Akash
+	<div class="profile_head">
+                	<div class="img">
+                    	<img width="167" height="167" src="<?=USER_PIC?><?php echo $res['user_image']?>" alt="">
+                    </div>
+                    <div class="info">
+                    	<h1 class="title captl"><? echo $res['user_fname'].' '.$res['user_lname']?></h1>
+                        <h3>Sr.Software Engineer at T3 Media</h3>
+                        <div class="floatright edit_btn1">
+				<a onclick="getajax('<?=BASE_PATH?>user/userprofile/user_id/<?=$mySessionFront->user['FrontUserId']?>','','pro_edit');" href="#" >Edit</a>
+                        </div>
+                        <p class="font12 exp_edu1">San Francisco, California <span>|</span> Information Technologies and Services</p>
+                        <ul class="exp_edu font12">
+                        	<li><span>Current</span> T3 Media</li>
+                            <li><span>Current</span> T3 Media</li>
+                            <li><span>Current</span> T3 Media</li>
+                        </ul>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+	
+	<? } ?>
+  
+ 
+

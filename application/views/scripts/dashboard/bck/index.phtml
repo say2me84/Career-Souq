@@ -1,0 +1,437 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script src="<?=JS_URL?>jquery.form.js" type="text/javascript"></script>
+
+ <script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#mypro').addClass('active');
+        });	 
+		  
+</script>
+
+
+<script language = "Javascript">
+function resume(){
+	alert('Hello...');
+	var user_id=$("#user_id").val();
+	alert(user_id);
+	var resume_file=$("#resume_file").val();
+	alert(resume_file);
+	
+	document.getElementById('resume').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'resumeedit'),'default',true);?>",
+	type: "POST",
+	//data: ({user_id: user_id, user_fname: user_fname, user_lname: user_lname}),
+		success: function(data){			
+		$("#resume").html(data);			
+		}
+	});
+//alert('hello');    baseinfo
+}
+</script>
+
+<!--======================================== Loading Forms vai Ajax ===================================-->
+<script type="text/javascript" >
+ $(document).ready(function() { 
+		
+            $('#photoimg').live('change', function()			{ 
+			           $("#preview").html('');
+			    $("#preview").html('<img src="<?=IMAGES_URL?>load.gif" alt="Uploading...."/>');
+			$("#imageform").ajaxForm({
+						target: '#preview'
+		}).submit();
+		
+			});
+        }); 
+</script>
+	<?php 
+		$res=$this->UserData;	
+		if($mySessionFront->user['userRole']=='Job Seeker') { 
+	?>
+	<div id="main">
+    	<div class="container job_apply">
+        	<div class="content_left">
+            	
+                    <div id="pro_edit">
+                       <div class="profile_head">
+                        <div class="img">
+                            <img width="124" height="118" src="<?=USER_PIC?><?php echo $res['user_image']?>" alt="">
+                        </div>
+                        <div class="info">
+                            <h1 class="title captl"><? echo $res['user_fname'].' '.$res['user_lname']?></h1>
+                            <h3>Sr.Software Engineer at T3 Media</h3>
+                            <div class="floatright edit_btn1">
+ <a onclick="getajax('<?=BASE_PATH?>user/userprofile/user_id/<?=$mySessionFront->user['FrontUserId']?>','pro_edit');" href="javascript:void(0)" >Edit</a>
+
+                            </div>
+                            
+     <p class="font12 exp_edu1"><?php echo $res['user_city']?>, <?php //echo $res['country_name']?> <span>|</span> <?php echo $res['country_name']?></p>
+                            
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    </div>
+               
+                
+                
+                <div class="profiel_list">
+                	<div id="preview" style="display:block; padding-bottom:5px;"></div>
+                    
+                    <div class="block1 selectForm jqtransformdone">
+                  		<h2 class="floatleft title">Upload Resume</h2>
+                        
+                        <span class="file-wrapper">
+                         
+<form id="imageform" method="post" enctype="multipart/form-data" action='<?php echo $this->url(array('controller'=>'dashboard','action'=>'resumeedit'),'default',false);?>'>
+<input type="text" name="user_id" id="user_id" value="<?=$mySessionFront->user['FrontUserId']?>">
+<input type="text" name="user_name" id="user_name" value="<?=$mySessionFront->user['UserName']?>">
+<input type="file" name="photoimg" id="photoimg" />
+ 
+</form>
+                          <input type="hidden" id="user_id" name="user_id" value="<?=$mySessionFront->user['FrontUserId']?>" >
+                          <span class="file-holder"></span>
+                          <span class="button">Browse</span>
+                        </span>
+                        <div class="floatright pdf_icon">Convert to PDF <img alt="" src="<?=IMAGES_URL?>pdf_icon.png"></div>
+                        <div class="clr"></div>
+                    </div>
+                   
+                    
+                    <div class="block1" id="pro_summary">
+                    	<h2 class="floatleft title">Profile Summery</h2>
+                        <div class="floatright">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/usersummary/user_id/<?=$mySessionFront->user['FrontUserId']?>','pro_summary');" href="#" class="edit_btn2" >Edit</a>	
+                        </div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        <div id="ckedit">
+                        <!--<textarea class="ckeditor" cols="80" id="editor1" rows="5" tabindex="1"></textarea>-->
+						</div>
+							<?php echo $res['user_profile_summary']?>
+                        </div>
+                    </div>
+                    
+                   
+                    <div class="block1" id="experience">
+                      <h2 class="floatleft title">Experience</h2>
+                       <div class="clr"></div>
+                        <div class="block1_content">
+                        	<ul class="bullet2">
+                            	<?php 
+									$i=1;
+									foreach($this->User_Experience as $MyUser_Experience) {
+								?>
+                              	  <li>
+                                	<div class="number"><?=$i++;?></div>
+                                    <div class="info">
+                                    	<h2><?php echo $MyUser_Experience['position']?></h2>
+                                        <h3><?php echo $MyUser_Experience['company']?></h3>
+                                        <p class="font12"><?php echo $MyUser_Experience['location']?>, <?php echo $MyUser_Experience['country_name']?> <span class="pipe_space">|</span> <?php echo $MyUser_Experience['employment_period_from']?> &ndash; <?php echo $MyUser_Experience['employment_period_to']?></p>
+                                        <h4>Job Responsibilities</h4>
+                                        <p class="font12"><?php echo $MyUser_Experience['responsibility']?></p>
+<div style="float:right; margin-right: -140px;">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/experience/id/<?=$MyUser_Experience['id']?>','experience');" href="#" class="edit_btn2" >Edit</a>
+</div>
+                                        
+                                        
+                                    </div>
+                                    <div class="img">
+                                    
+									<?php 
+                                        if($MyUser_Experience['logo']=='')
+                                        {
+                                    ?>
+                                		<img width="112" height="70"  src="<?=IMAGES_URL?>company_logo1.jpg" name="logo">
+                                        
+                                    <?php } else{ ?>
+                               			 <img width="100" height="70" src="<?=USER_PIC?><?php echo $MyUser_Experience['logo']?>" alt="">
+                                	<? }?>
+                                    	
+                                     </div>
+									<div class="clr"></div>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="block1" id="skills">
+                    	<h2 class="floatleft title">Skills &amp; Expertise</h2>
+                        <div class="floatright">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/skills/user_id/<?=$mySessionFront->user['FrontUserId']?>','skills');" href="#" class="edit_btn2" >Edit</a>                        </div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        	<p class="font16"><?php echo $res['user_skills_n_expertise']?> </p>
+                        </div>
+                    </div> 
+                    <div class="block1" id="education">
+                    	<h2 class="floatleft title">Education</h2>
+                        <div class="floatright">
+						</div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        	<ul class="bullet2">
+                            <?php 
+									$i=1;
+									foreach($this->Education_Dashboard as $User_Education) {
+								?>
+                              <li>
+                                	<div class="number"><?=$i++;?></div>
+                                    <div class="info1">
+                                    	<h2><?php echo $User_Education['university']?></h2>
+                                        <h3><?php echo $User_Education['education_title']?></h3>
+<div style="float:right;">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/education/id/<?=$User_Education['id']?>','education');" href="#" class="edit_btn2" >Edit</a>
+</div>
+                                  <p class="font12">
+                                  	From <?php echo $User_Education['starting_year']?> to <?php echo $User_Education['finishing_year']?>
+                                    
+                                  </p>
+
+                                    </div>
+                                    
+                                    <div class="clr"></div>
+                                </li>
+                             <?php } ?>   
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <!--Personal Information-->
+                    <div class="block1" id="personal">
+                    	<h2 class="floatleft title">Personal Information</h2>
+                        <div class="floatright">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/personal/user_id/<?=$mySessionFront->user['FrontUserId']?>','personal');" href="#" class="edit_btn2" >Edit</a>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        	<ul class="view_list">
+                            	<li>
+                                	<div class="label">Date of Birth</div>
+
+                                    <div class="info"><?php echo date("d-M-Y", strtotime($res['user_dob']))?></div>
+                                </li>
+                                
+                                <li>
+                                	<div class="label">Marital Status</div>
+                                    <div class="info"><?php echo $res['user_marital_status']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Email Address</div>
+                                    <div class="info"><?php echo $res['user_email']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Phone Number</div>
+                                    <div class="info"><?php echo $res['user_phone']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Gender</div>
+                                    <div class="info"><?php echo $res['user_gender']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Nationality</div>
+                                    <div class="info"><?php echo $res['nation_title']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Career Level</div>
+                                    <div class="info"><?php echo $res['career_level_title']?></div>
+                                </li>
+                            </ul>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="content_right">
+            	<div class="block stats">
+                	<h2 class="title">Profile Stats</h2>
+                    	<?php 	
+							$MyApply_Job=$this->Apply_Job;
+							$MyTotalSave=$this->SaveJobs; 
+							$MyTotalNoti=$this->Job_Noti;
+						?>
+                    <ul>
+                    	<li><a href="<?=APPLICATION_URL?>user/jobsapplied"><span class="number number_green"><?php echo $MyApply_Job['TotalApply']?></span>Apply Jobs</a></li>
+                         <li><a href="<?=APPLICATION_URL?>user/jobsaved"><span class="number"><?php echo $MyTotalSave['TotalSave']?></span> Jobs Saved</a></li>
+                        <li><a href="<?=APPLICATION_URL?>user/notification"><span class="number"><?php echo $MyTotalNoti['TotalNoti']?></span> Notifications</a></li>
+                        <li><a href="<?=APPLICATION_URL?>user/alljobs"><span class="number">45</span> Profile Views</a></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <!--Recommended Jobs-->
+                <div class="block recommended font12">
+                	<h2 class="title">Recommended Jobs</h2>
+                    <ul>
+						<?php 
+                            $i=1;
+                            foreach($this->Rec_Job as $MyRec_Job) {
+                        ?>
+                    	<li>
+                        	<div class="img">
+                            	<img width="100" height="70" src="<?=USER_PIC?><?php echo $res['user_image']?>" alt="">
+                            </div>
+                            <div class="info">
+                            	<h3><?php echo $MyRec_Job['job_title']?></h3>
+                                <p><strong>Posted by</strong> <?php echo $MyRec_Job['user_company']?> for <?php echo $MyRec_Job['job_city']?></p>
+                                <p><a href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$MyRec_Job['id']?>" class="blue1">View &amp; Apply</a> - <?php echo date("d-m-Y", strtotime($MyRec_Job['job_posted_on']))?></p>
+                            </div>
+                        </li>
+                        <?php } ?>
+                        <li class="align-right"><a href="#" class="black">View All →</a></li>
+                    </ul>
+                </div>
+                <div class="block ad align-center"><img alt="" src="images/google_ad1.jpg"></div>
+                <div class="block ad align-center"><img alt="" src="images/google_ad2.jpg"></div>
+            </div>
+            <div class="clr"></div>
+        </div>
+	</div>
+	<? 
+		//echo "Hello Job Seeker";
+	} else { 
+	
+	?>
+    
+	<div id="main">
+    <div class="container job_post featured_job_post">
+        	<div class="content_left">
+            	<div id="pro_edit">
+                	<div class="job_head">
+                	<div class="img">
+                    	<img width="124" height="118" src="<?=USER_PIC?><?php echo $res['user_image']?>" alt="">
+                        </div>
+                    <div class="info">
+                    	<h1 class="title captl"><?php echo $res['user_company']?></h1>
+                        <div class="manage_profile">
+<a onclick="getajax('<?=BASE_PATH?>user/companyprofile/user_id/<?=$mySessionFront->user['FrontUserId']?>','pro_edit');" href="javascript:void(0)" >Manage Profile</a>
+
+						</div>
+                        <p class="font12"><?php echo $res['user_city']?>, <?php echo $res['country_name']?> </p>
+                        <p class="job_title"><span class="blue">Software Development</span></p>
+                        <div class="floatleft"><a href="#" class="black">Add more Credits</a></div>
+                        <div class="floatright"><a href="<?=APPLICATION_URL?>job/postjob" class="blue">Post New Job</a></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                </div>
+                
+                <div class="list">
+                	<div class="block2">
+                    	<div class="block2_head">
+                        	<h2 class="floatleft">Overview</h2>
+                        	<div class="floatright"><a href="#" class="edit_btn2">Edit</a></div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="block2_content">
+                            <p><?php echo $res['user_profile_summary']?></p>
+                            <ul class="list_3 font12">
+                            	<li>
+                                	<p class="blue upprcase">INDUSTRIES</p>
+                                    <p>Web Development</p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">ANNUAL REVENUE</p>
+                                    <p>$955.5 Million</p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">NUMBER OF EMPLOYEES</p>
+                                    <p>1,369</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="block2">
+                    	<div class="block2_head">
+                        	<h2 class="floatleft">Contact Us</h2>
+                        	<div class="floatright"><a href="#" class="edit_btn2">Edit</a></div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="block2_content">
+                        	<div class="comapny_map"><img width="400" alt="" src="images/company_map.jpg"></div>
+                            <div class="company_address">
+                            	<h3>T3 Media</h3>
+                                <p class="font12">100 Potrero Avenue<br>San Francisco, California 94103</p>
+                                <ul class="icon_list1 blue font12">
+                                	<li><span class="img"><img alt="" src="images/mail_icon1.png"></span> <a href="#" class="blue">info@t3media.com</a></li>
+                                    <li><span class="img"><img alt="" src="images/phone_icon1.png"></span> +91 123-456-7890</li>
+                                    <li><span class="img"><img alt="" src="images/link_icon.png"></span> <a href="#" class="blue">www.t3media.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="content_right">
+            	<div class="block stats">
+                	<h2 class="title">Profile Stats</h2>
+                    	<?php 	
+							$MyPosted_Job=$this->Posted_Job;
+							$MyTotalSave=$this->SaveJobs; 
+							$MyTotalNoti=$this->Job_Noti;
+						?>
+                    <ul>
+   <li><a href="<?=APPLICATION_URL?>user/jobposted"><span class="number number_green"><?php echo $MyPosted_Job['TotalApply']?></span>Jobs Posted</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/jobsaved"><span class="number"><?php echo $MyTotalSave['TotalSave']?></span> Jobs Saved</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/notification"><span class="number"><?php echo $MyTotalNoti['TotalNoti']?></span> Notifications</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/alljobs"><span class="number">10</span> Resumes</a></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <div class="block credit_blnc font12">
+                	<h2 class="title">Credit Balance</h2>
+                    <div class="in_block1">
+                    	<h3>Job Posting Credits</h3>
+                        <?php $My_Credit = $this->Credit_Data; ?>
+                        <div class="in_block1_content">
+                            <ul class="bullet6 font12">
+                                <li>Normal Job Postings: <?php echo $My_Credit['NormalQryRemain'] ?></li>
+                                <li>Premier Job Postings: <?php echo $My_Credit['NormalQryRemain'] ?></li>
+                                <li>(Expire <?php echo date("d-M-Y", strtotime($My_Credit['Normal_Job_Expire_dt'])) ?>)</li>
+                                <li><a href="#" class="blue">Add job posting credits</a></li>
+                                <li><a href="#" class="blue">View Credit </a></li>
+                                <li><a href="#" class="blue">View Payment History</a></li>
+                            </ul>
+                            <p class="align-right"><a href="#" class="maroon underline">Buy Job Posting Credits</a></p>
+                        </div>
+                    </div>
+                    <div class="in_block1">
+                        <h3>CV Search Credits</h3>
+                        <div class="in_block1_content">                    	
+                            <ul class="bullet6 font12">
+                                <li>Global Search<br>(Expire 2013-07-26 08:14 GMT)</li>
+                                <li><a href="#" class="blue">Subscribe to CV Search</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="bullet6 font12">
+                        <li><a href="#" class="blue">View Payment History</a></li>
+                        <li><a href="#" class="blue">View Credit</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="clr"></div>
+        </div>
+	</div>
+	
+	<? } ?>
+  
+ 
+

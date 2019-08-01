@@ -1,0 +1,100 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+?>
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+<?php
+$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; 
+$paypal_id='sriniv_1293527277_biz@inbox.com';  // sriniv_1293527277_biz@inbox.com
+?>
+<div class="container plan_page">
+        	<div class="blue_header">
+            	<h1 class="title">Access <strong class="upprcase">millions of candidates</strong> with <strong class="upprcase">CV Search</strong></h1>
+                <ul class="bullet7">
+                	<li>Get instant access</li>
+                    <li>Easy-to-use search tools</li>
+                    <li>No extra fees or commission</li>
+                    <li class="blue">Try the free CV Search demo!</li>
+                </ul>
+            </div>            
+        	
+            <div class="prices_table selectForm">
+                    <div style="float:left;"><div class="col_head">
+	                    <div class="col col1">Package/Days</div>
+    	                <div class="col col2">Price</div>
+                        <div class="col col2"></div>
+                        
+                    </div>
+					<?php 
+						$i=1;
+						foreach($this->Cv_Search_Data as $Cv_Search_Data) {
+							
+					?>
+                    <div class="clr"></div>
+<form action='<?php echo $paypal_url; ?>' method='get' name='frmPayPal1' onsubmit="evalGroup();">
+                    <div class="col col1" style="padding-bottom:25px;">
+                    
+<script type="text/javascript">
+function evalGroup()
+{
+var group = document.frmPayPal1.item_name;
+for (var i=0; i<group.length; i++) {
+if (group[i].checked)
+break;
+}
+if (i==group.length)
+return alert("No radio button is checked");
+alert("Radio Button " + (i+1) + " is checked.");
+}
+</script>                    
+
+					
+                    <input type='hidden' name='business' value='<?php echo $paypal_id;?>'>
+                    <input type='hidden' name='cmd' value='_xclick'>
+                    
+					<input type="radio"  id="myval" value="<?php echo $Cv_Search_Data['Price']?>"><?php echo $Cv_Search_Data['Package/Days']?>
+                    </div>
+                    <div class="col col1" style="padding-bottom:25px;">$<?php echo $Cv_Search_Data['Price'];?></div>
+                    <div class="col col1" style="padding-bottom:25px;">
+                    	<input type="submit" class="buy_btn" value="Buy now" >
+                        
+<input type="hidden" name="item_name" value="<?php echo 'Package'.$Cv_Search_Data['Package/Days']?>">
+                        <input type='hidden' name='item_number' value='<?php echo $Cv_Search_Data['Package_Id'];?>'>
+                        <input type='hidden' name='amount' value='<?php echo $Cv_Search_Data['Price'];?>'>
+                        <input type='hidden' name='currency_code' value='USD'>
+                        <input type='hidden' name='custom' value='CV Plan'>
+                        
+                        <input type='hidden' name='cancel_return' value='<?=APPLICATION_URL?>subscription/cvcancel'>
+						<input type='hidden' name='return' value='<?=APPLICATION_URL?>subscription/cvsuccess'>
+                        
+	           </div>
+</form>
+                   <? } ?>
+    
+<script>
+	$("input:radio[id=myval]").click(function() {
+		var value = $(this).val();
+		//console.log(value);
+		//alert(value);
+		var fm = document.getElementById('fm');
+		var arrival_arro = value;
+		fm.value ='$'+value;
+	});
+</script>
+                    </div>
+                    <div class="col_foot">
+	                    <!--<div class="col col1"><input type="button" class="buy_btn" value="Buy now"></div>-->
+<div class="col col2">
+Total Price: <input type="text" id="fm" name="fm" readonly="readonly" style="width:50px; border:0;" >
+
+</div>
+                    </div>
+                    <div class="clr"></div>
+                    
+                </div>
+            <div class="clr"></div>
+        </div>

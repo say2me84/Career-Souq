@@ -1,0 +1,83 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$User_Education=$this->Edit_User_Education;
+?>
+
+<script language = "Javascript">
+function educationedit(){
+	var id=$("#id").val();
+	//alert(id);
+	
+	var degree =$("#degree").val();
+	//alert (degree);
+	var university=$("#university").val();
+	//alert (university);
+	var starting_year =$("#starting_year").val();
+	//alert (starting_year);
+	var finishing_year=$("#finishing_year").val();
+	//alert (finishing_year);
+	
+	document.getElementById('education').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'educationedit'),'default',false);?>",
+	type: "POST",
+	data: ({id:id, degree:degree, university:university, starting_year:starting_year, finishing_year:finishing_year}),
+		success: function(data){			
+		$("#education").html(data);			
+		}
+	});
+}
+
+//CKEDITOR.replace('editor1');
+</script>
+                        
+<div class="block1_content">
+<ul class="view_list ftrd_form">
+    <li>
+        <div class="label">Degree Name</div>
+
+    <div class="info">
+        <input type="hidden" name="id" id="id" class="inputbox" value="<?php echo $User_Education['id']?>"/>
+        <select name="degree" id="degree" class="inputbox">
+				<option value="">Select Degree</option>
+				<? 
+					$Degree_Qry = "select * from tbl_job_educations";
+                	$Degree_Data=$db->runQuery("$Degree_Qry");
+					//prd($Nationality_Data);
+					foreach($Degree_Data as $Degree_Name)
+                    {	
+                ?>
+<option value="<?=$Degree_Name['id']?>" <? if($Degree_Name['id']== $User_Education['degree']){ echo "selected"; }?>><?=$Degree_Name['education_title']?></option>
+		<? }?>
+		</select>
+    </div>
+    </li>
+    
+    <li>
+        <div class="label">University Name</div>
+        <div class="info">
+        	<input type="text" name="university" id="university" class="inputbox" value="<?php echo $User_Education['university']?>"/>
+        </div>
+    </li>
+    <li>
+        <div class="label">Starting Year</div>
+        <div class="info">
+        	<input type="text" name="starting_year" id="starting_year" class="inputbox" value="<?php echo $User_Education['starting_year']?>" />
+        </div>
+    </li>
+    <li>
+        <div class="label">Finishing Year</div>
+        <div class="info">
+        	<input type="text" name="finishing_year" id="finishing_year" class="inputbox" value="<?php echo $User_Education['finishing_year']?>" />
+        </div>
+    </li>
+   
+</ul>
+
+<div class="form_btns form_btns1 floatright">
+<input type="button" class="save_job_btn" value="Update" onclick="educationedit(); getajax('<?=BASE_PATH?>dashboard/reloadeducation','education');">
+<input type="submit" class="post_job_btn" value="Cancel" onclick="getajax('<?=BASE_PATH?>dashboard/reloadeducation','education');">
+</div>                            
+	<div class="clr"></div>
+</div>

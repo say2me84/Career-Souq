@@ -1,0 +1,58 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$user_summery=$this->user_id;
+?>
+
+
+<script language = "Javascript">
+function summeryedit(){
+	//alert('Hello...');
+	var user_id=$("#user_id").val();
+	//alert(user_id);
+	
+	var editor1=$("#editor1").val();
+	//alert(editor1);
+	
+	document.getElementById('pro_summary').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'usersummaryedit'),'default',false);?>",
+	type: "POST",
+	data: ({editor1: editor1}),
+		success: function(data){			
+		$("#pro_summary").html(data);			
+		}
+	});
+//alert('hello');    baseinfo
+}
+</script>
+<script>
+$(document).ready(function() {
+		$('textarea#editor1').addClass('ckeditor');
+        });	
+</script>
+<script type="text/javascript">       
+	//CKEDITOR.replace('editor1');
+</script>
+<div class="block1 selectForm" id="ajaxDiv">
+<div class="block1_content">
+<ul class="bullet2">
+<li>
+    <div class="info1 font12 edit_form">
+      <p>	
+            <label><span class="red">*</span>Profile Summery::</label>
+            <input type="hidden" id="user_id" name="user_id" value="<? echo $user_summery['user_id']?>" >
+           
+            <textarea class="" cols="80" id="editor1" name="editor1" rows="5" tabindex="1"><? echo $user_summery['user_profile_summary']?></textarea>
+      </p>
+    </div>
+ <div class="clr"></div>
+</li>
+</ul>
+</div>
+<div class="floatright">
+<input type="button"  value="Edit Profile" class="apply_btn" onclick="summeryedit(); getajax('<?=BASE_PATH?>dashboard/reloadsummary','pro_summary');">
+</div>
+	<div class="clr"></div>
+</div>
+

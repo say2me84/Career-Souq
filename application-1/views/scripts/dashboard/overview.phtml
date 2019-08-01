@@ -1,0 +1,58 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$user_summery=$this->user_id;
+?>
+
+
+<script language = "Javascript">
+function overviewedit(){
+	//alert('Hello...');
+	var user_id=$("#user_id").val();
+	//alert(user_id);
+	
+	var user_profile_summary=$("#user_profile_summary").val();
+	//alert(user_profile_summary);
+	
+	document.getElementById('overview').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'overviewedit'),'default',false);?>",
+	type: "POST",
+	data: ({user_profile_summary: user_profile_summary}),
+		success: function(data){			
+		$("#overview").html(data);			
+		}
+	});
+//alert('hello');    baseinfo
+}
+</script>
+<script>
+$(document).ready(function() {
+		$('textarea#1user_profile_summary').addClass('user_profile_summary');
+        });	
+</script>
+<script type="text/javascript">       
+	//CKEDITOR.replace('editor1');
+</script>
+<div class="block1 selectForm" id="ajaxDiv">
+<div class="block1_content">
+<ul class="bullet2">
+<li>
+    <div class="info1 font12 edit_form">
+      <p>	
+            <label><span class="red">*</span>Company Overview:</label>
+            <input type="hidden" id="user_id" name="user_id" value="<? echo $user_summery['user_id']?>" >
+           
+<textarea class="" cols="80" id="user_profile_summary" name="user_profile_summary" rows="5" tabindex="1"><? echo $user_summery['user_profile_summary']?>        </textarea>
+      </p>
+    </div>
+ <div class="clr"></div>
+</li>
+</ul>
+</div>
+<div class="floatright">
+<input type="button"  value="Edit Overview" class="apply_btn" onclick="overviewedit(); getajax('<?=BASE_PATH?>dashboard/reloadoverview','pro_summary');">
+</div>
+	<div class="clr"></div>
+</div>
+

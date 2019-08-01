@@ -1,0 +1,424 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$akash=$this->user_id;
+$aid=@$akash['user_id'];
+?>
+
+<script src="<?=JS_URL?>jquery.min.js" type="text/javascript"></script>
+<script src="<?=JS_URL?>jquery.pajinate.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+				$('#paging_container1').pajinate();
+			});
+			
+
+</script>
+
+
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+
+<div class="container job_apply">
+    <div class="content_left">
+        <?php 
+			$i=1;
+			foreach($this->UserData as $res) {
+		?>
+		<div id="pro_edit">
+		<div class="profile_head">
+			<div class="img">
+				<img width="167" height="167" src="<?=USER_PIC?><?php echo $res['user_image']?>" alt="">
+			</div>
+			<div class="info">
+				<h1 class="title captl"><? echo $res['user_fname'].' '.$res['user_lname']?></h1>
+				<h3>Sr.Software Engineer at T3 Media</h3>
+				<div class="floatright edit_btn1">
+		<a onclick="getajax('<?=BASE_PATH?>user/userprofile/user_id/<?=$mySessionFront->user['FrontUserId']?>','','pro_edit');" href="#" >Edit</a>
+				</div>
+				<p class="font12 exp_edu1">San Francisco, California <span>|</span> Information Technologies and Services</p>
+				<ul class="exp_edu font12">
+					<li><span>Current</span> T3 Media</li>
+					<li><span>Current</span> T3 Media</li>
+					<li><span>Current</span> T3 Media</li>
+				</ul>
+			</div>
+			<div class="clr"></div>
+		</div>
+		</div>
+		<?php }?>
+        
+        <div class="list">
+            <h1 class="title captl floatleft">Applications</h1>
+            <div class="floatright selectForm"><span class="label orng">Job Status</span> <select><option>-Select-</option></select></div>
+            <div class="clr"></div>
+            
+            
+           	<div id="paging_container1">
+            <ul class="content">
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+                <li><div class="list_block">
+                    <div class="head font12">
+                        <div class="floatleft">
+                            <h4><a class="black" href="#">Female Sales Executive</a></h4>
+                            <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                        </div>
+                        <div class="floatright">
+                            <p>30-05-2013</p>
+                            <p class="blue"><strong>Applied</strong></p>
+                        </div>
+                    </div>
+                    <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                    <div class="footer font11">
+                         <span>Job Role: <strong class="blue">Sales</strong></span>
+                         <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                         <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                    </div>
+                </div></li>
+            </ul>
+            <div class="page_navigation"></div>	
+            <!--<div class="paging">
+                <ul>
+                    <li><a href="#">Prev</a></li>
+                    <li><span>1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="content_right">
+        <div class="block stats">
+            <h2 class="title">Profile Stats</h2>
+            <ul>
+                <li><a href="#"><span class="number number_green">8</span> Jobs Applied</a></li>
+                <li><a href="#"><span class="number">8</span> Jobs Saved</a></li>
+                <li><a href="#"><span class="number">12</span> Notifications</a></li>
+                <li><a href="#"><span class="number">45</span> Profile Views</a></li>
+            </ul>
+            <div class="clr"></div>
+        </div>
+        <div class="block recommended font12">
+            <h2 class="title">Recommended Jobs</h2>
+            <ul>
+                <li>
+                    <div class="img"><img src="images/company_logo1.jpg" alt=""></div>
+                    <div class="info">
+                        <h3>Program Manager</h3>
+                        <p><strong>Posted by</strong> Media Group for Qatar</p>
+                        <p><a class="blue1" href="#">View &amp; Apply</a> - 15 June 2013</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="img"><img src="images/company_logo1.jpg" alt=""></div>
+                    <div class="info">
+                        <h3>Program Manager</h3>
+                        <p><strong>Posted by</strong> Media Group for Qatar</p>
+                        <p><a class="blue1" href="#">View &amp; Apply</a> - 15 June 2013</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="img"><img src="images/company_logo1.jpg" alt=""></div>
+                    <div class="info">
+                        <h3>Program Manager</h3>
+                        <p><strong>Posted by</strong> Media Group for Qatar</p>
+                        <p><a class="blue1" href="#">View &amp; Apply</a> - 15 June 2013</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="img"><img src="images/company_logo1.jpg" alt=""></div>
+                    <div class="info">
+                        <h3>Program Manager</h3>
+                        <p><strong>Posted by</strong> Media Group for Qatar</p>
+                        <p><a class="blue1" href="#">View &amp; Apply</a> - 15 June 2013</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="img"><img src="images/company_logo1.jpg" alt=""></div>
+                    <div class="info">
+                        <h3>Program Manager</h3>
+                        <p><strong>Posted by</strong> Media Group for Qatar</p>
+                        <p><a class="blue1" href="#">View &amp; Apply</a> - 15 June 2013</p>
+                    </div>
+                </li>
+                <li class="align-right"><a class="black" href="#">View All &rarr;</a></li>
+            </ul>
+        </div>
+        <div class="block ad align-center"><img src="images/google_ad1.jpg" alt=""></div>
+        <div class="block ad align-center"><img src="images/google_ad2.jpg" alt=""></div>
+    </div>
+    <div class="clr"></div>
+</div>
+

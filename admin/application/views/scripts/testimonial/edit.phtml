@@ -1,0 +1,46 @@
+<script>
+$(document).ready(function() {
+		$('textarea#message').addClass('ckeditor');
+        });	
+</script>
+<div id="big_box" align="center" >
+ <form name="Form_Memberedit" id="Form_Memberedit" action="" method="post" enctype="multipart/form-data">      
+ <table width="100%" border="0" cellspacing="5" cellpadding="0" class="frmtable">
+  <tr>
+  <td width="17%" align="left" valign="top">Name:</td>
+  <td align="left" valign="top"><?php echo $this->myform->name?></td>
+  </tr> ` 
+  <tr>
+  <td width="17%" align="left" valign="top">Company Name:</td>
+  <td align="left" valign="top"><?php echo $this->myform->company?></td>
+  </tr>  
+  <tr>
+  <td align="left" valign="top"> Designation:<span class="errormsg">*</span></td>
+  <td align="left" valign="top"><?php echo $this->myform->designation?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Email:</td>
+  <td align="left" valign="top"><?php echo $this->myform->email?></td>
+  </tr>
+  <tr>
+  	<td align="left" valign="top">Phone:</td>
+  	<td align="left" valign="top"><?php echo $this->myform->phone?></td>
+  </tr>
+  <tr>
+  	<td align="left" valign="top">Subject:</td>
+  	<td align="left" valign="top"><?php echo $this->myform->subject?></td>
+  </tr>
+  <tr>
+  	<td colspan="2" align="left" valign="top">Message:</td>
+  	</tr>
+  <tr>
+    <td colspan="2" align="left" valign="top"><?php echo $this->myform->message?></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" style="font-size:11px;"><span class="errormsg">*</span> Required fields</td>
+    <td align="left" valign="top"><input type="submit" name="mySubmit" id="mySubmit" value="Submit" /></td>
+  </tr>  
+</table>
+</form>
+</div>
+

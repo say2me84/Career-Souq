@@ -1,0 +1,240 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$akash=$this->user_id;
+$aid=@$akash['user_id'];
+?>
+
+<script src="<?=JS_URL?>jquery.min.js" type="text/javascript"></script>
+<script src="<?=JS_URL?>jquery.pajinate.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	$('#paging_container1').pajinate();
+});
+</script>
+
+
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+<?php $emp_data=$this->Employee_Data; ?>
+<div class="container job_apply">
+    <div class="content_left">
+            	<div id="pro_edit">
+                	<div class="job_head">
+                		  <div class="img">
+                    	<?php 
+						if($emp_data['user_image']=='')
+						{
+						?>
+							<img width="124" height="118"  src="<?=IMAGES_URL?>no-avator.png" >
+                        <?php }else{ ?>
+							<img width="124" height="118" src="<?=ADMIN_IMG?>user_pic/<?php echo $emp_data['user_image']?>" alt="">
+						<? }?>
+                    </div>
+                  		  <div class="info">
+                    	<h1 class="title captl"><?php echo $emp_data['user_company']?></h1>
+
+                        <p class="font12"><?php echo $emp_data['user_city']?>, <?php echo $emp_data['country_name']?> </p>
+                        <p class="job_title"><span class="blue"><?php echo $emp_data['category_title']?>Development</span></p>
+                        <div class="floatleft"><a href="<?=APPLICATION_URL?>subscription/index" class="black">Add more Credits</a></div>
+                        <div class="floatright"><a href="<?=APPLICATION_URL?>job/postjob" class="blue">Post New Job</a></div>
+                    </div>
+                    	<div class="clr"></div>
+              		</div>
+                </div>
+                               
+                <div class="list">
+                	
+                    <div class="block2" id="overview">
+                    	<div class="block2_head">
+                        	<h2 class="floatleft">Overview</h2>
+                        	<div class="floatright">
+                            
+<!--<a onclick="getajax('<?=BASE_PATH?>dashboard/overview/user_id/<?=$mySessionFront->user['FrontUserId']?>','overview');" href="#" class="edit_btn2" >Edit</a>--> 
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="block2_content" >
+
+                            <p><?php echo $emp_data['user_profile_summary']?></p>
+                            <ul class="list_3 font12">
+                            	<li>
+                                	<p class="blue upprcase">INDUSTRIES</p>
+                                    <p><?php echo $emp_data['category_title']?> </p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">ANNUAL REVENUE</p>
+                                    <p>$<?php echo $emp_data['user_annual_revenue']?></p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">NUMBER OF EMPLOYEES</p>
+                                    <p><?php echo $emp_data['user_number_of_employees']?></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+<!--We live with your dream to Create, inspire and Transform your Digital Identities into an emerging BRAND. We’re an Independent digital design, development and branding agency who strives to provide a better solution to all your business needs.-->                    
+                    
+                    <div class="block2">
+                    	<div class="block2_head">
+                        	<h2 class="floatleft">Contact Us</h2>
+                        	<div class="floatright">
+<!--<a onclick="getajax('<?=BASE_PATH?>dashboard/overview/user_id/<?=$mySessionFront->user['FrontUserId']?>','pro_summary');" href="#" class="edit_btn2" >Edit</a>-->
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="block2_content">
+                        	<div class="comapny_map">
+                           <?php //echo $emp_data['map_code']?>
+<!--<iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=
+&amp;q=100 Potrero Avenue,San Francisco, California 94103, United States&amp;hnear=100 Potrero Avenue,San Francisco, California 94103, United States&amp;t=m&amp;z=15&amp;&amp;output=embed">
+</iframe>-->
+
+
+<iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=
+&amp;q=<?=$emp_data['user_company_address_line_1'];?>, <?=$emp_data['user_company_address_line_2'];?>, <?=$emp_data['user_company_state'];?> ,<?=$emp_data['country_name'];?>&amp;hnear=<?=$emp_data['user_company_address_line_1'];?>, <?=$emp_data['user_company_address_line_2'];?>, <?=$emp_data['user_company_state'];?> ,<?=$emp_data['country_name'];?>&amp;t=m&amp;z=15&amp;&amp;output=embed">
+</iframe>
+	</div>
+                            <div class="company_address">
+                            	<h3><?php echo $emp_data['user_company']?></h3>
+                                <p class="font12"><?php echo $emp_data['user_company_address_line_1']?><br><?php echo $emp_data['user_company_address_line_2']?>,<?php echo $emp_data['user_company_state']?></p>
+    <ul class="icon_list1 blue font12">
+        <li><span class="img"><img alt="" src="<?=IMAGES_URL?>mail_icon1.png"></span>
+        	<a class="blue" href="mailto:<?php echo $emp_data['user_email']?>"><?php echo $emp_data['user_email']?></a>
+
+        </li>
+        
+        <li><span class="img"><img alt="" src="<?=IMAGES_URL?>phone_icon1.png"></span><?php echo $emp_data['user_company_phone_number']?></li>
+        
+        <li><span class="img"><img alt="" src="<?=IMAGES_URL?>link_icon.png"></span>
+        	<a href="<?php echo $emp_data['user_company_web_url']?>" target="_new" class="blue"><?php echo $emp_data['user_company_web_url']?></a>
+            
+        </li>
+    </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                
+                
+            </div>
+    
+    <div class="content_right">
+            	<div class="block stats">
+                	<h2 class="title">Profile Stats</h2>
+                    	<?php 	
+							$MyApply_Job=$this->Apply_Job;
+							$MyTotalSave=$this->SaveJobs; 
+							$MyTotalNoti=$this->Job_Noti;
+							$MyTotPro=$this->Jobber_Pro_View;
+						?>
+                    <ul>
+   <li><a href="<?=APPLICATION_URL?>user/jobsapplied"><span class="number number_green"><?php echo $MyApply_Job['TotalApply']?></span>Apply Jobs</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/jobsaved"><span class="number"><?php echo $MyTotalSave['TotalSave']?></span> Jobs Saved</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/notification"><span class="number"><?php echo $MyTotalNoti['TotalNoti']?></span> Notifications</a></li>
+   <li><a href="<?=APPLICATION_URL?>"><span class="number"><?php echo $MyTotPro['TotalViewPro']?></span>Profile Views</a></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <!--Recommended Jobs-->
+                <div class="block recommended font12">
+                	<h2 class="title">Recommended Jobs</h2>
+                    <ul>
+						<?php 
+                            $i=1;
+                            foreach($this->Rec_Job as $MyRec_Job) {
+                        ?>
+                    	<li>
+                        	<div class="img">
+                            	<?php 
+								if($MyRec_Job['user_image']=='')
+								{
+								?>
+									 <img width="100" height="70"  src="<?=IMAGES_URL?>no-avator.png" >
+									
+								<?php }else{ ?>
+									 <img width="100" height="70" src="<?=ADMIN_IMG?>user_pic/<?php echo $MyRec_Job['user_image']?>" alt="">
+								<? }?>
+                           </div>
+                            <div class="info">
+                            	<h3><?php echo $MyRec_Job['job_title']?></h3>
+                                <p><strong>Posted by</strong> <?php echo $MyRec_Job['user_company']?> for <?php echo $MyRec_Job['job_city']?></p>
+                                <p><a href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$MyRec_Job['id']?>" class="blue1">View &amp; Apply</a> - <?php echo date("d-m-Y", strtotime($MyRec_Job['job_posted_on']))?></p>
+                            </div>
+                        </li>
+                        <?php } ?>
+                        <li class="align-right"><a href="<?=APPLICATION_URL?>job/alljobs" class="black">View All →</a></li>
+                    </ul>
+                </div>
+                
+                <?php 
+					$i=1;
+					foreach($this->Add_Banner_Data as $Add_Banner_List) {
+				?>
+                <div class="block ad align-center">
+                <!--<img alt="" src="images/google_ad1.jpg">	banner_window_open	banner_link	-->
+                <!--<a target="_blank" href="http://google.com">-->
+                <a target="<?php echo $Add_Banner_List['banner_window_open']?>" href="<?php echo $Add_Banner_List['banner_link']?>">
+	                <img width="300" height="268" src="<?=ADMIN_IMG?>banners/<?php echo $Add_Banner_List['banner_image']?>" alt="">
+                </a>    
+                </div>
+                <!--<div class="block ad align-center"><img alt="" src="images/google_ad2.jpg"></div>-->
+                <?php }?>
+            </div>
+    <div class="clr"></div>
+</div>
+

@@ -1,0 +1,30 @@
+<div id="big_box" align="center" >
+ <form name="Form_Memberedit" id="Form_Memberedit" action="" method="post" enctype="multipart/form-data">      
+ <table width="100%" border="0" cellspacing="5" cellpadding="0" class="frmtable">
+  <tr>
+  <td width="17%" align="left" valign="top">Job Category:</td>
+  <td align="left" valign="top"><? echo $this->myform->category_title?></td>
+  </tr> `  
+  <tr>
+  <td align="left" valign="top">Front Page:<span class="errormsg">*</span></td>
+  <td align="left" valign="top"><? echo $this->myform->show_on_home_page?></td>
+  </tr>
+  <tr>
+  <td align="left" valign="top">Banner(optional):</td>
+  <td align="left" valign="top"><? echo $this->myform->category_banner?></td>
+  </tr>
+  <tr>
+  	<td align="left" valign="top">&nbsp;</td>
+  	<td align="left" valign="top">741px(width)  x  171px(height) for best results</td>
+  	</tr>
+  <tr>
+    <td align="left" valign="top">Last Image:</td>
+    <td align="left" valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" style="font-size:11px;"><span class="errormsg">*</span> Required fields</td>
+    <td align="left" valign="top"><input type="submit" name="mySubmit" id="mySubmit" value="Submit" /></td>
+  </tr>  
+</table>
+</form>
+</div>

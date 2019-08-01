@@ -1,0 +1,51 @@
+<?php 
+global $mySessionFront;
+
+?>
+
+<div id="paging_container1">
+            <ul class="content">
+               <?php if($mySessionFront->user['userRole']=='Employer') { ?>
+			   <? if(is_array($this->Inbox) && count($this->Inbox) > 0) {
+					foreach($this->Inbox as $MyInbox) { ?>	 
+                        <li class="unread">
+                            <div class="title"><?=$MyInbox['subject']?></div>
+                            <div class="content"><?=$MyInbox['message']?></div>
+                            <div class="from"><?=$MyInbox['from']?></div>
+                            <div class="time"><?=$MyInbox['sent_on']?></div>
+                        </li>
+                 <?php } ?>
+                 <?php } else {?> 
+                    <li class="unread">
+                        <div class="title">No Notification Found</div>
+                    </li>
+                    
+                 <?php } } else { ?>
+                 
+                 <?  //========== Job Seekar ===========//
+				 	if(is_array($this->Inbox) && count($this->Inbox) > 0) {
+					foreach($this->Inbox as $MyInbox) { ?>	 
+						<li class="unread">
+                            <div class="title"><?=$MyInbox['subject']?></div>
+                            <div class="content"><?=$MyInbox['message']?></div>
+                            <div class="from"><?=$MyInbox['from']?></div>
+                            <div class="time"><?=$MyInbox['sent_on']?></div>
+                        </li>                 <? } ?>
+                 <? } else { ?> 
+                    <li class="unread">
+                        <div class="title">No Notification Found</div>
+                    </li>
+                 <? } }?>
+                 
+            </ul>
+            <div class="page_navigation" style="padding-left:125px;"></div>	
+            <!--<div class="paging">
+                <ul>
+                    <li><a href="#">Prev</a></li>
+                    <li><span>1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>-->
+            </div>

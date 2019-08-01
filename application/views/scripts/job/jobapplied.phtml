@@ -1,0 +1,143 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+<link rel="stylesheet" href="<?=JS_URL?>jquery-ui.css" />
+
+<script src="<?=JS_URL?>jquery-ui.js"></script>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+ 
+ <script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+	
+	$(document).ready(function() {
+        $('select#sub_cat_id').addClass('selectbox');
+        });  
+</script>
+<script language="javascript">
+function getsubcat(CategorySno)
+{
+	document.getElementById('SubCatDiv').innerHTML="<img src='<?=APPLICATION_URL_ADMIN?>images/load.gif' border='0'>";
+	//alert(document.getElementById('SubCatDiv'));
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'job','action'=>'getsubcat'),'default',true);?>",
+	type: "POST",
+	data: ({CategorySno : CategorySno}),
+	success: function(data){			
+	$("#SubCatDiv").html(data);			
+	}});
+}
+</script>
+<!--======================================== Loading Forms vai Ajax ===================================-->
+<div class="container job_post featured_job_post">
+        	<div class="content_left">
+            	<div class="job_head">
+                	<div class="img"><img alt="" src="images/company_logo1.jpg"></div>
+                    <div class="info">
+                    	<h1 class="title captl">T3 Media</h1>
+                        <p class="font12">San Francisco, California </p>
+                        <p class="job_title"><span class="blue">Software Development</span></p>
+                        <div class="floatleft"><a href="#" class="black">Add more Credits</a></div>
+                        <div class="floatright"><a href="#" class="blue">Post New Job</a></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="list">
+                	<div class="block2">
+                    	<h2>My Job Posting</h2>
+                       	 <div class="list_block">
+                            <div class="head font12">
+                                <div class="floatleft">
+                                    <h4><a href="#" class="black">Female Sales Executive</a></h4>
+                                    <p>Hotels Supply &amp; Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                                </div>
+                                <div class="floatright">
+                                    <p>30-05-2013</p>
+                                    <p><strong class="orng">20 Applied</strong></p>
+                                </div>
+                            </div>
+                            <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene &amp; Paper products with a valid Bahrain driving lic...</p>
+                            <div class="footer font11">
+                                 <span>Job Role: <strong class="blue">Sales</strong></span>
+                                 <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                                 <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                            </div>
+                        </div>
+                       
+                        <div class="paging">
+                            <ul>
+                                <li><a href="#">Prev</a></li>
+                                <li><span>1</span></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                  	</div>
+                </div>
+            </div>
+            <div class="content_right">
+            	<div class="block stats">
+                	<h2 class="title">Profile Stats</h2>
+                    <ul>
+                    	<li><a href="#"><span class="number number_green">8</span> Jobs Applied</a></li>
+                        <li><a href="#"><span class="number">8</span> Jobs Saved</a></li>
+                        <li><a href="#"><span class="number">12</span> Notifications</a></li>
+                        <li><a href="#"><span class="number">45</span> Profile Views</a></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <div class="block credit_blnc font12">
+                	<h2 class="title">Credit Balance</h2>
+                    <div class="in_block1">
+                    	<h3>Job Posting Credits</h3>
+                        <div class="in_block1_content">
+                            <ul class="bullet6 font12">
+                                <li>Normal Job Postings: 50</li>
+                                <li>Premier Job Postings: 36</li>
+                                <li>(Expire 2013-07-26 08:14 GMT)</li>
+                                <li><a href="#" class="blue">Add job posting credits</a></li>
+                                <li><a href="#" class="blue">View Credit </a></li>
+                                <li><a href="#" class="blue">View Payment History</a></li>
+                            </ul>
+                            <p class="align-right"><a href="#" class="maroon underline">Buy Job Posting Credits</a></p>
+                        </div>
+                    </div>
+                    <div class="in_block1">
+                        <h3>CV Search Credits</h3>
+                        <div class="in_block1_content">                    	
+                            <ul class="bullet6 font12">
+                                <li>Global Search<br>(Expire 2013-07-26 08:14 GMT)</li>
+                                <li><a href="#" class="blue">Subscribe to CV Search</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="bullet6 font12">
+                        <li><a href="#" class="blue">View Payment History</a></li>
+                        <li><a href="#" class="blue">View Credit</a></li>
+                    </ul>
+                </div>
+                <div class="block ad align-center"><img alt="" src="images/google_ad1.jpg"></div>
+                <div class="block ad align-center"><img alt="" src="images/google_ad2.jpg"></div>
+            </div>            
+            <div class="clr"></div>
+        </div>
+	
+ 
+

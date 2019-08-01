@@ -1,0 +1,307 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+<link rel="stylesheet" href="<?=JS_URL?>jquery-ui.css" />
+
+<script src="<?=JS_URL?>jquery-ui.js"></script>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>-->
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+ 
+ <script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+		  
+</script>
+
+<script>
+function validate()
+{
+	if(document.getElementById("job_country").value == '' ) {
+		alert("Please Select Country");
+		return false;
+	}
+	if(document.getElementById("employment_id").value == '' ) {
+		alert("Please Select Employment Type");
+		return false;
+	}
+	
+	if(document.getElementById("job_career_level").value == '' ) {
+		alert("Please Select Career Level");
+		return false;
+	}
+	if(document.getElementById("job_education").value == '' ) {
+		alert("Please Select Degree");
+		return false;
+	}
+	if(document.getElementById("job_type").value == '' ) {
+		alert("Please Select Job Type");
+		return false;
+	}
+	if(document.getElementById("job_category").value == '' ) {
+		alert("Please Select Industry");
+		return false;
+	}
+	return true;
+	
+}
+
+</script> 
+<!--======================================== Loading Forms vai Ajax ===================================-->
+<script type="text/javascript" src="<?=JS_URL?>ddaccordion.js"></script>
+<script type="text/javascript">
+
+
+ddaccordion.init({
+	headerclass: "submenuheader", //Shared CSS class name of headers group
+	contentclass: "submenu", //Shared CSS class name of contents group
+	revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+	mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+	collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+	defaultexpanded: [], //index of content(s) open by default [index1, index2, etc] [] denotes no content
+	onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
+	animatedefault: false, //Should contents open by default be animated into view?
+	persiststate: true, //persist state of opened contents within browser session?
+	toggleclass: ["", ""], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+	togglehtml: ["suffix", "<img src='images/drop-down-erro2.jpg' class='statusicon' />", "<img src='images/drop-down-erro.jpg' class='statusicon' />"], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+	animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+	oninit:function(headers, expandedindices){ //custom code to run when headers have initalized
+		//do nothing
+	},
+	onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+		//do nothing
+	}
+})
+
+
+</script>
+
+
+
+
+
+<!--<form name="search" id="search" action="<?php //echo BASE_PATH?>job/search" method="get" onSubmit="return validate();">-->
+		<div class="container static_page" >
+        
+        	<h1 class="title">Advanced search</h1>
+
+
+<form name="search" id="search" action="<?=BASE_PATH?>Recruiters/search" method="post" >
+				<?php // echo $this->url(array('controller'=>'job', 'action'=>'search'), 'default', true)?>
+            <div class="content_full">
+            	<div class="form advanced-search-from ">
+                	<div class="col col1">
+                    	<span class="label">Keywords</span>
+                        <input type="text" value="" class="inputbox" id="user_fname"  name="user_fname"/>
+                    	<input type="hidden" value="1" class="inputbox" id="user_is_blocked"  name="user_is_blocked"/>
+                    </div>
+                    <div class="col col2">
+                    	<span class="label">Job Category</span>
+                        <?
+						$Job_categories_Qry="select * from tbl_job_categories";
+						$Job_categories=$db->runQuery("$Job_categories_Qry");
+						//prd($Job_categories);
+						?>
+                        <select id="user_industry" name="user_industry" class="inputbox">
+                                <option value="">Select Job Type</option>
+                                    <?				
+                                    foreach($Job_categories as $My_Job_categories)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Job_categories['cat_id']?>"><?=$My_Job_categories['category_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <div class="col col3">
+                    <?php	
+						
+						$qry="select * from tbl_countries";
+						$country=$db->runQuery("$qry");
+						//prd($country);
+					?>
+                    	<span class="label">Candidates location</span>
+                        	<select id="user_country" name="user_country" class="inputbox">
+                                <option value="">Select</option>
+                                    <?				
+                                    foreach($country as $countrylist)
+                                    {
+                                    ?>
+                                <option value="<?=$countrylist['country_id']?>"><?=$countrylist['country_name']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <div class="clr"></div>
+                    
+                    <div class="col col1">
+						<?
+                            $Job_Nationality_Qry="select * from tbl_nationalities";
+                            $Job_Nationality=$db->runQuery("$Job_Nationality_Qry");
+                            //prd($Job_Nationality);
+                        ?>
+                    	<span class="label">Nationality</span>
+                        <select id="user_nationality" name="user_nationality" class="inputbox">
+                                <option value="">Select Nationality</option>
+                                    <?				
+                                    foreach($Job_Nationality as $My_Job_Nationality)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Job_Nationality['id']?>"><?=$My_Job_Nationality['nation_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <div class="col col2">
+						<?
+                            $Education_Qry="select * from tbl_job_educations";
+                            $Education=$db->runQuery("$Education_Qry");
+                            //prd($Education);
+                        ?>
+                    	<span class="label">Degree</span>
+                        <select id="degree" name="degree" class="inputbox">
+                                <option value="">Select Degree</option>
+                                    <?				
+                                    foreach($Education as $My_Education)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Education['id']?>"><?=$My_Education['education_title']?></option>
+                                <?
+                                }
+                                ?>
+                        </select>
+                    </div>
+                    <!--<div class="col col3 rangeSelect">-->
+                    <div class="col col3">
+                    	<span class="label">Salary Range</span>
+                        <select class="inputbox" id="salary" name="salary">
+                        	<option value="">Salary Range</option>
+                            <option value="1000-5000">$1000-5000</option>
+                            <option value="5000-10000">$5000-10000</option>
+                            <option value="10000-15000">$10000-15000</option>
+                            <option value="20000-25000">$20000-25000</option>
+                            <option value="25000-30000">$25000-30000</option>
+                            <option value="30000-400000">$30000-400000</option>
+                        </select> 
+                        <!--<span class="mdl_text">to</span> 
+                        <select class="selectbox2" name="" id="">
+                        	<option value="">Select Max</option>
+                            <option value="5000">$5,000</option>
+                            <option value="10000">$10,000</option>
+                            <option value="20000">$20,000</option>
+                            <option value="25000">$25,000</option>
+                            <option value="50000">$50,000</option>
+                            <option value="100000">$100,000</option>
+                        </select>-->
+                    </div>
+                    <div class="clr"></div>
+                    
+                    <div class="col col1">
+						<?
+                            $Career_Level_Qry="select * from tbl_career_levels";
+                            $Career_Level=$db->runQuery("$Career_Level_Qry");
+                            //prd($Career_Level);
+                        ?>
+                    	<span class="label">Career Level</span>
+                        <select id="user_career_level" name="user_career_level" class="inputbox">
+                                <option value="">Select Career Level</option>
+                                    <?				
+                                    foreach($Career_Level as $My_Career_Level)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Career_Level['career_level_id']?>"><?=$My_Career_Level['career_level_title']?></option>
+                                <?
+                                }
+                                ?>
+                        </select>
+                    </div>
+                    <div class="col col2">
+						<?
+                            $Employment_types_Qry="select * from tbl_employment_type";
+                            $Employment_types=$db->runQuery("$Employment_types_Qry");
+                            //prd($Employment_types);
+                        ?>
+                    <span class="label">Job Type</span>
+                    
+                    <select id="user_employer_type" name="user_employer_type" class="inputbox">
+                            <option value="">Select Job Type</option>
+                                <?				
+                                foreach($Employment_types as $My_Employment_types)
+                                {
+                                ?>
+                            <option value="<?=$My_Employment_types['employment_id']?>"><?=$My_Employment_types['employment_title']?></option>
+                            <?
+                            }
+                            ?>
+                        </select>
+                        
+                    </div>
+                    <div class="col col3">
+                    	<span class="label">Gender</span>
+                        <select class="inputbox" id="user_gender" name="user_gender">
+                        	<option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="clr"></div>
+	<!--==============================================-->
+                    <!--<div class="col col1">
+						
+                    <span class="label">Years of Experience</span>
+                    
+                    <select id="user_employer_type" name="user_employer_type" class="selectbox">
+                        <option value="">Select Experience</option>
+                    	<option value="1">1 year Experience</option>
+                        <option value="2">2 year Experience</option>
+                        <option value="3">3 year Experience</option>
+                        <option value="4">4 year Experience</option>
+                        <option value="5">5 year Experience</option>
+                        <option value="6">6 year Experience</option>
+                        <option value="7">7 year Experience</option>
+                        <option value="8">8 year Experience</option>
+                        <option value="9">9 year Experience</option>
+                        <option value="10">10 year Experience</option>
+                        <option value="11">10+ year Experience</option>
+                    </select>
+                        
+                    </div>-->
+                    <div class="col col1">
+                    	<span class="label">Candidates Residence Location</span>
+                        <input type="text" value="" class="inputbox" id="user_city"  name="user_city"/>
+                    </div>
+                    <div class="clr"></div>
+                    
+                    <div class="btns"></div>
+                </div>
+            	<span class="btns">
+					<input type="submit" class="save_btn" value="Find resume">
+				 <!-- <input class="submit" id="search_submit" name="commit" value="" type="submit">-->
+                </span></div>
+            		<div class="clr">
+              </div>
+             </form>
+        </div >
+        	
+	
+ 
+

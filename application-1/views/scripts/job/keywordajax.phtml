@@ -1,0 +1,52 @@
+<?php 
+global $mySession;
+
+?>
+<script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+		  
+</script>
+
+			 <div class="list" id="list">
+                <? if(is_array($this->job_sallary) && count($this->job_sallary) > 0) {
+					foreach($this->job_sallary as $Myjob) { ?>	
+                    <div class="list_block featured_list_block">
+                    	<div class="head font12">
+                            <div class="floatleft">
+                                <h4><a class="black" href="#"><?=$Myjob['job_title']?></a></h4>
+                                <p>Hotels Supply & Services SPC - <span class="blue">Manama, Bahrain</span></p>
+                            </div>
+                            <div class="floatright">
+                            	<p><?php echo date("d-m-Y", strtotime($Myjob['job_posted_on']))?></p>
+                                <p class="orng"><strong>Featured Job</strong></p>
+                            </div>
+                        </div>
+                        <p class="clr font12">Applications are invited for the post of Sales Executive to work in a Hygiene Product Trading Company. Candidate must have sales experience in Hygiene & Paper products with a valid Bahrain driving lic...</p>
+                        <div class="footer font11">
+                        	 <span>Job Role: <strong class="blue">Sales</strong></span>
+                             <span>Company Industry: <strong class="blue">Retail/Wholesale</strong></span>
+                             <span>Career Level: <strong class="blue">Executive/Director</strong></span>
+                        </div>
+                        
+                    </div>
+                 <? } ?>
+                 <? } else {?> 
+                 	<div class="list_block featured_list_block">
+                 		<h4>PLEASE REFINE YOUR SEARCH</h4>   
+                    </div>
+				 <? } ?>  
+                    <div class="clr"></div>
+                </div>
+ 
+

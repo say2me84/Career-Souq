@@ -1,0 +1,63 @@
+<div class="wrap">
+                <div class="widgets">
+                    <? 	global $mySessionFront; 
+						 $db=new Db();
+						 
+						$Footer_Data= $db->runQuery ("SELECT * FROM tbl_static_page");
+						if(is_array($Footer_Data) && count($Footer_Data) > 0) 
+                            {
+								$i=1;
+                            foreach($Footer_Data as $res)
+                                {
+					?>
+                    <div class="block block1">
+                    	<h3><?php echo $res['Page_Category']?></h3>
+                    	<ul>
+					<? 
+                   		 
+                        $Static_Page = $db->runQuery("SELECT * FROM `tbl_static_page_detail` where page_cat_id = '".$res['static_page_id']."' and status='1'");	
+                        //prd($Static_Page);	
+                        if(is_array($Static_Page) && count($Static_Page) > 0) 
+                            {
+								$i=1;
+                            foreach($Static_Page as $MyStatic_Page)
+                                {
+                    ?>					
+            <li><a href="<? echo APPLICATION_URL.'Cmspage/index/page_id/'.$MyStatic_Page['page_id']?>"><?php echo $MyStatic_Page['title']?></a></li>
+                           
+						   <? }}?>
+                        </ul>
+                    </div>
+                    <? } } ?>
+                    <!--<div class="block block2">
+                    	<h3>Customer Services</h3>
+                    	<ul>
+                        	<li><a href="<?=APPLICATION_URL?>Static/contactus">Contact Us</a></li>
+                            <li><a href="<?=APPLICATION_URL?>Static/testimonials">Testimonials</a></li>
+                            <li><a href="<?=APPLICATION_URL?>Static/helpage">Help</a></li>
+                        </ul>
+                    </div>
+                    <div class="block block3">
+                    	<h3>Policies</h3>
+                    	<ul>
+                        	<li><a href="<?=APPLICATION_URL?>Static/privacypolicy">Privacy Policy</a></li>
+                            <li><a href="<?=APPLICATION_URL?>Static/termsofuse">Terms Of Use</a></li>
+                            <li><a href="<?=APPLICATION_URL?>Static/cookiepolicy">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="block block4">
+                    	<a href="#"><img src="<?=IMAGES_URL?>fb_icon.png" alt=""></a> 
+                        <a href="#"><img src="<?=IMAGES_URL?>twtr_icon.png" alt=""></a> 
+                        <a href="#"><img src="<?=IMAGES_URL?>pntrtst_icon.png" alt=""></a> 
+                        <a href="#"><img src="<?=IMAGES_URL?>instgram_icon.png" alt=""></a>
+                    </div>-->
+                    <div class="block block5">
+                    	<h2>SUBSCRIBE TO NEWSLETTER</h2>
+                        <div class="form">
+                        	<input type="text" value="" placeholder="Enter your email" class="inputbox"> <input type="button" value="Submit" class="submit">
+                        </div>
+                        <p class="align-right">Copyright © 2013.  All Right’s Reserved.<br>Site Credite</p>
+                    </div>                  
+           	  </div>
+                <div class="clr"></div>
+            </div>

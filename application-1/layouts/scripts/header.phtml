@@ -1,0 +1,62 @@
+<?
+	global $mySessionFront;
+	$db=new Db();
+?>
+
+<div class="wrap">
+        <h1 class="logo"><a href="<?=APPLICATION_URL?>index/index">Job Portal</a></h1>
+        <nav class="nav">
+            <ul>
+                <?php if(!isLogged()) { 
+						
+				?>
+                
+                <li id="home" class="active"><a href="<?=APPLICATION_URL?>index/index">Home</a></li>
+                <? }else{ ?>
+                
+	<!--=================================================== Job Seeker ==============================================================-->            
+                <?php if($mySessionFront->user['userRole']=='Job Seeker') { ?>
+               		 <li id="home"><a href="<?=APPLICATION_URL?>user/home">Home</a></li>
+                <?php 
+					} else { 
+				?>
+                	<li id="home"><a href="<?=APPLICATION_URL?>recruiters/home">Home</a></li>
+                <?php } }?>
+                
+	<!--===============================================================================================================================-->
+                <?php if(isLoggedFront())
+					{
+				?>
+               <li id="mypro"><a href="<?=APPLICATION_URL?>index/index">My Profile</a></li>
+               <? } else {?>
+               <li id=""><a href="<?=APPLICATION_URL?>recruiters/index">Find Resume</a></li>
+                <? } ?>
+	<!--===============================================================================================================================-->                
+                <?php if($mySessionFront->user['userRole']=='Job Seeker') { ?>
+               		 <li id=""><a href="<?=APPLICATION_URL?>job/index">Find a Job</a></li>
+                <?php 
+					} else { 
+				?>
+                	<li id="myjob"><a href="<?=APPLICATION_URL?>recruiters/index">Find Resume</a></li>
+                <?php } ?>
+            </ul>
+        </nav>
+        
+        <?php if(isLoggedFront())
+			{
+		?>
+        <div class="hdr_btn">
+        	<a class="dropdown" href="<?=APPLICATION_URL?>dashboard">Hello  
+			<?php echo $mySessionFront->user['UserName']?>&nbsp;!&nbsp;&nbsp;&nbsp;</a>
+            <a class="btn3" href="<?=APPLICATION_URL?>index/Logout">Sign out</a>                
+        </div>
+        
+        <? } else {?>
+        <div class="hdr_btn">
+            <a class="btn1" href="<?=APPLICATION_URL?>index/login">Candidate Login</a>
+            <a class="btn2" href="<?=APPLICATION_URL?>index/login">Recruiters Login</a>                
+        </div>
+        <? } ?>
+        <div class="clr"></div>
+    </div>
+

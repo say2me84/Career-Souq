@@ -1,0 +1,44 @@
+<script type="text/javascript">
+$(document).ready(function(){	
+	$("#flex1").flexigrid
+			(
+			{
+			url: '<?=APPLICATION_URL."static/generategrid"?>',
+			dataType: 'json',
+			colModel : [
+				{display: 'S.No.', name : '', width : 30, sortable : false, align: 'left'},
+				{display: 'Page Category', name : 'Page_Category', width : 100, sortable : true, align: 'left'},
+				{display: 'Edit', name : '', width : 30, sortable : false, align: 'center'},
+				{display: 'Delete', name : '', width : 30, sortable : false, align: 'center'}		
+				],						
+			searchitems : [
+				{display: 'Career Level ID', name : 'static_page_id', isdefault:true},				
+				{display: 'Career Level Title', name : 'Page_Category'}
+				],
+			sortname: "Page_Category",
+			sortorder: "asc",
+			usepager: true,
+			title: 'Page Category',
+			useRp: true,
+			rpOptions: ['20','30','40','10'],
+			rp: 10,
+			showTableToggleBtn: true,
+			singleSelect : true,
+			width: 1000,
+			height: 265,
+			autowidth:false
+			}
+			);   
+	
+});
+function sortAlpha(com)
+{ 
+	jQuery('#flex1').flexOptions({newp:1, params:[{name:'letter_pressed', value: com},{name:'qtype',value:$('select[ta=qtype]').val()}]});
+	jQuery("#flex1").flexReload(); 
+}
+</script>
+<table width="100%" cellpadding="0" cellspacing="0" align="center">
+<tr>
+<td align="left" valign="top"><table id="flex1" style="display:none;padding:0px;margin:0px;" width="100%" align="center"></table></td>
+</tr>
+</table>

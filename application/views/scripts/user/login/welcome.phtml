@@ -1,0 +1,31 @@
+<?php 
+global $mySession;
+
+?>
+ 
+  <div align="center" style="height:300px;vertical-align:middle;">
+  	<?php  
+	if(isset($mySession->errorMsg)){ 
+		echo errorMsg($mySession->errorMsg);
+		unset($mySession->errorMsg); 
+	} 
+	if(isset($mySession->sucMsg)){ 
+		echo sucessMsg($mySession->sucMsg);
+		unset($mySession->sucMsg); 
+	} 
+	if(isset($mySession->warningMsg)){ 
+		echo warningMsg($mySession->warningMsg);
+		unset($mySession->warningMsg); 
+	}
+	?>
+	<? if($mySession->user['userRole']=='A') { ?>
+		<div style="vertical-align:middle;padding-top:100px;" align="center">WELCOME ADMINISTRATOR</div>
+	<div id="showdetail">
+		
+	</div>
+    <? } else { ?>
+	<div style="vertical-align:middle;padding-top:100px;" align="center">WELCOME TO JOKE MUSIC PORTAL</div>
+	<? } ?>
+  </div>
+ 
+

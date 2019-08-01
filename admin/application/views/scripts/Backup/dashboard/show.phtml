@@ -1,0 +1,276 @@
+<?
+global $mySession;
+$sdetail = $this->sdetail[0];
+?>
+
+<!--<div id="fade1"   onclick="if (!is_modal) HideLightBoxmail(); return false;"></div>
+
+<div id="mail-form1" class="LB-white-content" style="background-color:#EEEEEE"> 
+<a id="close" href="#" onclick="HideLightBoxmail(); return false;"></a>
+  <form method="post" action="javascript:newsmail()" id="mail-form1"/ >
+ 
+    <table width="470" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><input type="hidden" id="newsid" value="538" /> </td>
+      </tr>
+	  
+      <tr>
+        <td class="mid" style="padding-left:10px; height:35px;"> 
+		<div id="responsecom1" style="float:right; color:#000000;"></div></td>
+      </tr>
+      <tr>
+        <td align="left">
+		<table border="0" cellspacing="1" cellpadding="1">
+            <tr>
+              <td class="lightboxtext" width="80px">Name:</td>
+              <td><input type="text" class="lightbox1" name="name" id="name" style="width: 130px" /></td>
+            </tr>
+          </table></td>
+      </tr>
+	
+	  <tr>
+        <td align="left">
+		<table border="0" cellspacing="1" cellpadding="1">
+            <tr>
+              <td class="lightboxtext" width="80px">Email ID:</td>
+              <td><input type="text" class="lightbox1" name="email" id="email" style="width: 130px" />
+                </td>
+            </tr>
+          </table>
+		  </td>
+      </tr>
+	  
+	  <tr>
+        <td align="left">
+		<table border="0" cellspacing="1" cellpadding="1">
+            <tr>
+              <td class="lightboxtext" width="80px">Description</td>
+              <td><textarea class="lightbox1" name="desc" id="desc" cols="40"></textarea>
+                </td>
+            </tr>
+          </table>
+		  </td>
+      </tr>
+      
+     
+      <tr>
+        <td>
+		<table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="80px">&nbsp;</td>
+              <td style="padding:5px;" align="left" width="280"><input type="image" src="http://www.entrancezone.com/images/botton/submit.jpg"  value="submit"/></td>
+			   
+            </tr>
+          </table></td>
+      </tr>
+    </table>
+ </form>
+</div> <a href="#" onclick="ShowLightBoxmail1('mail-form1')"> -->
+
+
+<div id="fade1"   onclick="if (!is_modal) HideLightBoxmail(); return false;"></div>
+
+<div id="mail-form1" class="LB-white-content" style="background-color:#EEEEEE"> 
+<a id="close" href="#" onclick="HideLightBoxmail(); return false;"></a>
+ <?
+	if(isLogged())
+	{
+?>
+<form method="post" id="mail-form1" action="" / >
+ 
+    <table width="470" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><input type="hidden" id="newsid" value="538" /> </td>
+      </tr>
+	  
+      <tr>
+        <td class="mid" style="padding-left:10px; height:35px;"> 
+		<div id="responsecom1" style="float:right; color:#000000;"></div></td>
+      </tr>
+      <tr>
+        <td align="left">
+		<table border="0" cellspacing="1" cellpadding="1">
+            <tr>
+              <td class="lightboxtext" width="80px">Name:</td>
+              <td><input type="text" class="lightbox1" name="name" id="name" style="width: 130px" /></td>
+            </tr>
+          </table></td>
+      </tr>
+	
+	  <tr>
+        <td align="left">
+		<table border="0" cellspacing="1" cellpadding="1">
+            <tr>
+              <td class="lightboxtext" width="80px">Email ID:</td>
+              <td><input type="text" class="lightbox1" name="email" id="email" style="width: 130px" />
+                </td>
+            </tr>
+          </table>
+		  </td>
+      </tr>
+	  
+	  <tr>
+        <td align="left">
+		<table border="0" cellspacing="1" cellpadding="1">
+            <tr>
+              <td class="lightboxtext" width="80px">Description</td>
+              <td><textarea class="lightbox1" name="desc" id="desc" cols="40"></textarea>
+                </td>
+            </tr>
+          </table>
+		  </td>
+      </tr>
+      
+     
+      <tr>
+        <td>
+		<table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="80px">&nbsp;</td>
+              <td style="padding:5px;" align="left" width="280"><input type="image" src="http://www.entrancezone.com/images/botton/submit.jpg"  value="submit"/></td>
+			   
+            </tr>
+          </table></td>
+      </tr>
+    </table>
+ </form>
+<? } else {?>
+ 
+ <div style="text-align:center; border:solid 1px #FF0000;"> Please Loging First...</div>
+  <form name="sq_login" id="sq_login" action="<?php echo $this->url(array('controller'=>'Login', 'action'=>'index'), 'default', false)?>" method="post">
+		   <input type="hidden" name="ptype" value="login" />
+		   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+           <td height="55" colspan="2" align="center" style="padding-top:25px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="37%"><div style="color:#000; text-align:right">User Id&nbsp;:&nbsp;</div></td>
+    <td width="63%">
+    <input type="text" id="_uname" name="_uname" />
+    <input type="hidden" id="CatDetailSno" name="CatDetailSno" value="<?=$sdetail['CatDetailSno']?>" />
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div style="color:#000; text-align:right">Password&nbsp;:&nbsp;</div></td>
+    <td><input type="password" id="_pass" name="_pass" /></td>
+  </tr>
+</table>
+<div style="text-align:center;"></div></td>
+         </tr> <tr>
+           <td width="37%" align="center"><a class="" href="<?=APPLICATION_URL?>Register/add">Register</a></td>
+           <td width="63%" align="center">&nbsp;</td>
+         </tr>
+         <tr>
+           <td colspan="2" align="center">&nbsp;</td>
+         </tr>
+         <tr>
+           <td height="36" colspan="2" align="right" style="padding-right:63px;"><div style="text-align:right"><input name="Submit" type="submit" class="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;" style="cursor:pointer" /></div></td>
+         </tr>
+</table> </form>
+</div>
+
+<? } ?>
+
+
+<!---------Video------->
+<aside class="video-part">
+<!---------Video-left--end------->
+<aside class="vid-left-part">
+<div style="float:left; width:99%; background:#287ac0; color:#FFFFFF; font-size:18px; font-weight:bold; border-radius:5px; line-height:38px; margin-bottom:15px; padding:0px 0px 0px 8px;">Video..</div>
+<aside class="you-tube">
+
+<div id="myElement">Loading the player...</div>
+	<script type="text/javascript">
+        jwplayer("myElement").setup({
+            autostart: "true",
+			width:"580",
+            height:"300",
+			file: "<?=VIDIO_FILE?><?=$sdetail['CatDetailPath']?>",
+            image: "<?=VIDIO_IMG?><?=$sdetail['VideoImage']?>"
+        });
+    </script>
+</aside>
+<aside class="post-com"><a href="#" onclick="ShowLightBoxmail1('mail-form1')">Login to Post Comment</a></aside>
+<aside class="coment-cantant">
+
+
+
+<!---------Comment start------>
+<? 
+	$db=new Db();
+	$ComtDetail = $db->runQuery("SELECT * FROM `jok_commentvideo` where CatDetailSno = '".$sdetail['CatDetailSno']."'ORDER BY CommentId DESC LIMIT 0, 5");		
+		if(is_array($ComtDetail) && count($ComtDetail) > 0) 
+			{
+			foreach($ComtDetail as $MyComtDetail)
+				{
+?>
+<aside class="user-contant">
+<? 
+	$db=new Db();
+	$UserDetail = $db->runQuery("SELECT * FROM `jok_user` where userid = '".$MyComtDetail['Userid']."' ORDER BY userid DESC");		
+		
+		if(is_array($UserDetail) && count($UserDetail) > 0) 
+			{
+			foreach($UserDetail as $MyUserDetaill)
+				{ 
+?>
+<div style="float:left; width:154px;">
+<img src="<?=USER_PIC?><?=$MyUserDetaill['photo']?>" width="154" height="134"/>
+<h3><?=$MyUserDetaill['fname']?>&nbsp;<?=$MyUserDetaill['lname']?></h3>
+</div>
+<span style="padding-left:8px; padding-right:5px; text-align:justify;"> 
+	
+	<?=$MyComtDetail['VideoComments']?>
+</span>
+</aside>
+<? } } } }?>
+<!---------Comment End ------>
+
+
+
+</aside>
+
+</aside>
+
+
+<!---------Video-rigth-start------>
+<aside class="vid-rigth-part">
+<? 
+	$db=new Db();
+	$SubCatDetail = $db->runQuery("SELECT * FROM `jok_SubCatDetail` ORDER BY CatDetailSno DESC LIMIT 0, 4");		
+		if(is_array($SubCatDetail) && count($SubCatDetail) > 0) 
+			{
+			foreach($SubCatDetail as $myvideo)
+				{
+?>
+
+
+<aside class="thumbnails-vid">
+<a href="<? echo BASE_PATH.'index/show/CatDetailSno/'.$myvideo['CatDetailSno']?>">
+    	<img  width="154" height="134" src="<?=VIDIO_IMG?><? echo $myvideo['VideoImage']?>"/>
+    </a>
+<h1><?=$myvideo['VideoName']?></h1>
+<p><? echo substr($myvideo['Discription'],0,30)."&nbsp;..."?></p>
+</aside>
+<?php  }}?>
+
+</aside>
+<!---------Video-rigth-end------>
+
+
+
+
+
+
+</aside>
+<!---------//Video-end------->
+
+
+
+
+
+ 
+

@@ -1,0 +1,106 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+if($mySessionFront->user['userRole']=='Job Seeker') { 
+		$res=$this->UserSummaryData;
+?>
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+		<h2 class="floatleft title">Profile Summery</h2>
+                        <div class="floatright">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/usersummary/user_id/<?=$mySessionFront->user['FrontUserId']?>','pro_summary');" href="#" class="edit_btn2">Edit</a>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        <?php echo $res['user_profile_summary']?>
+                        	
+                        </div>
+   <? 
+		//echo "Hello Job Seeker";
+	} else { $res=$this->UserData;
+	
+	?>
+   
+		<div class="block2_head">
+                        	<h2 class="floatleft">Overview</h2>
+                        	<div class="floatright">
+                            
+<a onclick="getajax('<?=BASE_PATH?>dashboard/companysummary/user_id/<?=$mySessionFront->user['FrontUserId']?>','pro_summary');" href="javascript:void(0)" class="edit_btn2" >Edit</a> 
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="block2_content" >
+                            <p><?php echo $res['user_profile_summary']?></p>
+                            <ul class="list_3 font12">
+                            	<li>
+                                	<p class="blue upprcase">INDUSTRIES</p>
+                                    <p><?php echo $res['category_title']?> </p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">ANNUAL REVENUE</p>
+                                    <p>$<?php echo $res['user_annual_revenue']?></p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">NUMBER OF EMPLOYEES</p>
+                                    <p><?php echo $res['user_number_of_employees']?></p>
+                                </li>
+                            </ul>
+                        </div>
+	
+	<? } ?>
+  
+ 
+

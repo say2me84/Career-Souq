@@ -1,0 +1,58 @@
+<script type="text/javascript">
+$(document).ready(function(){	
+	$("#flex1").flexigrid
+			(
+			{
+			url: '<?=APPLICATION_URL_ADMIN."member/generategrid"?>',
+			dataType: 'json',
+			colModel : [
+				{display: 'S.No.', name : '', width : 30, sortable : false, align: 'left'},
+				{display: 'Member Name', name : 'name', width : 50, sortable : true, align: 'left'},
+				{display: 'Gender', name : 'gender', width : 150, sortable : true, align: 'left'},				
+				{display: 'Father Name', name : 'fathername', width : 100, sortable : true, align: 'left'},
+				{display: 'Address', name : 'address', width : 65, sortable : true, align: 'left'},		
+				{display: 'Occupation', name : 'occupation', width : 65, sortable : true, align: 'left'},		
+				{display: 'Nomini Name', name : 'nomini_name', width : 160, sortable : true, align: 'left'},
+				{display: 'Relation', name : 'relation', width : 60, sortable : true, align: 'left'},
+				{display: 'Age', name : 'age', width : 60, sortable : true, align: 'left'},
+				{display: 'Withness Name', name : 'withness_name', width : 60, sortable : true, align: 'left'},
+				{display: 'withness FName', name : 'withness_fname', width : 60, sortable : true, align: 'left'},
+				{display: 'Withness Add', name : 'withness_add', width : 60, sortable : true, align: 'left'},
+				{display: 'Edit', name : '', width : 30, sortable : false, align: 'center'},
+				{display: 'Delete', name : '', width : 30, sortable : false, align: 'center'}		
+				],						
+			searchitems : [
+				{display: 'Member Name', name : 'name', isdefault:true},				
+				{display: 'Father Name', name : 'fathername'},
+				{display: 'Occupation', name : 'occupation'},
+				{display: 'withness FName', name : 'withness_fname'}
+				],
+			sortname: "name",
+			sortorder: "asc",
+			usepager: true,
+			title: 'View Member List',
+			useRp: true,
+			rpOptions: ['20','30','40','10'],
+			rp: 10,
+			showTableToggleBtn: true,
+			singleSelect : true,
+			width: 1000,
+			height: 265,
+			autowidth:false
+			}
+			);   
+	
+});
+function sortAlpha(com)
+{ 
+	jQuery('#flex1').flexOptions({newp:1, params:[{name:'letter_pressed', value: com},{name:'qtype',value:$('select[ta=qtype]').val()}]});
+	jQuery("#flex1").flexReload(); 
+}
+</script>
+<table width="100%" cellpadding="0" cellspacing="0" align="center">
+<tr>
+<td align="left" valign="top"><table id="flex1" style="display:none;padding:0px;margin:0px;" width="100%" align="center"></table></td>
+</tr>
+</table>
+
+

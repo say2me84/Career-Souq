@@ -1,0 +1,80 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+
+<div class="list" id="list">
+                <? if(is_array($this->My_sallary) && count($this->My_sallary) > 0) {
+					foreach($this->My_sallary as $Myjob) { ?>	
+                    <div class="list_block">
+                    	<div class="img">
+                        <!--<img alt="" src="images/profile_img2.png">-->
+                        <?php 
+						if($Myjob['user_image']=='')
+						{
+						?>
+							<img width="125" height="125"  src="<?=IMAGES_URL?>no-avator.png" >
+                        <?php }else{ ?>
+							<img width="125" height="125" src="<?=ADMIN_IMG?>user_pic/<?php echo $Myjob['user_image']?>" alt="">
+						<? }?>
+                        </div>
+                    	<div class="info">
+                        	<div class="floatleft">
+		<strong><a href="<?php echo $Myjob['user_id']?>"><?php echo $Myjob['user_fname']?> <?php echo $Myjob['user_lname']?></a></strong>
+                        	</div>
+                            <!--<div class="floatright font12">Last update:30-05-2013</div>-->
+                            <div class="clr"></div>
+	<?php 
+		$User_Exp_Activ= "SELECT * FROM tbl_user_experience WHERE is_current ='1' and user_id = '".$Myjob['user_id']."'";
+		$User_Exp_User_Exp_Activ_Data = $db->runQuery($User_Exp_Activ);
+		//prd($User_Exp_User_Exp_Activ_Data);
+	?>
+                            <div class="font12"><?php echo $Myjob['category_title']?><!--Web Design &amp; Developer /software Developer--></div>
+                            <p class="font11">
+                            <?php
+$User_Age_Qry="SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(user_dob)), '%Y')+0 AS user_age FROM tbl_users WHERE user_id ='".$Myjob['user_id']."'";
+									//prd($User_Age_Qry);
+								$User_Age_Result=$db->runQuery($User_Age_Qry);
+								//prd($User_Age_Result);
+							?>
+                            	Age: <span class="blue"><?php echo $User_Age_Result[0]['user_age']?></span> 
+                                <span class="spacer">&nbsp;</span> 
+                                Gender: <span class="blue"><?php echo $Myjob['user_gender']?></span> 
+                                <span class="spacer">&nbsp;</span>
+                                Nationality: <span class="blue"><?php echo $Myjob['nation_title']?></span> 
+                                <span class="spacer">&nbsp;</span>
+                                Residence: <span class="blue"><?php echo $Myjob['user_city']?>, <?php echo $Myjob['country_name']?></span>
+                            </p>
+    
+                            <p class="font11">
+                            	Job Title: <span class="blue"><?php echo $User_Exp_User_Exp_Activ_Data[0]['position']?></span>
+                            </p>
+                            <p class="font11">
+                            	Monthly Salary: <span class="blue">USD <?php echo $User_Exp_User_Exp_Activ_Data[0]['salary']?></span>
+                            </p>
+<?php 
+	//	$User_Exp_Activ= "SELECT * FROM tbl_user_experience WHERE is_current ='1' and user_id = '".$Myjob['user_id']."'";
+$User_Edu_Activ_Qry= "SELECT tbl_job_educations.education_title FROM tbl_job_educations LEFT JOIN tbl_user_education ON tbl_user_education.degree = tbl_job_educations.id where is_heighest ='1' and user_id = '".$Myjob['user_id']."'";
+$User_Edu_Activ_Data = $db->runQuery($User_Edu_Activ_Qry);
+//prd($User_Edu_Activ_Data);   education_title
+?>
+                            <p class="font11">
+                            	Degree: <span class="blue"><?php echo $User_Edu_Activ_Data[0]['education_title']?></span>
+                            </p>
+                            <p class="font11">
+                            	Experience: <span class="blue"><?php echo $User_Exp_User_Exp_Activ_Data[0]['exp_year']?> Years, <?php echo $User_Exp_User_Exp_Activ_Data[0]['exp_month']?> Months </span>
+                            </p>
+                            <p class="font12"><?= substr($Myjob['user_skills_n_expertise'],0,170).'.......'?></p>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                 <? } ?>
+                 <? } else {?> 
+                 	<div class="list_block featured_list_block">
+                 		<h4>PLEASE REFINE YOUR SEARCH</h4>   
+                    </div>
+				 <? } ?>  
+                    <div class="clr"></div>
+                </div>
+   

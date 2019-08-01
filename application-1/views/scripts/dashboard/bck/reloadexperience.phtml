@@ -1,0 +1,145 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+if($mySessionFront->user['userRole']=='Job Seeker') { 
+		$i=1;
+		//$res=$this->UserExperienceData;
+		//$MyUser_Experience=$this->UserExperienceData;
+		
+?>
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+<h2 class="floatleft title">Experience</h2>
+<div class="clr"></div>
+<div class="block1_content">
+    <ul class="bullet2">
+       <?php foreach($this->UserExperienceData as $MyUser_Experience) { ?> 
+		<li>
+            <div class="number"><?=$i++;?></div>
+            <div class="info">
+                <h2><?php echo $MyUser_Experience['position']?></h2>
+                <h3><?php echo $MyUser_Experience['company']?></h3>
+                <p class="font12"><?php echo $MyUser_Experience['location']?>, <?php echo $MyUser_Experience['location']?> <span class="pipe_space">|</span> <?php echo $MyUser_Experience['employment_period_from']?> &ndash; <?php echo $MyUser_Experience['employment_period_to']?></p>
+                <h4>Job Responsibilities</h4>
+                <p class="font12"><?php echo $MyUser_Experience['responsibility']?></p>
+<div style="float:right; margin-right: -140px;">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/experience/id/<?=$MyUser_Experience['id']?>','experience');" href="#" class="edit_btn2" >Edit</a>
+</div>
+                
+                
+            </div>
+            <div class="img">
+            
+            <?php 
+                if($MyUser_Experience['logo']=='')
+                {
+            ?>
+                <img width="112" height="70"  src="<?=IMAGES_URL?>company_logo1.jpg" name="logo">
+                
+            <?php } else{ ?>
+                 <img width="100" height="70" src="<?=USER_PIC?><?php echo $MyUser_Experience['logo']?>" alt="">
+            <? }?>
+                
+             </div>
+
+            <div class="clr"></div>
+        </li>
+        <?php } ?>
+    </ul>
+</div>
+   <? } else {?>
+  
+ <h2 class="floatleft title">Experience</h2>
+<div class="clr"></div>
+<div class="block1_content">
+    <ul class="bullet2">
+       <?php foreach($this->UserExperienceData as $MyUser_Experience) { ?> 
+		<li>
+            <div class="number"><?=$i++;?></div>
+            <div class="info">
+                <h2><?php echo $MyUser_Experience['position']?></h2>
+                <h3><?php echo $MyUser_Experience['company']?></h3>
+                <p class="font12"><?php echo $MyUser_Experience['location']?>, <?php echo $MyUser_Experience['location']?> <span class="pipe_space">|</span> <?php echo $MyUser_Experience['employment_period_from']?> &ndash; <?php echo $MyUser_Experience['employment_period_to']?></p>
+                <h4>Job Responsibilities</h4>
+                <p class="font12"><?php echo $MyUser_Experience['responsibility']?></p>
+<div style="float:right; margin-right: -140px;">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/experience/id/<?=$MyUser_Experience['id']?>','experience');" href="#" class="edit_btn2" >Edit</a>
+</div>
+                
+                
+            </div>
+            <div class="img">
+            
+            <?php 
+                if($MyUser_Experience['logo']=='')
+                {
+            ?>
+                <img width="112" height="70"  src="<?=IMAGES_URL?>company_logo1.jpg" name="logo">
+                
+            <?php } else{ ?>
+                 <img width="100" height="70" src="<?=USER_PIC?><?php echo $MyUser_Experience['logo']?>" alt="">
+            <? }?>
+                
+             </div>
+
+            <div class="clr"></div>
+        </li>
+        <?php } ?>
+    </ul>
+</div>
+
+<? } ?>
+

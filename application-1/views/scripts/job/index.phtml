@@ -1,0 +1,233 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+<!--============================================ Jquery Autosugest ===========================================-->  
+		
+<!--============================================ Jquery Autosugest ===========================================--> 
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+ 
+ <script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+		  
+</script>
+
+
+
+
+ 
+<!--======================================== Loading Forms vai Ajax ===================================-->
+
+<script>
+ $(document).ready(function() {
+ 	$('#job_keywords').focus().autocomplete("getautocustid.php");
+	});
+</script>
+<!--<form name="search" id="search" action="<?php //echo BASE_PATH?>job/search" method="get" onSubmit="return validate();">-->
+		<div class="container static_page" >
+        
+        	<h1 class="title">Advanced search</h1>
+
+
+<form name="search" id="search" action="<?=BASE_PATH?>job/search" method="get" >
+				
+            <div class="content_full">
+            	<div class="form advanced-search-from selectForm">
+                	<div class="col col1 ui-widget">
+                   	<span class="label">Keywords</span>
+<?php echo $this->url(array('controller'=>'dashboard','action'=>'experienceedit'),'default',false);?>
+                    </div>
+                    <span class="col col1 ui-widget">
+
+
+                    
+                    <input type="text" value="" class="inputbox" id="job_keywords"  name="job_keywords"/>
+                    
+                    <input type="hidden" value="1" class="inputbox" id="job_status"  name="job_status"/>
+                    </span>
+<? 
+	foreach($this->job_keywords as $akash)
+	{
+?>
+
+<? 
+	 //echo $akash['job_keywords'];
+	}
+?>
+                    <div class="col col2">
+                    	<span class="label">Country</span>
+                        
+                        	<select id="job_country" name="job_country" class="inputbox">
+                            <?	
+								$qry="select * from tbl_countries";
+								$country=$db->runQuery("$qry");
+								//prd($country);
+							?>
+                                <option value="">Select</option>
+                                    <?				
+                                    foreach($country as $countrylist)
+                                    {
+                                    ?>
+                                <option value="<?=$countrylist['country_id']?>"><?=$countrylist['country_name']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <div class="col col3">
+					<?
+						$Employment_types_Qry="select * from tbl_employment_type";
+						$Employment_types=$db->runQuery("$Employment_types_Qry");
+						//prd($Employment_types);
+					?>
+                    	<span class="label">Employment Type</span>
+                        
+                        <select id="job_employment_type" name="job_employment_type" class="inputbox">
+                                <option value="">Select Job Type</option>
+                                    <?				
+                                    foreach($Employment_types as $My_Employment_types)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Employment_types['employment_id']?>"><?=$My_Employment_types['employment_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                        
+                    </div>
+                    <div class="clr"></div>
+                    <?
+						$Career_Level_Qry="select * from tbl_career_levels";
+						$Career_Level=$db->runQuery("$Career_Level_Qry");
+						//prd($Career_Level);
+					?>
+                    <div class="col col1">
+                    	<span class="label">Career Level</span>
+                        <select id="job_career_level" name="job_career_level" class="inputbox">
+                                <option value="">Select Career Level</option>
+                                    <?				
+                                    foreach($Career_Level as $My_Career_Level)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Career_Level['career_level_id']?>"><?=$My_Career_Level['career_level_title']?></option>
+                                <?
+                                }
+                                ?>
+                        </select>
+                    </div>
+                    <?
+						$Education_Qry="select * from tbl_job_educations";
+						$Education=$db->runQuery("$Education_Qry");
+						//prd($Education);
+					?>
+                    <div class="col col2">
+                    	<span class="label">Degree</span>
+                        <select id="job_education" name="job_education" class="inputbox">
+                                <option value="">Select Career Level</option>
+                                    <?				
+                                    foreach($Education as $My_Education)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Education['id']?>"><?=$My_Education['education_title']?></option>
+                                <?
+                                }
+                                ?>
+                        </select>
+                    </div>
+                    <div class="col col3 rangeSelect">
+                    	<span class="label">Salary Range</span>
+                        <select class="selectbox1">
+                        	<option value="">$0</option>
+                            <option value="">$1,000</option>
+                            <option value="">$5,000</option>
+                            <option value="">$10,000</option>
+                        </select> 
+                        	<span class="mdl_text">to</span> 
+                        <select class="selectbox2" name="job_sallary" id="job_sallary">
+                        	<option value="">$5,000</option>
+                            <option value="">$10,000</option>
+                            <option value="">$15,000</option>
+                            <option value="">$20,000</option>
+                            <option value="">$25,000</option>
+                            <option value="">$30,000</option>
+                        </select>
+                    </div>
+                    <div class="clr"></div>
+                    <?
+						$job_types_Qry="select * from tbl_job_types";
+						$job_types=$db->runQuery("$job_types_Qry");
+						//prd($job_types);
+					?>
+                    <div class="col col1">
+                    	<span class="label">Job Type</span>
+                        <select id="job_type" name="job_type" class="selectbox">
+                                <option value="">Select Job Type</option>
+                                    <?				
+                                    foreach($job_types as $My_job_typ)
+                                    {
+                                    ?>
+                                <option value="<?=$My_job_typ['id']?>"><?=$My_job_typ['job_type_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <?
+						$Job_categories_Qry="select * from tbl_job_categories";
+						$Job_categories=$db->runQuery("$Job_categories_Qry");
+						//prd($Job_categories);
+					?>
+                    <div class="col col2">
+                    	<span class="label">Industry</span>
+                        <select id="job_category" name="job_category" class="selectbox">
+                                <option value="">Select Job Type</option>
+                                    <?				
+                                    foreach($Job_categories as $My_Job_categories)
+                                    {
+                                    ?>
+                                <option value="<?=$My_Job_categories['cat_id']?>"><?=$My_Job_categories['category_title']?></option>
+                                <?
+                                }
+                                ?>
+                            </select>
+                    </div>
+                    <div class="col col3">
+                    	<span class="label">Posted Date</span>
+                        <select class="selectbox" id="job_posted_on" name="job_posted_on">
+                        	<option value="">Posted within 24 Hours</option>
+                            <option value="">Posted within 3 days</option>
+                           	<option value="">Posted within 7 days</option>
+                            <option value="">Any Posted Date</option>
+                        </select>
+                    </div>
+                    <div class="clr"></div>
+                    <div class="btns"></div>
+                </div>
+            	<span class="btns">
+					<input type="submit" class="save_btn" value="Find Jobs">
+				 <!-- <input class="submit" id="search_submit" name="commit" value="" type="submit">-->
+                </span></div>
+            		<div class="clr">
+              </div>
+             </form>
+        </div >
+        	
+	
+ 
+

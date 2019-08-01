@@ -1,0 +1,272 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+?>
+<link rel="stylesheet" type="text/css" href="<? //echo CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+
+<script>
+$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#mypro').addClass('active');
+        });	 
+
+
+$(document).ready(function() {
+		$('textarea#editor1').addClass('ckeditor');
+        });	
+		
+</script>
+
+<div class="container company_profile">
+<?php $res=$this->Company_Data; ?>
+        	<div class="content_full">
+            	<div class="job_head">
+                	<div class="img">
+                    <?php 
+						if($res['user_image']=='')
+						{
+						?>
+							<img width="124" height="118"  src="<?=IMAGES_URL?>no-avator.png" >
+                        <?php }else{ ?>
+							<img width="124" height="118" src="<?=ADMIN_IMG?>user_pic/<?php echo $res['user_image']?>" alt="">
+						<? }?>
+                    </div>
+                    <div class="info">
+                    	<h1 class="title captl"><?php echo $res['user_company']?></h1>
+                        <div class="manage_profile"><a href="<?=BASE_PATH?>dashboard/companyedit/user_id/<?=$mySessionFront->user['FrontUserId']?>">Manage Profile</a></div>
+                        <p class="font12"><?php echo $res['user_city']?>, <?php echo $res['country_name']?></p>
+                        <p class="job_title"><span class="blue"><?php echo $res['category_title']?></span></p>
+                        <div class="floatleft"><a href="#" class="black">Add more Credits</a></div>
+                        <div class="floatright"><a href="#" class="blue">Post New Job</a></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="list">
+                	<div class="block2">
+                    	<div class="block2_head">
+                        	<h2 class="floatleft">Overview</h2>
+                        	<div class="floatright"><a href="#" class="edit_btn2">Edit</a></div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="block2_content">
+                            <p><!--We live with your dream to Create, inspire and Transform your Digital Identities into an emerging BRAND. We’re an Independent digital design, development and branding agency who strives to provide a better solution to all your business needs.-->
+                            <?php echo $res['user_company_detail']?>
+                            </p>
+                            <ul class="list_3 font12">
+                            	<li>
+                                	<p class="blue upprcase">INDUSTRIES</p>
+                                    <p><?php echo $res['category_title']?></p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">ANNUAL REVENUE</p>
+                                    <p>$<?php echo $res['user_annual_revenue']?></p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">NUMBER OF EMPLOYEES</p>
+                                    <p><?php echo $res['user_number_of_employees']?></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab_block">
+                    	<ul class="tabs">
+                        	<li id="manage_ac"><a href="<?=BASE_PATH?>dashboard/companyedit/user_id/<?=$mySessionFront->user['FrontUserId']?>">Manage Account</a></li>
+                            <li id="my_credit"><a href="<?=BASE_PATH?>dashboard/mycredits" >My Credits</a></li>
+                            <li id="pay_his" class="active"><a href="<?=BASE_PATH?>dashboard/paymenthistory" >Payment History</a></li>
+                            <li id="pay_mthd"><a href="<?=BASE_PATH?>dashboard/paymentmethod" >Payment Method</a></li>
+                        </ul>
+                        <div class="tab_content company_history">
+                        	<div class="font12">
+                            	<p><strong>Job Posting</strong></p>
+                                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                  <tbody>
+                                  <tr class="head">
+                                    <td>Date(GMT)</td>
+                                    <td>Invoice</td>
+                                    <td>Service</td>
+                                    <td>Status</td>
+                                    <td>Qty</td>
+                                    <td>Qty Remaining </td>
+                                    <td>Amount</td>
+                                  </tr>
+                                  <?php 
+									$i=1;
+									foreach($this->Pay_Job_Hist as $My_Pay) {
+								  ?>
+                                  <tr class="">
+                                    <?php 
+										if(@$My_Pay['membership_plan_name']=='Job Plan' or @$My_Pay['membership_plan_name']=='Job Plan')
+										{
+									?>
+                                    <td><?php echo $My_Pay['job_posting_membership_start_dt']?></td>
+                                    <?php }else{ ?>
+                                    <td><?php echo $My_Pay['user_resume_membership_start_dt']?></td>
+                                    <?php } ?>
+                     <!-- ==================================================================================================================== -->
+					<?php 
+                        if(@$My_Pay['membership_plan_name']=='Job Plan' or @$My_Pay['membership_plan_name']=='Job Plan')
+                        {
+                    ?>
+                                    <td><?php echo $My_Pay['Invoice']?></td>
+                                    <?php }else{ ?>
+                                    <td><?php echo $My_Pay['Invoice']?></td>
+                                    <?php } ?>
+                     <!-- ==================================================================================================================== -->
+						<?php 
+                            if(@$My_Pay['membership_plan_name']=='Job Plan' or @$My_Pay['membership_plan_name']=='Job Plan')
+                            {
+                        ?>
+                                    <td><?php echo $My_Pay['membership_plan_name']?></td>
+                                    <?php }else{ ?>
+                                    <td><?php echo $My_Pay['membership_plan_name']?></td>
+                                    <?php } ?>
+                     <!-- ==================================================================================================================== -->
+					<?php 
+                        if(@$My_Pay['membership_plan_name']=='Job Plan' or @$My_Pay['membership_plan_name']=='Job Plan')
+                        {
+                    ?>
+                                    <td><div class="green"><strong>Active</strong></div> Expires:<?php echo $My_Pay['job_posting_membership_expire']?></td>
+                                    <?php }else{ ?>
+                                    <td><div class="green"><strong>Active</strong></div> Expires:<?php echo $My_Pay['user_resume_membership_expires']?></td>
+                                    <?php } ?>
+                     <!-- ==================================================================================================================== -->
+					 <?php 
+                        if(@$My_Pay['membership_plan_name']=='Job Plan' or @$My_Pay['membership_plan_name']=='Job Plan')
+                        {
+                    ?>
+                                    <td><?php echo $My_Pay['user_normal_jobs_val']?></td>
+                                    <?php }else{ ?>
+                                    <td><?php echo $My_Pay['user_resume_membership_val']?></td>
+                                    <?php } ?>
+                     <!-- ========================================Bal========================================================================== -->
+					 <?php 
+                        if(@$My_Pay['membership_plan_name']=='Job Plan' or @$My_Pay['membership_plan_name']=='Job Plan')
+                        {
+                    ?>
+                                    <td><?php echo $My_Pay['user_normal_jobs_val']?></td>
+                                    <?php }else{ ?>
+                                    <td><?php echo $My_Pay['user_resume_membership_val']?></td>
+                                    <?php } ?>
+                     <!-- ==================================================================================================================== -->
+						<?php 
+                            if(@$My_Pay['membership_plan_name']=='Job Plan' or @$My_Pay['membership_plan_name']=='Job Plan')
+                            {
+                        ?>
+                                    <td><?php echo $My_Pay['Amt']?></td>
+                                    <?php }else{ ?>
+                                    <td><?php echo $My_Pay['Amt']?></td>
+                                    <?php } ?>
+                     <!-- ==================================================================================================================== -->
+                     
+                                  </tr>
+                                  <?php /*?><tr>
+                                    <td class="align-center">
+										<?php 
+										if(@$My_Pay['job_posting_membership_start_dt']=='0000-00-00')
+										{
+										?>
+											 N/A
+										<?php }else{ 
+											echo $My_Pay['job_posting_membership_start_dt'];
+										 }?>
+									
+                                    </td>
+                                    <td>
+										<?php 
+										if(@$My_Pay['Invoice']=='')
+										{
+										?>
+											 N/A
+										<?php }else{ 
+											echo $My_Pay['Invoice'];
+										 }?>
+									<?php //echo $My_Pay['Invoice']?>
+                                    
+                                    </td> 
+                                    <td>
+									  <?php 
+										if(@$My_Pay['membership_plan_name']=='')
+										{
+										?>
+											 N/A
+										<?php }else{ 
+											echo $My_Pay['membership_plan_name'];
+										 }?>
+									<?php //echo $My_Pay['membership_plan_name']?></td>
+<td><div class="green"><strong>Active</strong></div> Expires:
+										<?php 
+										if(@$My_Pay['user_featured_jobs_expire']=='')
+										{
+										?>
+											 N/A
+										<?php }else{ 
+											echo $My_Pay['user_featured_jobs_expire'];
+										 }?>
+								<?php //echo $My_Pay['user_featured_jobs_expire']?>
+                                <!--2013-07-26 14:04GMT--></td>
+                                    <td>
+										<?php 
+										if(@$My_Pay['user_normal_jobs_val']=='')
+										{
+										?>
+											 N/A
+										<?php }else{ 
+											echo $My_Pay['user_normal_jobs_val'];
+										 }?>
+									<?php //echo $My_Pay['user_normal_jobs_val']?></td>
+                                    <td>
+										<?php 
+										if(@$My_Pay['user_normal_jobs_val']=='')
+										{
+										?>
+											 N/A
+										<?php }else{ 
+											echo $My_Pay['user_normal_jobs_val'];
+										 }?>
+									<?php //echo $My_Pay['user_normal_jobs_val']?>
+                                    	</td>
+                                    <td>
+									<?php 
+										if(@$My_Pay['Amt']=='')
+										{
+										?>
+											 N/A
+										<?php }else{ 
+											echo '$'.$My_Pay['Amt'];
+										 }?>
+									<?php //echo $My_Pay['Amt']?></td>
+                                  </tr><?php */?>
+                                  <?php 
+									 }
+								   ?>
+                                  <tr class="head">
+                                  	<td class="align-right font14" colspan="7"><!--<strong>Total Payment: $53,895.94</strong>--></td>
+                                  </tr>
+                                </tbody></table>
+                                <div class="blue_box">
+                                	<div class="blue font14"><strong>Service Status</strong></div>
+                                    <p class="font12"><strong class="green">Active</strong>: Service is active and in use.</p>
+                                    <p class="font12"><strong class="orng">Pending</strong>: Service is pending activation by the use.</p>
+                                    <p class="font12"><strong class="red">Expired</strong>: Service has been deactivated or has expired.</p>
+                                </div>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+
+

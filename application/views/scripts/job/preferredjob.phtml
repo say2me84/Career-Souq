@@ -1,0 +1,203 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+$myjob=$this->Job_Details;
+//echo $myjob['job_responsibilities'];
+?>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+<script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+	
+	$(document).ready(function() {
+        $('select#sub_cat_id').addClass('selectbox');
+        }); 
+		
+		
+	$(document).ready(function() {
+        //$('myul#li').addClass('body');
+		$("#myli").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli1").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli2").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli3").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli4").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli5").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli6").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli7").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli8").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli9").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli10").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli11").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli12").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli13").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli14").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli15").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli16").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+		$("#myli17").css({'color':'<?php echo $myjob['job_menu_foreground_color']?>'});
+        }); 		 
+</script>
+<!--======================================== Loading Forms vai Ajax ===================================-->
+<div class="pagenew" style="background-color:<?php echo $myjob['job_bg_color']?>">
+
+<!--<div class="containernew job_postnew">-->
+	<div class="containernew job_postnew" style="background-color:<?php echo $myjob['job_menu_foreground_color']?>">
+	<div class="job_headnew">
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+        <div class="img">
+			<?php 
+                if($myjob['Header_Banner']=='')
+                {
+                ?>
+                    <img width="950" height="263"  src="<?=IMAGES_URL?>job_img2.jpg" >
+                <?php }else{ ?>
+                    <img width="950" height="263" src="<?=ADMIN_IMG?>Company_Header_Banner/<?php echo $myjob['Header_Banner']?>" alt="">
+            <? }?>
+        
+        <!--<img src="<?=IMAGES_URL?>job_img2.jpg" width="100%" alt="">-->
+            <div class="jobtit"> 
+     <?php echo $myjob['user_company']?> , Downtown, United Arab Emirates</div>
+        </div>
+	</div>
+    <div class="content_leftnew">
+    	<div class="listnew">
+            <div class="block2new">
+                <h2 class="nano"><? echo $myjob['job_title']?></h2>
+                <div class="job_btnsnew">
+                    <!--<a href="#" class="save_btnnew">Save this job</a>
+                    <a href="#" class="apply_btnnew">apply now</a>-->
+                    
+<a class="save_btnnew" href="<?=BASE_PATH?>job/prefjobsave/job_id/<?php echo $myjob['id']?>">Save this job</a>
+    <a class="apply_btnnew" href="<?=BASE_PATH?>job/prefjobapply/job_id/<?php echo $myjob['id']?>&amp;<?php echo $myjob['company_id']?>&amp;<? echo $myjob['job_title']?>">apply now</a>
+                </div>
+                
+                
+                <div class="clr"></div>
+                <div class="block2_contentnew">
+                    <p><?php echo $myjob['job_description']?></p>
+                    
+                </div>
+            </div>
+            <div class="block2new">
+                <h2 class="nano">Job Responsibilities</h2>
+                <?php echo $myjob['job_responsibilities']?>
+                <!--<ul class="bullet4new">
+                    <li>Manage and motivate restaurant employees through constant communication and regular team meetings</li>
+                    <li>Manage and motivate restaurant employees through constant communication and regular team meetings</li>
+                    <li>Manage and motivate restaurant employees through constant communication and regular team meetings</li>
+                    <li>Manage and motivate restaurant employees through constant communication and regular team meetings</li>
+                    <li>Manage and motivate restaurant employees through constant communication and regular team meetings</li>
+                </ul>-->
+             </div>
+             <div class="block2new"><img src="<?=IMAGES_URL?>job_img2.png" width="100%" alt=""></div>
+             <div class="clr"></div>
+        </div>
+    </div>
+    <div class="content_rightnew">
+        <!--<div class="blocknew company_logonew">-->
+        <div class="blocknew company_logonew" style="background:<?php echo $myjob['job_logo_bg_color']?>">
+        	<?php 
+			if($myjob['Company_Logo']=='')
+			{
+			?>
+				<img width="188" height="140"  src="<?=IMAGES_URL?>no-avator.png" >
+			<?php }else{ ?>
+				<img width="191" height="140" src="<?=ADMIN_IMG?>company_logo/<?php echo $myjob['Company_Logo']?>" alt="">
+			<? }?>
+        	
+           <!-- <img width="191" height="59" src="<?=IMAGES_URL?>company_logo2.jpg" alt="">-->
+        </div>
+        <!--<div class="blocknew job_overviewnew font12n">-->
+        <div class="blocknew job_overviewnew font12n" style="background:<?php echo $myjob['job_menu_color']?> !important">
+        
+            <h2 class="title"  >Job Overview</h2>
+            <ul id="myul">
+                <li id="myli">City: <?php echo $myjob['job_city']?></li>
+                <li id="myli1">Country: <?php echo $myjob['country_name']?></li>
+                <li id="myli2">Industry: <?php echo $myjob['category_title']?></li>
+                <li id="myli3">Sub Category: <?php echo $myjob['sub_category_title']?></li>
+                <li id="myli4">Salary: <?php echo $myjob['job_sallary']?></li>
+                <li id="myli5">Career Level: <?php echo $myjob['career_level_title']?></li>
+                <li id="myli6">Experience: <?php echo $myjob['experience_title']?></li>
+                <li id="myli7">Education: <?php echo $myjob['education_title']?></li>
+                <li id="myli8">Employment Type: <?php echo $myjob['employment_title']?></li>
+                <li id="myli9">Travel Required: <?php echo $myjob['job_travel_required']?></li>
+                <li id="myli10">Relocation: <?php echo $myjob['job_relocation']?></li>
+                <li id="myli11">Job Role: <?php echo $myjob['job_role_title']?></li>
+                <li id="myli12">Email: <?php echo $myjob['job_email']?></li>
+                <li id="myli13">Phone Number: <?php echo $myjob['job_phone_number']?></li>
+                <li id="myli14">Contact Name: <?php echo $myjob['job_contact_name']?></li>
+                <li id="myli15">Fax No: <?php echo $myjob['job_fax']?></li>
+                <li id="myli16">Travel Required: <?php echo $myjob['job_travel_required']?></li>
+                <li id="myli17">Relocation: <?php echo $myjob['job_relocation']?></li>
+            </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+</div>
+
+</div>
+

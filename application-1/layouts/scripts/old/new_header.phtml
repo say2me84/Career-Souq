@@ -1,0 +1,24 @@
+                
+<aside class="top-part">
+<aside class="top-bg">
+<figure class="top-right-part">
+<aside class="cont-box"><img src="images/cont-icon.jpg"/><span> +44 (0) 20 8300 6111 </span></aside>
+<?php if(isLogged())
+	{
+?>
+<aside class="login-box"><img src="images/login-icon.jpg"/><a href="<?=APPLICATION_URL?>index/logout">Logout</a></aside>
+<? } else {?>
+<aside class="login-box"><img src="images/login-icon.jpg"/><a href="<?=APPLICATION_URL?>index/login">Login / Register</a></aside>
+<?php } ?>
+</figure></aside>
+<!---logo-part---------->
+<aside class="contant-bg">
+<aside class="logo-part">
+<aside class="logo"><a style="text-decoration:none;" href="<?=APPLICATION_URL?>">Joke</a></aside>
+</aside>
+<aside class="search-right-part">
+<aside class="follous"><img src="images/fb-icons.jpg" /></aside>
+<aside class="Search"><input name="" class="In-text" type="text" value="Search..." /></aside>
+</aside>
+</aside>
+</aside>

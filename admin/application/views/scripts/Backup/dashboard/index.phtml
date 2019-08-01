@@ -1,0 +1,98 @@
+<?php 
+global $mySession;
+
+?>
+ 
+  <div align="center" style="height:300px;vertical-align:middle;">
+  	<?php  
+	if(isset($mySession->errorMsg)){ 
+		echo errorMsg($mySession->errorMsg);
+		unset($mySession->errorMsg); 
+	} 
+	if(isset($mySession->sucMsg)){ 
+		echo sucessMsg($mySession->sucMsg);
+		unset($mySession->sucMsg); 
+	} 
+	if(isset($mySession->warningMsg)){ 
+		echo warningMsg($mySession->warningMsg);
+		unset($mySession->warningMsg); 
+	}
+	?>
+	<? if($mySession->user['userRole']=='Job Seeker') { ?>
+	<div style="vertical-align:middle;padding-top:100px;" align="center">WELCOME Job Seeker</div>
+	<? 
+	$tbcontent = '<div style="padding:10px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+ 	 <tr>
+    	<td class="desboardboxheading">Due </td>
+		<td class="desboardboxvalue" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="20" style="border-bottom:1px dashed #CCCCCC;" width="20%">Today</td>
+    <td style="border-bottom:1px dashed #CCCCCC;" width="20%">This (M)</td>
+	<td style="border-bottom:1px dashed #CCCCCC;" width="20%">Daily (M)</td>
+    <td style="border-bottom:1px dashed #CCCCCC;" width="20%">Old</td>
+    <td style="border-bottom:1px dashed #CCCCCC;" width="20%">Total</td>
+	
+  </tr>
+  <tr>
+    <td height="20"><span style="cursor:pointer;" onclick="getdetail(2,\'\',\'showdetail\')">'.$this->todaydue.'<span style="color:#FFCC00"> Inst.</span><br />'.$this->todaydueamount.'/-</span></td>
+    <td><span style="cursor:pointer;" onclick="getdetail(3,\'\',\'showdetail\')">'.$this->thismonthdue.'<span style="color:#FFCC00"> Inst.</span><br />'.$this->thismonthdueamount.'/-</span></td>
+	<td ><span style="cursor:pointer;" onclick="getdetail(4,\'\',\'showdetail\')">'.$this->thismonthdailydue.'<span style="color:#FFCC00"> Inst.</span><br />'.$this->thismonthdailydueamount.'/-</span></td>
+    <td><span style="cursor:pointer;" onclick="getdetail(1,\'\',\'showdetail\')">'.$this->olddue.'<span style="color:#FFCC00"> Inst.</span><br />'.$this->olddueamount.'</span></td>
+    <td>'.($this->thismonthdue+ $this->thismonthdailydue + $this->olddue).'<span style="color:#FFCC00"> Inst.</span><br />'.($this->thismonthdueamount+ $this->thismonthdailydueamount + $this->olddueamount).'/-</td>
+	
+  </tr>
+</table>
+</td>
+	</tr>
+	<tr>
+    	<td class="desboardboxheading">Collection of this month</td>
+		<td class="desboardboxvalue" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td style="border-bottom:1px dashed #CCCCCC; height:20px" width="20%">New </td>
+    <td style="border-bottom:1px dashed #CCCCCC" width="20%">Installment</td>
+    <td style="border-bottom:1px dashed #CCCCCC" width="20%">Old Installment</td>
+    <td style="border-bottom:1px dashed #CCCCCC" width="20%">Advance</td>
+	<td style="border-bottom:1px dashed #CCCCCC" width="20%">Total</td>
+  </tr>
+  <tr>
+    <td height="20">'.$this->totalnewcollection.'/-</td>
+    <td>'.$this->totalduecollection.'/-</td>
+    <td>'.$this->totaloldduecollection.'/-</td>
+    <td>'.$this->totaladvancecollection.'/-</td>
+	<td>'.($this->totalnewcollection + $this->totalduecollection + $this->totaloldduecollection+ $this->totaladvancecollection).'/-</td>
+  </tr>
+</table>
+</td>
+	</tr>
+
+	  <tr>
+    	<td class="desboardboxheading">Maturity of this month</td>
+		<td class="desboardboxvalue" >'.$this->totalmaturity.'</td>
+	  </tr>
+	  <tr>
+   		 <td class="desboardboxheading">Customer of this month</td>
+		 <td class="desboardboxvalue" >'.$this->totalcustomer.'</td>
+	  </tr>
+	  <tr>
+    	<td class="desboardboxheading">Agent of this month</td>
+		<td class="desboardboxvalue" >'.$this->totalagent.'</td>
+	  </tr>
+	  
+	</table>
+</div>
+	<div id="showdetail">
+		
+	</div>';
+	echo $tbcontent;
+	 $File = "Reports/dashboard.txt"; 
+	 $Handle = fopen($File, 'w');
+	 $Data = $tbcontent; 
+	 fwrite($Handle, $Data);
+    } else { 
+	
+	?>
+	<div style="vertical-align:middle;padding-top:100px;" align="center">WELCOME Employee</div>
+	<? } ?>
+  </div>
+ 
+

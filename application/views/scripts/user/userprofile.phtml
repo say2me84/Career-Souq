@@ -1,0 +1,64 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$akash=$this->user_id;
+?>
+
+
+
+<script language = "Javascript">
+function ajaxuseredit(){
+	//alert('Hello...');
+	var user_id=$("#user_id").val();
+	//alert(user_id);
+	
+	var user_fname=$("#user_fname").val();
+	//alert(user_fname);
+	
+	var user_lname=$("#user_lname").val();
+	//alert(user_lname);
+	
+	document.getElementById('pro_edit').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'user','action'=>'ajaxuseredit'),'default',true);?>",
+	type: "POST",
+	data: ({user_id: user_id, user_fname: user_fname, user_lname: user_lname}),
+		success: function(data){			
+		//$("#pro_edit").html(data);			
+		}
+	});
+//alert('hello');    baseinfo
+}
+</script>
+<div class="block1 selectForm" id="ajaxDiv">
+
+<div class="block1_content">
+	<span class="blue"><? echo $this->PageTitle; ?></span>
+<ul class="bullet2">
+<li>
+    <div class="info1 font12 edit_form">
+      
+        <p>	
+            <label><span class="red">*</span>First Name:</label>
+            <input type="hidden" id="user_id" name="user_id" value="<?=$mySessionFront->user['FrontUserId']?>" >
+            <input type="text" id="user_fname" name="user_fname" class="inputbox" value="<?php echo $akash['user_fname'] ?>" >
+        </p>
+        <p>
+            <label><span class="red">*</span>Last Name:</label>
+            <input type="text" id="user_lname" name="user_lname" class="inputbox" value="<?php echo $akash['user_lname'] ?>" >
+        </p>
+       
+    </div>
+ <div class="clr"></div>
+</li>
+</ul>
+</div>
+<div class="form_btns form_btns1 floatright">
+	<input type="button" class="save_job_btn" value="Update" onclick="ajaxuseredit(); getajax('<?=BASE_PATH?>user/baseinfo','pro_edit');">
+    <input type="submit" class="post_job_btn" value="Cancel" onclick="getajax('<?=BASE_PATH?>user/baseinfo','pro_edit');">
+</div>
+
+
+	<div class="clr"></div>
+</div>
+

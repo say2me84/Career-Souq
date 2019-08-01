@@ -1,0 +1,56 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$User_Skill=$this->user_id;
+?>
+
+
+<script language = "Javascript">
+function skillsedit(){
+	//alert('Hello...');
+	var user_id=$("#user_id").val();
+	//alert(user_id);
+	
+	var editor1=$("#editor1").val();
+	//alert(editor1);
+	
+	document.getElementById('skills').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'skillsedit'),'default',false);?>",
+	type: "POST",
+	data: ({user_id:user_id,editor1: editor1}),
+		success: function(data){			
+		$("#skills").html(data);			
+		}
+	});
+//alert('hello');    baseinfo
+}
+
+//CKEDITOR.replace('editor1');
+</script>
+
+<div class="block1 selectForm" id="ajaxDiv">
+<div class="block1_content">
+<ul class="bullet2 ftrd_form">
+<li>
+    <div class="info1 font12 edit_form">
+      <p>	
+            <label><span class="red">*</span>Profile Summery::</label>
+            <input type="hidden" id="user_id" name="user_id" value="<? echo $User_Skill['user_id']?>" class="inputbox">
+           
+            <textarea class="textarea" cols="80" id="editor1" name="editor1" rows="5" ><? echo $User_Skill['user_skills_n_expertise']?></textarea>
+      </p>
+    </div>
+ <div class="clr"></div>
+</li>
+</ul>
+</div>
+
+
+<div class="form_btns form_btns1 floatright">
+<input type="button" class="save_job_btn" value="Update" onclick="skillsedit(); getajax('<?=BASE_PATH?>dashboard/reloadskills','skills');">
+<input type="submit" class="post_job_btn" value="Cancel" onclick="getajax('<?=BASE_PATH?>dashboard/reloadskills','skills');">
+</div>
+	<div class="clr"></div>
+</div>
+

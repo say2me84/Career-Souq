@@ -1,0 +1,84 @@
+<?php global $mySessionFront;?>
+
+<!--============================================ Java Script & Css ===========================================-->	
+<script type="text/javascript" language="javascript">
+	//$(document).ready(function() {
+         // $('body').addClass('home');
+        //});
+		
+	$(document).ready(function() {
+        $('li').removeClass('active');
+        });	
+		
+	$('#listTasks').click(function ( event ) {
+                    event.preventDefault(); 
+                    $.ajax
+                    ({
+                        url: '<?php echo $tasks_dashboard; ?>',
+                        success: function(html) 
+                        { 
+                            $('#content').html(html); 
+                        }				
+                    });
+     });
+</script>
+<!--============================================ Loading Controlls ===========================================-->
+<script>	 
+$(document).ready(function() {
+	 $('#listProjects').click(function ( event ) {
+            event.preventDefault(); 
+            $.ajax
+            ({
+                url: '<?php echo $projects_dashboard; ?>',
+                success: function(html) 
+                { 
+                    $('#content').html(html); 
+                    $("#hiddendiv").trigger('click');
+                }				
+            });
+        });
+		
+		
+		$('#listProjects').click(function ( event ) {
+            event.preventDefault(); 
+            $.ajax
+            ({
+                url: '<?php echo $this->url(array('controller'=>'Dashboard', 'action'=>'userprofile'), 'default', true)?>',
+                success: function(html) 
+                { 
+                    $('#content').html(html); 
+                    $("#hiddendiv").trigger('click');
+                }				
+            });
+        });
+	
+});
+</script>
+<!--============================================ End Java Script & Css ===========================================-->  
+   
+<?php 
+	$i=1;
+	foreach($this->UserData as $res) {
+?>
+<div id="pro_edit">
+   <div class="profile_head">
+                	<div class="img">
+                    	<img width="167" height="167" src="<?=USER_PIC?><?php echo $res['user_image']?>" alt="">
+                    </div>
+                    <div class="info">
+                    	<h1 class="title captl"><? echo $res['user_fname'].' '.$res['user_lname']?></h1>
+                        <h3>Sr.Software Engineer at T3 Media</h3>
+                        <div class="floatright edit_btn1">
+							<a onclick="getajax('<?=BASE_PATH?>user/userprofile/user_id/<?=$mySessionFront->user['FrontUserId']?>','','pro_edit');" href="#" >Edit</a>
+                        </div>
+                        <p class="font12 exp_edu1">San Francisco, California <span>|</span> Information Technologies and Services</p>
+                        <ul class="exp_edu font12">
+                        	<li><span>Current</span> T3 Media</li>
+                            <li><span>Current</span> T3 Media</li>
+                            <li><span>Current</span> T3 Media</li>
+                        </ul>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+</div>
+<?php }?>

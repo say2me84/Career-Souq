@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Color Selector</title>
+
+	<script src="jquery.min.js"></script>
+	<!-- MiniColors -->
+	<script src="jquery.minicolors.js"></script>
+	<link rel="stylesheet" href="jquery.minicolors.css">
+    
+    <script>
+		$(document).ready( function() {
+			
+            $('.demo').each( function() {
+                //
+                // Dear reader, it's actually very easy to initialize MiniColors. For example:
+                //
+                //  $(selector).minicolors();
+                //
+                // The way I've done it below is just for the demo, so don't get confused 
+                // by it. Also, data- attributes aren't supported at this time. Again, 
+                // they're only used for the purposes of this demo.
+                //
+				$(this).minicolors({
+					control: $(this).attr('data-control') || 'hue',
+					defaultValue: $(this).attr('data-defaultValue') || '',
+					inline: $(this).attr('data-inline') === 'true',
+					letterCase: $(this).attr('data-letterCase') || 'lowercase',
+					opacity: $(this).attr('data-opacity'),
+					position: $(this).attr('data-position') || 'bottom left',
+					change: function(hex, opacity) {
+						var log;
+						try {
+							log = hex ? hex : 'transparent';
+							if( opacity ) log += ', ' + opacity;
+							console.log(log);
+						} catch(e) {}
+					},
+					theme: 'default'
+				});
+                
+            });
+			
+		});
+	</script>
+</head>
+
+<body>
+
+	<div class="form-group">
+		<label for="hidden-input">Hidden Input</label>
+		<br><br>
+		<input type="text" id="hidden-input" class="demo" value="#db913d">
+	</div>
+</body>
+</html>

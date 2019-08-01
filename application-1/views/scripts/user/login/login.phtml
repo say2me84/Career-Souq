@@ -1,0 +1,122 @@
+<?php global $mySession;?>
+
+<!--============================================ Java Script & Css ===========================================-->	
+<script type="text/javascript" language="javascript">
+	//$(document).ready(function() {
+         // $('body').addClass('home');
+        //});
+		
+	$(document).ready(function() {
+        $('li').removeClass('active');
+        });	   
+</script>
+<!--============================================ End Java Script & Css ===========================================-->  
+   
+<div class="container login_page">
+
+<h1 class="title">LOGIN  OR CREATE AN ACCOUNT</h1>
+
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+
+
+
+<form name="sq_login" id="sq_login" action="<?php echo $this->url(array('controller'=>'Login', 'action'=>'index'), 'default', true)?>" method="post">	
+<div class="block login_block">
+    <h2 class="title">Log In</h2>
+    <div class="form">
+        <p>If you have an account with us, please log in.</p>
+        <p><label>Email Address *</label><br><?php echo $this->loginform->_uname?></p>
+        <p><label>Password *</label><br>
+		<input type="hidden" name="ptype" value="login" />
+		<?php echo $this->loginform->_pass?></p>
+        <p>Required Fields *</p>
+        <p class="social_login"><a href="#"><img src="images/login_facebook.png" alt=""></a> <a href="#"><img src="images/login_twitter.png" alt=""></a></p>
+    </div>
+    
+    <div class="block_footer">
+        <div class="floatleft"><a class="orng" href="#">Forgot your Password?</a></div>
+        <div class="floatright"><input name="Submit" class="submit" type="submit" value="Login"></div>
+        <div class="clr"></div>
+    </div>
+</div>
+</form> 
+
+<form name="reg">
+<div class="block register_block">
+    <h2 class="title">New user? Please register.</h2>
+    <div class="form">
+        <p>
+        	<label><?php echo $this->loginform->Regtype?>I'm a new job seeker</label>
+            
+        	If you are looking for a job, register here.
+        </p>
+        <p>
+        	<label><input type="radio" name="employer" value="employer">I'm a new employer</label>
+            If you need to hire staff for your company, register here.
+        </p>
+    </div>
+ 
+  <div class="block_footer">
+        <div class="floatleft">&nbsp;</div>
+        <div class="floatright"><input type="button" value="CREATE AN ACCOUNT" class="submit"></div>
+        <div class="clr"></div>
+    </div>
+</div>
+</form>
+
+ 
+<div class="clr"></div>
+</div>

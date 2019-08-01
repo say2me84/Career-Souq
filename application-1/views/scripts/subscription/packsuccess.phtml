@@ -1,0 +1,101 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+?>
+<div class="container login_page">
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+<h1 class="title"></h1>
+
+
+</div>
+<?php
+/*echo 'Hello.....<br>';
+echo $_REQUEST['tx'].'<br>'; // Paypal transaction ID
+echo $_REQUEST['st'].'<br>'; // Payment Status
+echo $_REQUEST['amt'].'<br>'; // Paypal received amount
+echo $_REQUEST['cc'].'<br>'; // Paypal received currency type
+echo $_REQUEST['item_number'].'<br>';
+echo $_REQUEST['cm']; // Package Name*/
+?>
+<?php
+
+/* 
+[Combo_Id] => 1
+[Plan_Name] => Small
+[Price] => 50
+[Job_Posting] => 10
+[Days_CV_Search] => 20
+[Featured_Job_Posting] => 4
+*/
+
+//Rechecking the product price and currency details					user_id,
+
+/*if($item_price==$res['Price']) //&& $item_currency==$currency)
+{
+
+$result = mysql_query("INSERT INTO User_Plan_Details(membership_plan_name,job_posting_membership_start_dt,job_posting_membership_expire,user_normal_jobs_val,user_featured_jobs_start_dt,user_featured_jobs_expire,user_featured_jobs_val,user_resume_membership_start_dt,user_resume_membership_expires,user_resume_membership_val) VALUES('$item_no', '$uid', NOW(),'$item_transaction')");
+if($result)
+{
+//echo "<h1>Welcome, $username</h1>";
+echo "<h1>Payment Successful</h1>";
+}
+}
+else
+{
+echo "Payment Failed";
+}*/
+
+?>

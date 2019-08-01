@@ -1,0 +1,43 @@
+<script>
+
+$(document).ready(function() {
+		$('textarea#content').addClass('ckeditor');
+        });	
+</script>
+<div id="big_box" align="center" >
+ <form name="Form_Memberedit" id="Form_Memberedit" action="" method="post" enctype="multipart/form-data">      
+ <table width="100%" border="0" cellspacing="5" cellpadding="0" class="frmtable">
+
+  <tr>
+      <td width="14%" align="left" valign="top">Page Title:</td>
+      <td width="86%" align="left" valign="top"><? echo $this->myform->title?></td>
+  </tr>
+  <tr>
+      <td width="14%" align="left" valign="top">Page Category:</td>
+      <td width="86%" align="left" valign="top"><? echo $this->myform->Page_Category?></td>
+  </tr>
+   <tr>
+      <td colspan="2" align="left" valign="top">Page Content:</td>
+      </tr>
+  
+  <tr>
+      <td colspan="2" align="left" valign="top" id="loader"><? echo $this->myform->content?></td>
+  </tr>
+  
+  <tr>
+      <td width="14%" align="left" valign="top">Activ On Front:</td>
+      <td width="86%" align="left" valign="top"><? echo $this->myform->is_front?></td>
+  </tr>
+  
+  <tr>
+      <td width="14%" align="left" valign="top">Status:</td>
+      <td width="86%" align="left" valign="top"><? echo $this->myform->status?></td>
+  </tr>
+  
+  <tr>
+    <td align="left" valign="top" style="font-size:11px;"><span class="errormsg">*</span> Required fields</td>
+    <td align="left" valign="top"><input type="submit" name="mySubmit" id="mySubmit" value="Submit" /></td>
+  </tr>  
+</table>
+</form>
+</div>

@@ -1,0 +1,89 @@
+<?php global $mySessionFront;?>
+
+<!--============================================ Java Script & Css ===========================================-->	
+
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+          $('body').addClass('home');
+        });   
+	
+	$(function() {
+	   $('#foo2').carouFredSel({
+			auto: false,
+			prev: '#prev2',
+			next: '#next2',
+			pagination: "#pager2",
+			mousewheel: true,
+			swipe: {
+				onMouse: true,
+				onTouch: true
+			}
+		});
+	});
+</script>
+<!--============================================ End Java Script & Css ===========================================-->  
+ <?php 
+ 	global $mySessionFront;
+	$db=new Db();
+ 	$MyCat_Img=$this->Cat_Img;
+	?>
+ 
+    <div class="MagmntImg">
+	 <?php 
+		if($MyCat_Img['category_banner']=='')
+			{
+		?>
+			<img  width="741" height="171"  src="<?=IMAGES_URL?>mangmentimg.jpg" >
+		
+		<?php }else{ ?>
+			<img src="<?=ADMIN_IMG?>banners/<?=$MyCat_Img['category_banner']?>" alt="" width="741" height="171" />
+	<? }?>
+    
+    
+    </div>
+
+<?php 
+	if(is_array($this->Cat_Details) && count($this->Cat_Details) > 0) {
+		$i=1;
+		foreach($this->Cat_Details as $My_Detail) {
+ ?>      
+  
+       
+<div class="Magmntblk">
+         <div class="MagmntblkLeft">
+        <a href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$My_Detail['id']?>">
+			<?php 
+			if($My_Detail['user_image']=='')
+				{
+			?>
+				<img width="106" height="82"  src="<?=IMAGES_URL?>no-avator.png" >
+			
+			<?php }else{ ?>
+				<img src="<?=ADMIN_IMG?>user_pic/<?=$My_Detail['user_image']?>" alt="" width="106" height="82"/>
+			<? }?>	
+        </a>
+         
+         </div>
+         <div class="MagmntblkMid">
+          <h1><?=$My_Detail['job_title']?></h1>
+          <p><span>Posted by</span> <?=$My_Detail['user_company']?> for <?=$My_Detail['job_city']?></p>
+          <div class="Vierw_Apply"><a href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$My_Detail['id']?>">Vierw  &amp; Apply</a><span>- <?php echo date("d-M-Y", strtotime($My_Detail['job_posted_on']))?></span></div>
+         </div>
+         <div class="MagmntblkRight">
+          <p style="padding-right:5px; text-align:justify;"><?php echo substr($My_Detail['job_description'],0,150)?></p>
+          <a class="ViewMore" href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$My_Detail['id']?>">View More</a><div class="clear"></div>
+         </div>
+         <div class="clear"></div>
+</div>
+<? }}else {?> 
+<div class="Magmntblk">
+	<h1>No Job Found..</h1>
+</div>
+<?php  }?>
+
+
+
+
+
+
+ 

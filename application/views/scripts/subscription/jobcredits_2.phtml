@@ -1,0 +1,121 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<!--<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>-->
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+
+<?php
+$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; 
+$paypal_id='sriniv_1293527277_biz@inbox.com';  // sriniv_1293527277_biz@inbox.com
+
+
+?>
+<div class="container plan_page">
+        	<div class="blue_header">
+            	<h1 class="title">Advertise your <strong class="upprcase">job vacancies</strong> today</h1>
+                <ul class="bullet7">
+                	<li>Quick and easy to post</li>
+                    <li>Ads stay live for 60 days</li>
+                    <li>No extra fees or commission</li>
+                    <li class="blue">Free options available</li>
+                </ul>
+            </div>            
+        	<div class="content_full">
+            	<h2 class="red_ribbon_title">JOB POSTING</h2>
+                <!--<form action='<?php //echo $paypal_url; ?>' method='post' name='frmPayPal1'>-->
+<div class="prices_table selectForm">
+                	<div class="col_head">
+	                    <div class="col col1">Package/Days</div>
+    	                <div class="col col2">Price</div>
+                    </div>
+                    <div class="clr"></div>
+
+                    <?php 
+						$i=1;
+						foreach($this->Job_Search_Data as $Job_Data) {
+					?>
+
+                    <div class="col col1">
+			<input type="radio" name="radio_val" id="radio_val" value="<?php echo $Job_Data['Package_Id']?>" onclick="getajax('<?=BASE_PATH?>Subscription/jobcredits/Package_Id/<?php echo $Job_Data['Package_Id']?>','ajaxDiv');"><?php echo $Job_Data['Package/Days']?></div>
+					
+                    <div class="col col2">$<?php echo $Job_Data['Price'];?></div>
+                    <div class="clr"></div>
+                  <?  } ?>
+<div id="ajaxDiv" ></div>     
+                   <?  //$res=$this->My_Package; ?>
+                   
+                   
+                  <form action='<?php echo $paypal_url; ?>' method='get' name='frmPayPal1'>
+                  	<?php 
+						$i=1;
+						foreach($this->My_Package as $Frm_Data) {
+					?>
+                    <input type='hidden' name='cmd' value='_xclick'>
+					<input type='hidden' name='currency_code' value='USD'>
+						
+                    <input type='hidden' name='item_name' value='<?php echo 'Package'.$Frm_Data['Package/Days']?>'>
+                    <input type='hidden' name='item_number' value='<?php echo $Frm_Data['Package_Id'];?>'>
+					<input type='hidden' name='amount' value='<?php echo $Frm_Data['Price'];?>'>
+                    
+					<? } ?>
+                    
+                    <div class="col_foot">
+	                    <div class="col col1">
+                        <input type='hidden' name='business' value='<?php echo $paypal_id;?>'>
+                        <input type="submit" class="buy_btn" value="Buy now">
+                        </div>
+    	                <div class="col col2">Total Price: $310</div>
+                    </div>
+                    <div class="clr"></div>
+                    
+                </div>
+                <input type='hidden' name='cancel_return' value='<?=APPLICATION_URL?>subscription/jobcancel'>
+				<input type='hidden' name='return' value='<?=APPLICATION_URL?>subscription/jobsuccess'>
+</form>
+
+
+
+                <h2 class="title align-center upprcase"><a class="black" href="#">How do Premier Job Postings work?</a></h2>
+                <ul class="bullet2">
+
+                    <li>
+                        <div class="number">1</div>
+                        <div class="info1">
+                            <h2>Post your job vacancy on our website</h2>
+                            <p>With the largest database of professionals in the Middle East, your job will get great visibility across the region.</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                    <li>
+                        <div class="number">2</div>
+                        <div class="info1">
+                            <h2>Start receiving applicants immediately*</h2>
+                            <p>Within minutes, your job is advertised on jobportal.com and on our global network of partner websites.</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                    <li>
+                        <div class="number">3</div>
+                        <div class="info1">
+                            <h2>Filter your applicants and focus on the most qualified candidates</h2>
+                            <p>Seek out that ideal candidate you're looking for; our applicant filtration tool is incredibly easy to use.</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                    <li>
+                        <div class="number">4</div>
+                        <div class="info1">
+                            <h2>Hire and start growing your team</h2>
+                            <p>Our recruitment solutions help employers like you save time and money while making recruitment fun!</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                </ul>
+                <p class="font12">First-time buyers from certain countries may be requested to submit verification documents before job postings are published on our database.</p>
+          	</div>
+            <div class="clr"></div>
+        </div>

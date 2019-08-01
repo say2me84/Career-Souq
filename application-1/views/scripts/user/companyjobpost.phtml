@@ -1,0 +1,215 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$akash=$this->user_id;
+$aid=@$akash['user_id'];
+?>
+
+<script src="<?=JS_URL?>jquery.min.js" type="text/javascript"></script>
+<script src="<?=JS_URL?>jquery.pajinate.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+				$('#paging_container1').pajinate();
+			});
+			
+
+</script>
+
+
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+
+<div class="container job_apply">
+    <div class="content_left">
+        <?php 
+				//$res=$this->UserData;	
+				$emp_data=$this->Employee_Data;	
+			?>
+            	<div class="job_head">
+                	<div class="img">
+                    	<?php 
+						if($emp_data['user_image']=='')
+						{
+						?>
+							<img width="124" height="118"  src="<?=IMAGES_URL?>no-avator.png" >
+                        <?php }else{ ?>
+							<img width="124" height="118" src="<?=ADMIN_IMG?>user_pic/<?php echo $emp_data['user_image']?>" alt="">
+						<? }?>
+                    </div>
+                    <div class="info">
+                    	<h1 class="title captl"><?php echo $emp_data['user_company']?></h1>
+<div class="manage_profile"><a href="<?=BASE_PATH?>dashboard/companyedit/user_id/<?=$mySessionFront->user['FrontUserId']?>" >Manage Profile</a>
+
+						</div>
+                        <p class="font12"><?php echo $emp_data['user_city']?>, <?php echo $emp_data['country_name']?> </p>
+                        <p class="job_title"><span class="blue"><?php echo $emp_data['category_title']?>Development</span></p>
+                        <div class="floatleft"><a href="<?=APPLICATION_URL?>subscription/index" class="black">Add more Credits</a></div>
+                        <div class="floatright"><a href="<?=APPLICATION_URL?>job/postjob" class="blue">Post New Job</a></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+        
+        <div class="list">
+            <h1 class="title captl floatleft">My Job Posting</h1>
+            
+            	<div class="clr"></div>
+            
+            
+           	<div id="paging_container1">
+            <ul class="content">
+              
+			   <? if(is_array($this->Company_Job_Post_List) && count($this->Company_Job_Post_List) > 0) {
+					foreach($this->Company_Job_Post_List as $Myjob) { ?>	 
+                <li>
+                	<div class="list_block">
+                            <div class="head font12">
+                                <div class="floatleft"> <? //echo BASE_PATH?><!--user/companysingaljoblist/id/--><? //echo $Myjob['id']?>
+<h4><a href="<? echo BASE_PATH?>user/companysingaljoblist/job_id/<? echo $Myjob['id']?>" class="black"><?php echo $Myjob['job_title']?></a></h4>
+         <p><?php echo $Myjob['sub_category_title']?> - <span class="blue"><?php echo $Myjob['user_fname']?>, <?php echo $Myjob['user_lname']?></span></p>
+                                </div>
+                                <div class="floatright">
+                                    <p><?php echo date("d-m-Y", strtotime($Myjob['job_posted_on']))?></p>
+                                    
+                                    <!--<p><strong class="orng">20 Applied</strong></p>-->
+                                </div>
+                            </div>
+                            <p class="clr font12"><?=substr($Myjob['job_description'],0,186)?>...</p>
+                            <div class="footer font11">
+                                 <span>Job Role: <strong class="blue"><?php echo $Myjob['job_role_title']?></strong></span>
+                                 <span>Company Industry: <strong class="blue"><?php echo $Myjob['category_title']?></strong></span>
+                                 <span>Career Level: <strong class="blue"><?php echo $Myjob['career_level_title']?></strong></span>
+                            </div>
+                        </div>
+                    
+                </li>
+             <?php } } else {?> 
+                <li>
+               		<div class="list_block">
+                        
+                        <div class="footer font11">
+                             <h4>No Job Found</h4> 
+                        </div>
+                    </div>
+                </li>
+                 <? }?>
+                 
+            </ul>
+            <div class="page_navigation" style="padding-left:125px;"></div>	
+            <!--<div class="paging">
+                <ul>
+                    <li><a href="#">Prev</a></li>
+                    <li><span>1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>-->
+            </div>
+        </div>
+    </div>
+    
+    <div class="content_right">
+            	<div class="block stats">
+                	<h2 class="title">Profile Stats</h2>
+                    	<?php 	
+							$MyPosted_Job=$this->Emp_Posted_Job;
+							$MyTotalSave=$this->Emp_SaveJobs; 
+							$MyTotalNoti=$this->Emp_Job_Noti;
+							$Resumes_Total=$this->Resumes_Data_Total;
+						?>
+                    <ul>
+   <li><a href="<?=APPLICATION_URL?>user/companyjobpost"><span class="number number_green"><?php echo $MyPosted_Job['TotalApply']?></span>Jobs Posted</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/jobsaved"><span class="number"><?php echo $MyTotalSave['TotalSave']?></span> Jobs Saved</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/notification"><span class="number"><?php echo $MyTotalNoti['TotalNoti']?></span> Notifications</a></li>
+   <li><a href="<?=APPLICATION_URL?>user/alljobs"><span class="number"><?php echo $Resumes_Total['Total_Resumes']?></span> Resumes</a></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <div class="block credit_blnc font12">
+                	<h2 class="title">Credit Balance</h2>
+                    <div class="in_block1">
+                    	<h3>Job Posting Credits</h3>
+                        
+                        <div class="in_block1_content">
+                            <ul class="bullet6 font12">
+                                <li>Normal Job Postings: <?php echo $emp_data['user_jobs_available'] ?></li>
+                                <li>Premier Job Postings: <?php echo $emp_data['user_featured_jobs_available'] ?></li>
+                                <li>(Expire <?php echo date("d-M-Y", strtotime($emp_data['user_jobs_expire_on'])) ?>)</li>
+                                <li><a href="<?=APPLICATION_URL?>subscription/jobcredits" class="blue">Add job posting credits</a></li>
+                                <li><a href="<?=APPLICATION_URL?>dashboard/mycredits" class="blue">View Credit </a></li>
+                                <li><a href="#" class="blue">View Payment History</a></li>
+                            </ul>
+                            <p class="align-right"><a href="<?=APPLICATION_URL?>subscription/jobcredits" class="maroon underline">Buy Job Posting Credits</a></p>
+                        </div>
+                    </div>
+                    <div class="in_block1">
+                        <h3>CV Search Credits</h3>
+                        <div class="in_block1_content">                    	
+                            <ul class="bullet6 font12">
+                                <li>Global Search<br>(Expire <?php echo date("d-M-Y", strtotime($emp_data['user_resume_membership_expires_on'])) ?>)</li>
+                                <li><a href="<?=APPLICATION_URL?>subscription/cvcredits" class="blue">Subscribe to CV Search</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="bullet6 font12">
+                        <li><a href="<?=APPLICATION_URL?>dashboard/paymenthistory" class="blue">View Payment History</a></li>
+                        <li><a href="<?=APPLICATION_URL?>dashboard/mycredits" class="blue">View Credit</a></li>
+                    </ul>
+                </div>
+            </div>
+    <div class="clr"></div>
+</div>
+

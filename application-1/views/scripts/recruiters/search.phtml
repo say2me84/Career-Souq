@@ -1,0 +1,356 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+
+<link rel="stylesheet" href="<?=JS_URL?>jquery-ui.css" />
+<script src="<?=JS_URL?>jquery-ui.js"></script>
+<script src="<?=JS_URL?>ddaccordion.js"></script>
+<script type="text/javascript">
+
+
+ddaccordion.init({
+	headerclass: "submenuheader", //Shared CSS class name of headers group
+	contentclass: "submenu", //Shared CSS class name of contents group
+	revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+	mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+	collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+	defaultexpanded: [], //index of content(s) open by default [index1, index2, etc] [] denotes no content
+	onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
+	animatedefault: false, //Should contents open by default be animated into view?
+	persiststate: true, //persist state of opened contents within browser session?
+	toggleclass: ["", ""], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+	//togglehtml: ["suffix", "<img src='images/drop-down-erro2.jpg' class='statusicon' />", "<img src='images/drop-down-erro.jpg' class='statusicon' />"],
+	togglehtml: ["suffix", "", ""],
+	 //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+	animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+	oninit:function(headers, expandedindices){ //custom code to run when headers have initalized
+		//do nothing
+	},
+	onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+		//do nothing
+	}
+})
+
+
+</script>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>-->
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+ 
+ <script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+		  
+</script>
+<!--======================================== Loading More Less Buttons ===================================-->
+<script src="<?=JS_URL?>jquery.moreless.js"></script>
+<script type="text/javascript">
+	$(function () {
+	
+		$(document).moreless(
+		{
+			startHeight: 143,
+			moreText: 'More...',
+			lessText: 'Less...',
+			outerContainer: 'more-less',
+			MycontentContainer: 'text-block',
+			anchorClass: 'adjust'
+		}
+	);
+	
+	});
+</script>
+<style>
+.adjust {
+    color: #00A6A4; font-weight:bold; padding-left:150px
+}
+a {
+    color: #00A6A4;
+    text-decoration: none;
+}
+</style>
+<!--======================================== End of More Less Buttons ===================================-->
+
+<!--class="text-block"-->
+	<div class="container search_result">
+        	<h1 class="title">Jobs in the Gulf and Middle East <span>We found 5000+ job vacancies for you.</span></h1>
+            <div class="content_left">
+            
+            	<div class="result_bar font12">
+                	<div class="floatleft selectForm"><span class="label">Sort by:</span> 
+                    	<select><option>Recommended</option></select>
+                    </div>
+                    <div class="floatright paging">
+                    	<ul>
+                        	<li><a href="#">&lt;</a></li>
+                            <li><span>1</span></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&gt;</a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="clr"></div>
+                </div>
+               
+                <div class="list" id="list">
+                <? if(is_array($this->advsearchlist) && count($this->advsearchlist) > 0) {
+					foreach($this->advsearchlist as $Myjob) { ?>	
+                    <div class="list_block">
+                    	<div class="img">
+                        <!--<img alt="" src="images/profile_img2.png">-->
+                        <?php 
+						if($Myjob['user_image']=='')
+						{
+						?>
+							<img width="125" height="125"  src="<?=IMAGES_URL?>no-avator.png" >
+                        <?php }else{ ?>
+							<img width="125" height="125" src="<?=ADMIN_IMG?>user_pic/<?php echo $Myjob['user_image']?>" alt="">
+						<? }?>
+                        </div>
+                    	<div class="info">
+                        	<div class="floatleft">
+		<strong><a href="<?php echo $Myjob['user_id']?>"><?php echo $Myjob['user_fname']?> <?php echo $Myjob['user_lname']?></a></strong>
+                        	</div>
+                            <!--<div class="floatright font12">Last update:30-05-2013</div>-->
+                            <div class="clr"></div>
+	<?php 
+		$User_Exp_Activ= "SELECT * FROM tbl_user_experience WHERE is_current ='1' and user_id = '".$Myjob['user_id']."'";
+		$User_Exp_User_Exp_Activ_Data = $db->runQuery($User_Exp_Activ);
+		//prd($User_Exp_User_Exp_Activ_Data);
+	?>
+                            <div class="font12"><?php echo $Myjob['category_title']?><!--Web Design &amp; Developer /software Developer--></div>
+                            <p class="font11">
+                            <?php
+$User_Age_Qry="SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(user_dob)), '%Y')+0 AS user_age FROM tbl_users WHERE user_id ='".$Myjob['user_id']."'";
+									//prd($User_Age_Qry);
+								$User_Age_Result=$db->runQuery($User_Age_Qry);
+								//prd($User_Age_Result);
+							?>
+                            	Age: <span class="blue"><?php echo $User_Age_Result[0]['user_age']?></span> 
+                                <span class="spacer">&nbsp;</span> 
+                                Gender: <span class="blue"><?php echo $Myjob['user_gender']?></span> 
+                                <span class="spacer">&nbsp;</span>
+                                Nationality: <span class="blue"><?php echo $Myjob['nation_title']?></span> 
+                                <span class="spacer">&nbsp;</span>
+                                Residence: <span class="blue"><?php echo $Myjob['user_city']?>, <?php echo $Myjob['country_name']?></span>
+                            </p>
+    
+                            <p class="font11">
+                            	Job Title: <span class="blue"><?php echo $User_Exp_User_Exp_Activ_Data[0]['position']?></span>
+                            </p>
+                            <p class="font11">
+                            	Monthly Salary: <span class="blue">USD <?php echo $User_Exp_User_Exp_Activ_Data[0]['salary']?></span>
+                            </p>
+<?php 
+	//	$User_Exp_Activ= "SELECT * FROM tbl_user_experience WHERE is_current ='1' and user_id = '".$Myjob['user_id']."'";
+$User_Edu_Activ_Qry= "SELECT tbl_job_educations.education_title FROM tbl_job_educations LEFT JOIN tbl_user_education ON tbl_user_education.degree = tbl_job_educations.id where is_heighest ='1' and user_id = '".$Myjob['user_id']."'";
+$User_Edu_Activ_Data = $db->runQuery($User_Edu_Activ_Qry);
+//prd($User_Edu_Activ_Data);   education_title
+?>
+                            <p class="font11">
+                            	Degree: <span class="blue"><?php echo $User_Edu_Activ_Data[0]['education_title']?></span>
+                            </p>
+                            <p class="font11">
+                            	Experience: <span class="blue"><?php echo $User_Exp_User_Exp_Activ_Data[0]['exp_year']?> Years, <?php echo $User_Exp_User_Exp_Activ_Data[0]['exp_month']?> Months </span>
+                            </p>
+                            <p class="font12"><?= substr($Myjob['user_skills_n_expertise'],0,170).'.......'?></p>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                 <? } ?>
+                 <? } else {?> 
+                 	<div class="list_block featured_list_block">
+                 		<h4>PLEASE REFINE YOUR SEARCH</h4>   
+                    </div>
+				 <? } ?>  
+                    <div class="clr"></div>
+                </div>
+                
+                <div class="result_bar font12">
+                    <div class="floatright paging">
+                    	<ul>
+                        	<li><a href="#">&lt;</a></li>
+                            <li><span>1</span></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&gt;</a></li>
+                        </ul>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            
+            
+            
+			
+            <div class="content_right">
+              <div class="glossymenu">
+                    <div class="block search_block selectForm">
+                        <h2 class="submenuheader">Refine your search</h2>
+                        <div class="search_form submenu">
+                            <p>
+                                <input type="text" class="inputbox" value="Search Keywords">
+                             </p>
+                            <p><select class="selectbox"><option>All</option></select></p>
+                            <p class="align-center"><input type="button" value="search NOW" class="search_btn"></p>
+                            <p class="font16 align-center"><a class="black" href="#">Advance Search</a></p>
+                        </div>
+                    </div>
+                    <div class="block filter font12">
+                        <h2 class="title collapse submenuheader">Job Location</h2>
+                         <div class=" filter_content">
+                            <ul class="bullet5 text-block submenu">
+                            <?php
+                            $MyCnty_Qry="SELECT country_name,country_id FROM tbl_countries";
+//prd($MyCnty_Qry);
+$MyCnty_Data = $db->runQuery($MyCnty_Qry);
+//prd($MyCnty_Data);
+foreach($MyCnty_Data as $countrylist)
+{ 
+//$Total_User_Qry= "SELECT user_type='Job Seeker', count(*) as MyUserType FROM tbl_users GROUP BY user_country = '".$countrylist['country_id']."'";
+$Total_User_Qry= "Select count(user_type) as Total_user_typ FROM tbl_users  WHERE user_type='Job Seeker' AND user_country = '".$countrylist['country_id']."' ";
+$Total_User_Qry_Data = $db->runQuery($Total_User_Qry);
+//prd($Total_User_Qry_Data);
+?>
+						<li>
+		<a onclick="getajax('<?=BASE_PATH?>recruiters/recruitercountry/country_id/<?=$countrylist['country_id']?>','list');" href="javascript:void(0)" >
+							<?=$countrylist['country_name']?> (<?=$Total_User_Qry_Data[0]['Total_user_typ']?>)
+							</a>          
+						</li>
+						 <?php } ?>
+                           </ul>
+                          
+                        </div>
+                        </div>
+                    <div class="block filter font12">
+                <h2 class="title collapse submenuheader">Sallary Refinement</h2>
+                <div class="filter_content">
+                <ul class="bullet5 text-block submenu">
+<li><a onclick="getajax('<?=BASE_PATH?>recruiters/recruitersalary/salary/1000,10000','list');" href="javascript:void(0)" >$ 5000 - 10000</a></li>
+<li><a onclick="getajax('<?=BASE_PATH?>recruiters/recruitersalary/salary/10000,15000','list');" href="javascript:void(0)">$ 10000 - 15000</a></li>
+<li><a onclick="getajax('<?=BASE_PATH?>recruiters/recruitersalary/salary/14000,20000','list');" href="javascript:void(0)">$ 15000 - 20000</a></li>
+<li><a onclick="getajax('<?=BASE_PATH?>recruiters/recruitersalary/salary/20000,25000','list');" href="javascript:void(0)">$ 20000 - 25000</a></li>
+                </ul>
+                </div>
+            </div>
+                    
+                    <div class="block filter font12">
+                        <h2 class="title collapse submenuheader">Company Industry</h2>
+                        <div class="filter_content">
+                        <ul class="bullet5 text-block submenu">
+                            <?php
+$MyCnty_Qry="SELECT tbl_job_categories.cat_id, tbl_job_categories.category_title FROM tbl_job_categories";
+//prd($MyCnty_Qry);
+$MyCnty_Data = $db->runQuery($MyCnty_Qry);
+	//prd($MyCnty_Data);
+foreach($MyCnty_Data as $countrylist)
+{ 
+//$Total_User_Qry= "SELECT user_type='Job Seeker', count(*) as MyUserType FROM tbl_users GROUP BY user_country = '".$countrylist['country_id']."'";
+$Total_User_Qry= "Select count(user_type) as Total_user_typ FROM tbl_users  WHERE user_type='Job Seeker' AND user_industry = '".$countrylist['cat_id']."' ";
+$Total_User_Qry_Data = $db->runQuery($Total_User_Qry);
+//prd($Total_User_Qry_Data);
+?>
+                                <li>
+          <a onclick="getajax('<?=BASE_PATH?>recruiters/recruiterbyindustry/cat_id/<?=$countrylist['cat_id']?>','list');" href="#" >
+                <?=$countrylist['category_title']?> (<?=$Total_User_Qry_Data[0]['Total_user_typ']?>)
+          </a>
+                                </li>
+                            <? } ?>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="block filter font12">
+                        <h2 class="title collapse submenuheader">Career Level</h2>
+                        <div class="filter_content">
+                        <ul class="bullet5 text-block submenu">
+<?php
+	$MyCnty_Qry="SELECT tbl_career_levels.career_level_id, tbl_career_levels.career_level_title FROM tbl_career_levels";
+
+//prd($MyCnty_Qry);
+$MyCnty_Data = $db->runQuery($MyCnty_Qry);
+	//prd($MyCnty_Data);			//career_level_id	career_level_title
+foreach($MyCnty_Data as $countrylist)
+{ 
+//$Total_User_Qry= "SELECT user_type='Job Seeker', count(*) as MyUserType FROM tbl_users GROUP BY user_country = '".$countrylist['country_id']."'";
+$Total_User_Qry= "Select count(user_type) as Total_user_typ FROM tbl_users  WHERE user_type='Job Seeker' AND user_career_level = '".$countrylist['career_level_id']."' ";
+$Total_User_Qry_Data = $db->runQuery($Total_User_Qry);
+//prd($Total_User_Qry_Data);
+?>
+                                <li>	<!--javascript:void(0)-->
+ <a onclick="getajax('<?=BASE_PATH?>recruiters/recruiterbycareerlevel/career_level_id/<?=$countrylist['career_level_id']?>','list');" href="#" >
+                                    <?=$countrylist['career_level_title']?> (<?=$Total_User_Qry_Data[0]['Total_user_typ']?>)
+                                </a>
+                                </li>
+                            <? } ?>
+                        </ul>
+                        </div>
+                    </div>
+<!--<div class="block filter font12">
+                    <h2 class="title collapse submenuheader">Date Posted</h2>
+                    <div class="filter_content">
+                    <ul class="bullet5 text-block submenu">
+                        <li><a onclick="getajax('<?=BASE_PATH?>job/jobbydateajax/job_posted_on/now()','','list');" href="javascript:void(0)" >Today</a></li>
+                        <li><a onclick="getajax('<?=BASE_PATH?>job/jobbydateajax/job_posted_on/2','','list');" href="javascript:void(0)" >Past 2 days</a></li>
+                        <li><a onclick="getajax('<?=BASE_PATH?>job/jobbydateajax/job_posted_on/7','','list');" href="javascript:void(0)" >Past 7 days</a></li>
+                        <li><a onclick="getajax('<?=BASE_PATH?>job/jobbydateajax/job_posted_on/21','','list');" href="javascript:void(0)" >Past 21 Days</a></li>
+                        <li><a onclick="getajax('<?=BASE_PATH?>job/jobbydateajax/job_posted_on/30','','list');" href="javascript:void(0)" >Past 30 Days</a></li>
+                    </ul>
+                    
+                    </div>
+                </div>-->
+                    <div class="block filter font12">
+                        <h2 class="title collapse submenuheader">Company Type</h2>
+                        <div class="filter_content">
+                        <ul class="bullet5 text-block submenu">
+<?php
+	$MyCnty_Qry="SELECT tbl_job_sub_categories.sub_cat_id, tbl_job_sub_categories.sub_category_title, tbl_job_sub_categories.category_id FROM tbl_job_sub_categories";
+	
+	//prd($MyCnty_Qry);
+	$MyCnty_Data = $db->runQuery($MyCnty_Qry);
+	//prd($MyCnty_Data);			//career_level_id	career_level_title
+	foreach($MyCnty_Data as $countrylist)
+	{ 
+	//$Total_User_Qry= "SELECT user_type='Job Seeker', count(*) as MyUserType FROM tbl_users GROUP BY user_country = '".$countrylist['country_id']."'";
+	$Total_User_Qry= "Select count(user_type) as Total_user_typ FROM tbl_users  WHERE user_type='Job Seeker' AND user_industry = '".$countrylist['category_id']."' ";
+	$Total_User_Qry_Data = $db->runQuery($Total_User_Qry);
+	//prd($Total_User_Qry_Data);
+?>
+                                <li>
+<a onclick="getajax('<?=BASE_PATH?>recruiters/recruiterbycompytype/category_id/<?=$countrylist['category_id']?>','list');" href="javascript:void(0)" >
+                                    <?=$countrylist['sub_category_title']?> (<?=$Total_User_Qry_Data[0]['Total_user_typ']?>)
+                                </a>
+                                </li>
+                            <? } ?>
+                        </ul>
+                        </div>
+                    </div>
+              </div>
+				
+                
+                
+                <p class="align-center"><input type="button" value="Search Now" class="search_btn"></p>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+  
+ 
+

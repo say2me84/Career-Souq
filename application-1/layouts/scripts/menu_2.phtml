@@ -1,0 +1,88 @@
+
+<ul id="qm0" class="qmmc">
+	<!--==================== Careerlevels =================================-->
+    <li><a class="qmparent" href="<?=APPLICATION_URL?>index/welcome">Dashboard</a></li>
+	<li><span class="qmdivider qmdividery"></span></li>
+	<?
+	if($mySession->user['userRole']=='A') { ?>	
+    
+<!--==================== Category =================================-->    
+	<li><a class="qmparent" href="<?=APPLICATION_URL?>category">Category</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>category">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>category/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li>
+<!--==================== Sub Category =================================-->    
+	<li><a class="qmparent" href="<?=APPLICATION_URL?>subcategory">Sub Category</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>subcategory">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>subcategory/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li>
+<!--==================== Careerlevels =================================-->    
+	<li><a class="qmparent" href="<?=APPLICATION_URL?>Careerlevels">Careerlevels</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>Careerlevels">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>Careerlevels/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li>
+<!--==================== Experiences =================================-->    
+    <li><a class="qmparent" href="<?=APPLICATION_URL?>Experiences">Experiences</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>experiences">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>experiences/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li>
+<!--==================== Education =================================-->
+    <li><a class="qmparent" href="<?=APPLICATION_URL?>education">Education</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>education">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>education/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li>
+<!--==================== Job Types =================================-->   
+ 	<li><a class="qmparent" href="<?=APPLICATION_URL?>Jobtype">Job Type</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>Jobtype">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>Jobtype/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li> 
+<!--==================== Country =================================-->   
+ 	<li><a class="qmparent" href="<?=APPLICATION_URL?>Zone">Country</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>Zone">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>Zone/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li> 
+<!--==================== Nationalitie =================================-->   
+ 	<li><a class="qmparent" href="<?=APPLICATION_URL?>nationalitie">Nationality</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>nationalitie">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>nationalitie/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li> 
+        
+<!--==================== banners =================================-->   
+ 	<li><a class="qmparent" href="<?=APPLICATION_URL?>banner">Banners</a>
+		<ul>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>banner">View All</a></li>
+			<li><a class="qmparent" href="<?=APPLICATION_URL?>banner/add">Add New</a></li>
+		</ul>
+	</li>
+	<li><span class="qmdivider qmdividery"></span></li>     
+    
+<!-- ================================================================================================================== -->
+	<? }  ?>
+	
+	
+</ul>
+<script type="text/javascript">qm_create(0,false,0,500,false,false,false,false,false);</script>

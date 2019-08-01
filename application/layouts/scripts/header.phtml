@@ -1,0 +1,125 @@
+<?
+	global $mySessionFront;
+	$db=new Db();
+?>
+
+<script type="text/javascript" >
+	$(document).ready(function()
+	{	
+		$(".account").mouseover(function()
+		{
+			var X=$(this).attr('id');
+		
+		if(X==1)
+		{
+			$(".submenu1").hide();
+			$(this).attr('id', '0');	
+		}
+		else
+		{
+			$(".submenu1").show();
+			$(this).attr('id', '1');
+		}
+		
+		});
+	
+	//Mouseup textarea false
+	$(".submenu1").mouseup(function()
+	{
+		return false
+	});
+		$(".account").mouseup(function()
+	{
+	return false
+	});
+	//Textarea without editing.
+	$(document).mouseup(function()
+	{
+	$(".submenu1").hide();
+	$(".account").attr('id', '');
+	});
+		
+	});
+</script>
+
+<div class="wrap">
+        <h1 class="logo"><a href="<?=APPLICATION_URL?>index/index">Job Portal</a></h1>
+        <nav class="nav">
+            <ul>
+                
+				<?php
+                	if(!isLogged()) { 
+				?>
+					<li id="home" class="active"><a href="<?=APPLICATION_URL?>index/index">Home</a></li>
+					<li id=""><a href="<?=APPLICATION_URL?>recruiters/index">Find Resume</a></li>
+                    <li id=""><a href="<?=APPLICATION_URL?>job/index">Find a Job</a></li>
+				<? } else if(isLoggedFront())
+					{ ?>
+	<!--=================================================== Job Seeker ==============================================================-->            
+                <?php if($mySessionFront->user['userRole']=='Job Seeker') { ?>
+               		 <li id="home"><a href="<?=APPLICATION_URL?>user/home">Home</a></li>
+                     <li id="mypro"><a href="<?=APPLICATION_URL?>index/index">My Profile</a></li>
+                     <li id=""><a href="<?=APPLICATION_URL?>job/index">Find a Job</a></li>
+                <?php 
+					} else { 
+				?>
+                	<li id="home"><a href="<?=APPLICATION_URL?>recruiters/home">Home</a></li>
+                    <li id="mypro"><a href="<?=APPLICATION_URL?>index/index">My Profile</a></li>
+                    <li id=""><a href="<?=APPLICATION_URL?>recruiters/index">Find Resume</a></li>
+                <?php } }?>
+           </ul>
+        </nav>
+        
+        <?php if(isLoggedFront())
+			{
+		?>
+		
+        <?php /*?><div class="hdr_btn">
+        	<a class="dropdown" href="<?=APPLICATION_URL?>dashboard">Hello <?php echo $mySessionFront->user['UserName']?></a>
+            <!--<a class="btn3" href="<?=APPLICATION_URL?>index/Logout">Sign out</a>-->                
+        </div><?php */?>
+        
+		<div class="dropdown">
+	<a class="account"><span>Hello <?= substr($mySessionFront->user['UserName'],0,7)?>...</span></a>
+    
+	<div class="submenu1" style="display: none; ">
+		<ul class="root">
+            <li >
+              <a href="<?=APPLICATION_URL?>dashboard" >Profile</a>
+            </li>
+           <?php if($mySessionFront->user['userRole']=='Job Seeker') { ?> 
+            <li >
+              <a href="<?=APPLICATION_URL?>user/jobsapplied">Apply Jobs</a>
+            </li>
+            <li>
+              <a href="<?=APPLICATION_URL?>user/notification">Notifications</a>
+            </li>
+            <?php } else { ?>
+            
+            <li >
+              <a href="<?=APPLICATION_URL?>company/companypostedjob">My Jobs</a>
+            </li>
+            <li>
+              <a href="<?=APPLICATION_URL?>company/companymsg">Notifications</a>
+            </li>
+            <li>
+              <a href="<?=APPLICATION_URL?>dashboard/mycredits">My Credits</a>
+            </li>
+            <?php } ?>
+            <li>
+              <a href="<?=APPLICATION_URL?>index/Logout">Sign Out</a>
+            </li>
+	  </ul>
+      
+	</div>
+	</div>
+    
+        <? } else {?>
+        <div class="hdr_btn">
+            <a class="btn1" href="<?=APPLICATION_URL?>index/login">Candidate Login</a>
+            <a class="btn2" href="<?=APPLICATION_URL?>index/login">Recruiters Login</a>                
+        </div>
+        <? } ?>
+        <div class="clr"></div>
+    </div>
+

@@ -1,0 +1,52 @@
+<?php 
+global $mySession;
+
+?>
+<script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	 
+		  
+</script>
+
+			 <div class="list" id="list">
+                <? if(is_array($this->job_sallary) && count($this->job_sallary) > 0) {
+					foreach($this->job_sallary as $Myjob) { ?>	
+                    <div class="list_block ">
+                    	<div class="head font12">
+                            <div class="floatleft">
+                                <h4><a class="black" href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$Myjob['id']?>"><?=$Myjob['job_title']?></a></h4>
+                                <p><?php echo $Myjob['job_city']?> - <span class="blue"><?php echo $Myjob['country_name']?></span></p>
+                            </div>
+                            <div class="floatright">
+                            	<p><?php echo date("d-m-Y", strtotime($Myjob['job_posted_on']))?></p>
+                                <!--<p class="orng"><strong>Featured Job</strong></p>-->
+                            </div>
+                        </div>
+                        <p class="clr font12"><?= substr($Myjob['job_description'],0,170)?></p>
+                        <div class="footer font11">
+                        	 <span>Job Role: <strong class="blue"><?php echo $Myjob['job_role_title']?></strong></span>
+                             <span>Company Industry: <strong class="blue"><?php echo $Myjob['category_title']?></strong></span>
+                             <span>Career Level: <strong class="blue"><?php echo $Myjob['career_level_title']?></strong></span>
+                        </div>
+                        
+                    </div>
+                 <? } ?>
+                 <? } else {?> 
+                 	<div class="list_block featured_list_block">
+                 		<h4>PLEASE REFINE YOUR SEARCH</h4>   
+                    </div>
+				 <? } ?>  
+                    <div class="clr"></div>
+                </div>
+ 
+

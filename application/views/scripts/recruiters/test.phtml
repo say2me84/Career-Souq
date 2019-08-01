@@ -1,0 +1,26 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+//$MyCnty_Qry="SELECT tbl_career_levels.career_level_id, tbl_career_levels.career_level_title FROM tbl_career_levels";	tbl_career_levels user_career_level
+
+//$MyCnty_Qry="SELECT tbl_job_categories.cat_id, tbl_job_categories.category_title FROM tbl_job_categories";
+$MyCnty_Qry="SELECT tbl_job_sub_categories.sub_cat_id, tbl_job_sub_categories.sub_category_title, tbl_job_sub_categories.category_id FROM tbl_job_sub_categories";
+
+//prd($MyCnty_Qry);
+$MyCnty_Data = $db->runQuery($MyCnty_Qry);
+	//prd($MyCnty_Data);			//career_level_id	career_level_title
+foreach($MyCnty_Data as $countrylist)
+{ 
+//$Total_User_Qry= "SELECT user_type='Job Seeker', count(*) as MyUserType FROM tbl_users GROUP BY user_country = '".$countrylist['country_id']."'";
+$Total_User_Qry= "Select count(user_type) as Total_user_typ FROM tbl_users  WHERE user_type='Job Seeker' AND user_industry = '".$countrylist['category_id']."' ";
+$Total_User_Qry_Data = $db->runQuery($Total_User_Qry);
+//prd($Total_User_Qry_Data);
+?>
+
+
+
+
+<?=$countrylist['sub_category_title']?> (<?=$Total_User_Qry_Data[0]['Total_user_typ']?>)
+
+<?php } ?>

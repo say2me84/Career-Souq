@@ -1,0 +1,107 @@
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<!--<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>-->
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+<?php
+$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; 
+$paypal_id='sriniv_1293527277_biz@inbox.com';  // sriniv_1293527277_biz@inbox.com
+?>
+<div class="container plan_page">
+        	<div class="blue_header">
+            	<h1 class="title">Access <strong class="upprcase">millions of candidates</strong> with <strong class="upprcase">CV Search</strong></h1>
+                <ul class="bullet7">
+                	<li>Get instant access</li>
+                    <li>Easy-to-use search tools</li>
+                    <li>No extra fees or commission</li>
+                    <li class="blue">Try the free CV Search demo!</li>
+                </ul>
+            </div>            
+        	<div class="content_full">
+            	<h2 class="red_ribbon_title">CV SEARCH</h2>
+               		 
+                
+                <form action='<?php echo $paypal_url; ?>' method='get' name='frmPayPal1'>
+                	 
+                <div class="prices_table selectForm jqtransformdone">
+                	<div class="col_head">
+	                    <div class="col col1">Package/Days</div>
+    	                <div class="col col2">Price</div>
+                    </div>
+                    <div class="clr"></div>
+                   <?php 
+						$i=1;
+						foreach($this->Cv_Search_Data as $Cv_Search_Data) {
+					 ?>
+                    <div class="col col1">
+                    	<span class="jqTransformRadioWrapper">
+                            <a rel="packsPrice" class="jqTransformRadio" href="#"></a>
+                     <input type="radio" value="<?php echo 'Package/Days'.' '.$Cv_Search_Data['Package/Days'];?>" name="item_name" class="jqTransformHidden">
+                            
+					<!--<input type='hidden' name='item_name' value='<?php// echo $Cv_Search_Data['Package/Days'];?>'>-->
+                    
+                    <input type='hidden' name='item_number' value='<?php echo $Cv_Search_Data['Package_Id'];?>'>
+					<input type='hidden' name='amount' value='<?php echo $Cv_Search_Data['Price'];?>'>
+					<input type='hidden' name='cmd' value='_xclick'>
+    	                <input type='hidden' name='currency_code' value='USD'>
+                        </span><?php echo $Cv_Search_Data['Package/Days']?>
+                        </div>
+                    <div class="col col2">$<?php echo $Cv_Search_Data['Price']?></div>
+                    <div class="clr"></div>
+                    
+                    <? } ?>
+                    <div class="col_foot">
+	                    <div class="col col1">
+                    	<input type='hidden' name='business' value='<?php echo $paypal_id;?>'>
+	                    
+                    	
+                        	<input type="submit" value="Buy now" class="buy_btn">
+                        </div>
+    	                <div class="col col2">Total Price: $520</div>
+                    </div>
+                    <div class="clr"></div>
+                    
+                </div>
+                	<input type='hidden' name='cancel_return' value='<?=APPLICATION_URL?>subscription/cvcancel'>
+                    <input type='hidden' name='return' value='<?=APPLICATION_URL?>subscription/cvsuccess'>
+                </form>
+                
+                
+                <h2 class="title align-center upprcase"><a href="#" class="black">How does CV Search work?</a></h2>
+                <ul class="bullet2">
+                    <li>
+                        <div class="number">1</div>
+                        <div class="info1">
+                            <h2>Subscribe to CV Search for instant access*</h2>
+                            <p>We'll give you unlimited access to the largest database of professionals in the Middle East.</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                    <li>
+                        <div class="number">2</div>
+                        <div class="info1">
+                            <h2>Find candidates from our searchable CV database</h2>
+                            <p>CV Search is incredibly easy to use; seek out that ideal candidate you're looking for.</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                    <li>
+                        <div class="number">3</div>
+                        <div class="info1">
+                            <h2>Contact the candidates you like</h2>
+                            <p>Use your Contact Credits to reveal email addresses and phone numbers of your shortlisted candidates.</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                    <li>
+                        <div class="number">4</div>
+                        <div class="info1">
+                            <h2>Hire and start growing your team</h2>
+                            <p>Our recruitment solutions help employers like you save time and money while making recruitment fun!</p>
+                        </div>
+                        <div class="clr"></div>
+                    </li>
+                </ul>
+                <p class="font12">First-time buyers from certain countries may be requested to submit verification documents before access to the CV database is approved. </p>
+          	</div>
+            <div class="clr"></div>
+        </div>

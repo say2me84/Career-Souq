@@ -1,0 +1,10 @@
+<?
+if($this->mode==0 && $this->mode==2) {
+$string = "";
+
+$string = jschars($string);
+?>
+Element.update("modal-box", "<?=$string?>");
+Modalbox.show($('modal-box'), {title: 'Edit profile', width: 500});
+<?
+} ?>

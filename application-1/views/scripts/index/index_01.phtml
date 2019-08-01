@@ -1,0 +1,180 @@
+<?php global $mySession;?>
+
+<!--============================================ Java Script & Css ===========================================-->	
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,800,800italic' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" type="text/css" href="<?=ASSET_CSS?>style.css"/>
+<script type="text/javascript" src="<?=ASSET_JS?>jquery-1.8.0.min.js" ></script>
+<script type="text/javascript" src="<?=ASSET_JS?>image_slide.js" ></script>
+<script type="text/javascript" src="<?=ASSET_JS?>custom.js" ></script>
+<script type="text/javascript" src="<?=ASSET_JS?>jquery.carouFredSel-6.2.1-packed.js" ></script>
+
+<script type="text/javascript" src="<?=JS_URL?>imgLiquid-min.js" ></script>
+
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+          $('body').addClass('home');
+        });   
+	
+	$(function() {
+	   $('#foo2').carouFredSel({
+			auto: false,
+			prev: '#prev2',
+			next: '#next2',
+			pagination: "#pager2",
+			mousewheel: true,
+			swipe: {
+				onMouse: true,
+				onTouch: true
+			}
+		});
+	});
+	
+	
+	window.onload=function(){
+	 $("ul.slideshow li").imgLiquid({fill:true});
+	}
+</script>
+<!--============================================ End Java Script & Css ===========================================-->  
+ 
+<div class="container home_page">
+        <section class="homesliderblk">   
+                 
+            <section class="homesliderblk">
+                    <div class="Slider"><ul class="slideshow">
+                        <li class="show"><img src="<?=ASSET_IMG?>slider.jpg" alt="" /><h1>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h1><a href="#" class="know-more">know more</a></li>
+                        <li><img src="<?=ASSET_IMG?>slider2.jpg" alt="" /><h1>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h1><a href="#" class="know-more">know more</a></li>
+                        <li><img src="<?=ASSET_IMG?>slider3.jpg" alt="" /><h1>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h1><a href="#" class="know-more">know more</a></li>
+                      </ul></div>
+                    <div class="outerblock">                    
+                        <div class="headsearch">
+                            <div class="searchform">
+                            	<input type="text" class="view" placeholder="Target Position" value="" />
+                            	<input type="text" class="where" placeholder="Where" value="" />
+                            	<input type="text" class="go" placeholder="GO" value="GO" />
+                            </div>
+                            <div class="or"></div>
+                            <div class="quregister"><a href="#">QUICK REGISTER</a></div>
+                            <div class="clear"></div>
+                        </div>
+                	</div>
+                </section>
+        </section>
+				
+            <section class="block-1-outer">
+            
+              <div class="block-1">
+                <h1 class="heading-1">Hand Picked Featured Jobs for You</h1>
+                <div class="fronttab">
+                  <div class="fronttabLeft">
+                    <ul>
+                    <?php 
+						$i=1;
+						foreach($this->Categories_Data as $My_Cat_List) { 
+						//cat_id category_title  category_banner show_on_home_page
+					?>
+                
+                      <li class="tab<? echo $i++;?>">
+ <a class="active" href="#"  id="tabs1" onClick="getajax('<?=BASE_PATH?>index/loadjob/cat_id/<?=$My_Cat_List['cat_id']?>','job_load');">
+					  <?php echo $My_Cat_List['category_title']?></a></li>
+                      <? } ?>
+                    </ul>
+                  </div>
+                  <div class="fronttabRight">
+                    <div class="management" id="job_load" >
+                      
+			  <?php 
+                $MyCat_Img=$this->Home_Cat_Img;
+              ?>
+ 				 <div class="MagmntImg"><img src="<?=ADMIN_IMG?>banners/<?=$MyCat_Img['category_banner']?>" alt="" width="741" height="171" /></div>
+                        <?php 
+							$i=1;
+							foreach($this->Cat_Details as $My_Detail) { 
+						?>
+						            
+                         <div class="Magmntblk">
+                         
+                        <div class="MagmntblkLeft"><a href="#"><img src="<?=ADMIN_IMG?>User_pic/<?=$My_Detail['user_image']?>" alt="" width="106" height="82"/></a></div>
+                            <div class="MagmntblkMid">
+                              <h1><?=$My_Detail['job_title']?></h1>
+                              <p><span>Posted by</span> <?=$My_Detail['user_company']?> for <?=$My_Detail['job_city']?></p>
+                              <div class="Vierw_Apply"><a href="#">Vierw  &amp; Apply</a><span>- <?php echo date("d-M-Y", strtotime($My_Detail['job_posted_on']))?></span></div>
+                            </div>
+                        <div class="MagmntblkRight">
+                          <p style="padding-right:5px; text-align:justify"><?= substr($My_Detail['job_description'],0,150)?></p>
+                          <a href="#" class="ViewMore">View More</a>
+                          <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        </div>
+                        <?php } ?> 
+                      
+                    </div>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </section>
+            
+            <section class="ClentLgo">
+              <div id="SlideItMoo_outer">
+                <h1 class="heading-1">Our Top Featured Employeers</h1>
+                <div class="list_carousel">
+                  <ul id="foo2">
+                    <li><img src="<?=ASSET_IMG?>lgo1.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo2.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo3.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo4.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo5.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo1.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo1.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo1.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo1.png" width="220" height="95" alt="img" /></li>
+                    <li><img src="<?=ASSET_IMG?>lgo1.png" width="220" height="95" alt="img" /></li>
+                  </ul>
+                  <div class="clearfix"></div>
+                  <a id="prev2" class="prev" href="#"></a> <a id="next2" class="next" href="#"></a> </div>
+              </div>
+            </section>
+<!--============================================ Testimonial_Data =============================================== -->
+            <section class="EmpBlock">
+              <div class="EmpBlockIn">
+                <div class="EffectImg">
+				<?php 
+                    $i=1;
+                    foreach($this->Testimonials_Data as $My_Testimonials) { 
+//testimonial_id name avator company designation email phone subject message  is_read  left_on
+                ?>
+	
+                  <div class="EmpImg">
+                    <div class="tiptool"><?=substr($My_Testimonials['message'],0,150)?>.</div>
+                    <div class="EmlInfo"> <a href="#"><span><?=$My_Testimonials['name']?></span><?=$My_Testimonials['designation']?></a> </div>
+                    <a href="<? echo APPLICATION_URL.'testimonial/index/page_id/'.$My_Testimonials['testimonial_id']?>">
+                   <?php 
+						if($My_Testimonials['avator']=='')
+						{
+					?>
+						<img width="196" height="208"  src="<?=IMAGES_URL?>no-avator.png" >
+						
+					<?php }else{ ?>
+						<img width="196" height="208" src="<?=USER_PIC?><?php echo $My_Testimonials['avator']?>">
+					<? }?>
+                    </a> 
+                    </div>
+                    
+                <?php } ?>
+                 
+                  <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="AreU">
+                  <h2>Are you ready to Take Next Leap?</h2>
+                  <a href="<?=APPLICATION_URL?>job/index" class="Btn1">Search job</a>
+                  <a href="<?=APPLICATION_URL?>index/login" class="Btn2">Quick register</a> </div>
+                <div class="clear"></div>
+              </div>
+            </section>
+<!--============================================ Testimonial_Data =============================================== -->
+          <div class="clr"></div>
+        </div>

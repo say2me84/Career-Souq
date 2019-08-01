@@ -1,0 +1,97 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+?>
+<link rel="stylesheet" type="text/css" href="<? //echo CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+
+<script>
+$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#mypro').addClass('active');
+        });	 
+
+
+$(document).ready(function() {
+		$('textarea#editor1').addClass('ckeditor');
+        });	
+		
+</script>
+
+<div class="container company_profile">
+<?php $res=$this->Company_Data; ?>
+        	<div class="content_full">
+            	<div class="job_head">
+                	<div class="img"><img width="124" height="118" src="<?=ADMIN_USR_IMG?><?php echo $res['user_image']?>" alt=""></div>
+                    <div class="info">
+                    	<h1 class="title captl"><?php echo $res['user_company']?></h1>
+                        <div class="manage_profile"><a href="<?=BASE_PATH?>dashboard/companyedit/user_id/<?=$mySessionFront->user['FrontUserId']?>">Manage Profile</a></div>
+                        <p class="font12"><?php echo $res['user_city']?>, <?php echo $res['country_name']?></p>
+                        <p class="job_title"><span class="blue"><?php echo $res['category_title']?></span></p>
+                        <div class="floatleft"><a href="#" class="black">Add more Credits</a></div>
+                        <div class="floatright"><a href="#" class="blue">Post New Job</a></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="list">
+                	<div class="block2">
+                    	<div class="block2_head">
+                        	<h2 class="floatleft">Overview</h2>
+                        	<div class="floatright"><a href="#" class="edit_btn2">Edit</a></div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="block2_content">
+                            <p><!--We live with your dream to Create, inspire and Transform your Digital Identities into an emerging BRAND. We’re an Independent digital design, development and branding agency who strives to provide a better solution to all your business needs.-->
+                            <?php echo $res['user_company_detail']?>
+                            </p>
+                            <ul class="list_3 font12">
+                            	<li>
+                                	<p class="blue upprcase">INDUSTRIES</p>
+                                    <p><?php echo $res['category_title']?></p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">ANNUAL REVENUE</p>
+                                    <p>$<?php echo $res['user_annual_revenue']?></p>
+                                </li>
+                                <li>
+                                	<p class="blue upprcase">NUMBER OF EMPLOYEES</p>
+                                    <p><?php echo $res['user_number_of_employees']?></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab_block">
+                    	<ul class="tabs">
+                        	<li id="manage_ac" ><a href="<?=BASE_PATH?>dashboard/companyedit/user_id/<?=$mySessionFront->user['FrontUserId']?>">Manage Account</a></li>
+                            <li id="my_credit" class=""><a href="<?=BASE_PATH?>dashboard/mycredits" >My Credits</a></li>
+                            <li><a href="<?=BASE_PATH?>dashboard/paymenthistory">Payment History</a></li>
+                            <li class="active"><a href="<?=BASE_PATH?>dashboard/paymentmethod">Payment Method</a></li>
+                        </ul>
+                        <div class="tab_content company_payment company_profile_form">
+                        	<div class="payment_method1 selectForm font12 jqtransformdone">
+                            	<p><span class="jqTransformRadioWrapper"><a rel="" class="jqTransformRadio" href="#"></a>
+                                <input type="radio" value="" class="jqTransformHidden" checked="checked"></span> PayPal</p>
+                                
+                            </div>
+                            
+                            <div class="clr"></div>
+                            
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+
+

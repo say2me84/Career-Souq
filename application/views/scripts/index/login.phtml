@@ -1,0 +1,175 @@
+<?php global $mySessionFront;?>
+
+<!--============================================ Java Script & Css ===========================================-->	
+<script type="text/javascript" language="javascript">
+	//$(document).ready(function() {
+         // $('body').addClass('home');
+        //});
+		
+	$(document).ready(function() {
+        $('li').removeClass('active');
+        });	
+		   
+</script>
+
+<script>
+function vali()
+{
+	if(document.getElementById("user_type").checked == false ) {
+		alert("Please select user type");
+		return false;
+	}
+	if(document.getElementById("user_confirm_password").value=='') {
+		alert("Please enter confirm password");
+		return false;
+	}
+	if(document.getElementById("user_new_password").value!=document.getElementById("user_confirm_password").value) {
+		alert("Confirm password should be same");
+		return false;
+	}
+	return true;
+	
+}
+
+
+function checkUser_type()
+	{
+		if(!document.getElementsByName("user_type")[0].checked && !document.getElementsByName("user_type")[1].checked)
+	{
+		alert("Please select User Type");
+		return false;
+	}
+		return true;
+	}
+		
+//function validate()
+//{
+//	checkUser_type();
+//}
+
+window.onload = function() {
+  document.getElementById("_uname").focus();
+};
+</script>
+
+<!--============================================ End Java Script & Css ===========================================-->  
+   
+<div class="container login_page">
+<!--<input type="text" id="autosuggest" />-->
+<h1 class="title">LOGIN  OR CREATE AN ACCOUNT</h1>
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+
+<?php 
+//=====================
+?>
+
+<form name="sq_login" id="sq_login" action="<?php echo $this->url(array('controller'=>'index', 'action'=>'login'), 'default', true)?>" method="post">	
+<div class="block login_block">				
+    <h2 class="title">Log In</h2>
+    <div class="form">
+        <p>If you have an account with us, please log in.</p>
+        <p><label>Email Address *</label><br><?php echo $this->loginform->_uname?></p>
+        <p><label>Password *</label><br>
+		<input type="hidden" name="ptype" value="login" />
+		<?php echo $this->loginform->_pass?></p>
+        <p >Required Fields *</p>
+     
+        
+<p class="social_login">
+    <a href="<?php //echo $dialog_url;?>"><img src="<?=IMAGES_URL?>login_facebook.png" alt=""></a> 
+    <a href="#"><img src="<?=IMAGES_URL?>login_twitter.png" alt=""></a>
+</p>
+    </div>
+    <div class="block_footer">
+        <div class="floatleft"><a class="orng" href="<?=APPLICATION_URL?>/index/forgotpass">Forgot your Password?</a></div>
+        <div class="floatright"><input name="Submit" class="submit" type="submit" value="Login"></div>
+        <div class="clr"></div>
+    </div>
+</div>
+</form>
+<div class="block register_block">
+    <h2 class="title">New user ? Please register.</h2>
+
+<form name="radioform" id="radioform" onSubmit="return checkUser_type()" action="<?php echo $this->url(array('controller'=>'index', 'action'=>'register'), 'default', false)?>" method="get">							    
+    <div class="form">
+        <p><label>
+        	
+            <input type="radio" name="user_type" id="user_type" value="Job_Seeker">
+            I'm a new job seeker</label>If you are looking for a job, register here.</p>
+        
+        <p><label>
+        	 
+            <input type="radio" name="user_type" id="user_type" value="Employer">
+            I'm a new employer</label>If you need to hire staff for your company, register here.
+       </p>
+    
+    </div>
+    
+    <div class="block_footer">
+        <div class="floatleft">&nbsp;</div>
+        <div class="floatright">
+        
+           <input type="submit" class="submit" value="CREATE AN ACCOUNT" >
+            
+        </div>
+        <div class="clr"></div>
+    </div>
+</form>    
+    
+</div>
+
+<div class="clr"></div>
+</div>

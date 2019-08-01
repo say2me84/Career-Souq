@@ -1,0 +1,211 @@
+<?php 
+global $mySessionFront;
+$db = new Db();
+?>
+
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>-->
+
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+
+<script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').removeClass('active');
+        });	 
+	
+	$(document).ready(function() {
+        $('select#sub_cat_id').addClass('selectbox');
+        });  
+</script>
+<?php
+$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; 
+$paypal_id='sriniv_1293527277_biz@inbox.com';  // sriniv_1293527277_biz@inbox.com
+
+//http://packsuccess?tx=6HC4439792521101D&st=Completed&amt=50.00&cc=USD&cm=&item_number=
+
+//tx=5SB29478PX435435Y
+//&st=Completed
+//&amt=50.00
+//&cc=USD
+//&cm=Small
+//&item_number=1
+?>
+<div class="container recruiter_page">
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+        	<div class="content_full">
+            	<h1 class="title align-center">Online Recruitment and Employment Solutions for Employers</h1>
+            	<div class="prices_cols">
+                <form action='<?php echo $paypal_url; ?>' method='post' name='frmPayPal1'>
+                    <div class="col col1">
+                    	<h2>Small</h2>
+                        <div class="prices"><sub>$</sub> <span>50</span> <sup>monthly</sup></div>
+                        <ul class="list">
+                        	<li>10 Job Posting</li>
+                            <li>20 days CV search</li>
+                            <li>4 Featured Job Posting</li>
+                        </ul>
+                        <input type='hidden' name='business' value='<?php echo $paypal_id;?>'>
+                        <input type='hidden' name='cmd' value='_xclick'>
+    	
+                        <input type='hidden' name='item_name' value='Small'>
+                        <input type='hidden' name='custom' value='Small'>
+                        <input type='hidden' name='item_number' value='1'>
+                        <input type='hidden' name='amount' value='50'>
+    					<input type='hidden' name='currency_code' value='USD'>
+                        
+                        <input type='hidden' name='cancel_return' value='<?=APPLICATION_URL?>Subscription/packcancel'>
+                		<input type='hidden' name='return' value='<?=APPLICATION_URL?>Subscription/packsuccess'>
+                        
+                        <input type="submit" class="buy_btn" value="BUY NOW">
+                    </div>
+               </form>																		   	
+               
+				<form action='<?php echo $paypal_url; ?>' method='post' name='frmPayPal1'>                    
+                    <div class="col col2">
+                    	<h2>Medium</h2>
+                        <div class="prices"><sub>$</sub> <span>79</span> <sup>monthly</sup></div>
+                        <ul class="list">
+                        	<li>20 Job Posting</li>
+                            <li>20 days CV search</li>
+                            <li>11 Featured Job Posting</li>
+                        </ul>
+                        <input type='hidden' name='business' value='<?php echo $paypal_id;?>'>
+                        <input type='hidden' name='cmd' value='_xclick'>
+    
+                        <input type='hidden' name='item_name' value='Medium'>
+                        <input type='hidden' name='custom' value='Medium'>
+                        <input type='hidden' name='item_number' value='2'>
+                        <input type='hidden' name='amount' value='79'>
+    
+                        
+                        <input type='hidden' name='currency_code' value='USD'>
+                        
+                        <input type='hidden' name='cancel_return' value='<?=APPLICATION_URL?>Subscription/packcancel'>
+                		<input type='hidden' name='return' value='<?=APPLICATION_URL?>Subscription/packsuccess'>
+                    
+                        <input type="submit" class="buy_btn" value="BUY NOW">
+                    </div>
+                    	
+				</form>
+                <form action='<?php echo $paypal_url; ?>' method='post' name='frmPayPal1'>    
+                    <div class="col col3">
+                    	<h2>Large</h2>
+                        <div class="prices"><sub>$</sub> <span>90</span> <sup>monthly</sup></div>
+                        <ul class="list">
+                        	<li>30 Job Posting</li>
+                            <li>20 days CV search</li>
+                            <li>4 Featured Job Posting</li>
+                        </ul>
+                        <input type='hidden' name='business' value='<?php echo $paypal_id;?>'>
+                        <input type='hidden' name='cmd' value='_xclick'>
+    
+                        <input type='hidden' name='item_name' value='Large'>
+                        <input type='hidden' name='custom' value='Large'>
+                        <input type='hidden' name='item_number' value='3'>
+                        <input type='hidden' name='amount' value='90'>
+    
+                        
+                        <input type='hidden' name='currency_code' value='USD'>
+                        
+                        <!--<input type='hidden' name='cancel_return' value='http://localhost/paypal/cancel.php'>
+                        <input type='hidden' name='return' value='http://localhost/paypal/success.php'>-->
+                   		 <input type='hidden' name='cancel_return' value='<?=APPLICATION_URL?>Subscription/packcancel'>
+                		 <input type='hidden' name='return' value='<?=APPLICATION_URL?>Subscription/packsuccess'>
+                       
+                        <input type="submit" class="buy_btn" value="BUY NOW">
+                    </div>
+                    	
+                  </form>  
+                	<div class="clr"></div>
+                </div>
+                
+                <div class="seperator">
+                    <span class="or">or</span>
+                </div>
+                <h1 class="title align-center">CUSTOMIZE YOUR PACKAGE</h1>
+                <div class="floatleft highlight-box2 mar-l180">
+                    <h3 class="align-center">Post Jobs</h3>
+                    <ul class="check_icons">
+                        <li>Post jobs worldwide</li>
+                        <li>Receive applicants in minutes</li>
+                        <li>60-day ads available</li>
+                    </ul>
+                    <p class="align-right"><a href="<?=APPLICATION_URL?>subscription/jobcredits" class="black">More details...</a></p>
+                    <a href="<?=APPLICATION_URL?>subscription/jobcredits" class="post_now_btn">Post Now</a>
+                </div>
+                <div class="floatleft highlight-box2">
+                    <h3 class="align-center">Search CVs</h3>
+                    <ul class="check_icons">
+                        <li>Access 12,250,000 candidates</li>
+                        <li>Filter CVs by 34 criteria</li>
+                        <li>Hire talent quickly and easily</li>
+                    </ul>
+                    <p class="align-right"><a href="<?=APPLICATION_URL?>subscription/cvcredits" class="black">Try CV Search</a></p>
+                    <a href="<?=APPLICATION_URL?>subscription/cvcredits" class="post_now_btn">Search Now</a>
+                </div>
+            </div>
+            <div class="clr"></div>
+        </div>

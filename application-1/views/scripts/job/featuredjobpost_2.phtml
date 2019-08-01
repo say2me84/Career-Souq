@@ -1,0 +1,419 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+?>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+<link rel="stylesheet" href="<?=JS_URL?>jquery-ui.css" />
+
+<script src="<?=JS_URL?>jquery-ui.js"></script>
+<!--======================================== Auto Suggest vai Jquery ===================================-->
+
+<link rel="stylesheet" type="text/css" href="<?=CSS_URL?>jqtransform.css" />
+<script type="text/javascript" src="<?=JS_URL?>jquery.jqtransform.js"></script>
+<script type="text/javascript" src="<?=JS_URL?>public.js"></script>
+ 
+ <script type="text/javascript" language="javascript">
+ 
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').removeClass('active');
+        });	 
+	
+	$(document).ready(function() {
+        $('select#sub_cat_id').addClass('selectbox');
+        });  
+</script>
+<script language="javascript">
+function getsubcat(CategorySno)
+{
+	document.getElementById('SubCatDiv').innerHTML="<img src='<?=APPLICATION_URL_ADMIN?>images/load.gif' border='0'>";
+	//alert(document.getElementById('SubCatDiv'));
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'job','action'=>'getsubcat'),'default',true);?>",
+	type: "POST",
+	data: ({CategorySno : CategorySno}),
+	success: function(data){			
+	$("#SubCatDiv").html(data);			
+	}});
+}
+</script>
+<!--======================================== Loading Forms vai Ajax ===================================-->
+<div class="container job_post featured_job_post">
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+        	<div class="content_left">
+<?php $res=$this->Company_Data; ?>
+            	<div class="job_head">
+                	<div class="img"><img width="124" height="118" src="<?=ADMIN_USR_IMG?><?php echo $res['user_image']?>" alt=""></div>
+                    <div class="info">
+                    	<h1 class="title captl"><?php echo $res['user_company']?></h1>
+                        <p class="font12"><?php echo $res['user_city']?>, <?php echo $res['country_name']?></p>
+                        <p class="job_title"><span class="blue"><?php echo $res['category_title']?></span></p>
+                        <div class="floatleft"><a href="#" class="black">Add more Credits</a></div>
+                        <div class="floatright"><a href="#" class="blue">Post New Job</a></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="form_block">
+                	<h1 class="title captl">New Job Posting</h1>
+                    <div class="clr"></div>
+<form name="" id="" action="" method="post" enctype="multipart/form-data">    
+    <div class="ftrd_form selectForm">
+        <div class="full">
+            <div class="label">Job Title</div>
+            <div class="field"><? echo $this->myform->Job_Title?></div>
+        </div>
+        <div class="full">
+            <div class="label">Job Key Words</div>
+            <div class="field"><? echo $this->myform->job_keywords?></div>
+            <div class="padT3">Seperated by comma ( , )</div>
+        </div>
+        <div class="full">
+            <div class="label">Category</div>
+            <div class="field field1"><? echo $this->myform->CategorySno?></div>
+            
+            <div class="label">Sub Category</div>
+            <div class="field field1" id="SubCatDiv"><? echo $this->myform->SubCatId?></div>
+        </div>
+        <div class="full">
+            <div class="label">Description</div>
+            <div class="field"><? echo $this->myform->Description?></div>
+        </div>
+        <div class="full">
+            <div class="label">Responsibilities</div>
+            <div class="field"><? echo $this->myform->Responsibilities?></div>
+        </div>
+        <div class="full">
+            <div class="label">Skills Required</div>
+            <div class="field"><? echo $this->myform->Skills_Required?></div>
+        </div>
+        <div class="full">
+            <div class="label">Country</div>
+            <div class="field field1"><? echo $this->myform->CountryId?></div>
+            <div class="label">City</div>
+            <div class="field field1"><? echo $this->myform->City?></div>
+        </div>
+        <div class="full">
+            <div class="label">Employment Type</div>
+            <div class="field field1"><? echo $this->myform->Employment_Type?></div>
+            <div class="label">Job Type</div>
+            <div class="field field1"><? echo $this->myform->Job_Type?></div>
+        </div>
+        <div class="full">
+            <div class="label">Education</div>
+            <div class="field field1"><? echo $this->myform->EducationId?></div>
+            <div class="label">Experience</div>
+            <div class="field field1"><? echo $this->myform->ExperienceId?></div>
+        </div>
+        <div class="full">
+            <div class="label">Career Level</div>
+            <div class="field field1"><? echo $this->myform->Career_Level?></div>
+            <div class="label">Travel Required</div>
+            <div class="field field1"><? echo $this->myform->Travel_Required?></div>
+        </div>
+        <div class="full">
+            <div class="label">Relocation</div>
+            <div class="field field1"><? echo $this->myform->Relocation?></div>
+            <div class="label">Sallary</div>
+            <div class="field field1"><? echo $this->myform->Sallary?></div>
+        </div>
+        <div class="full">
+            <div class="label">Email</div>
+            <div class="field field1"><? echo $this->myform->Email?></div>
+            <div class="label">Phone Number</div>
+            <div class="field field1"><? echo $this->myform->Phone_Number?></div>
+            
+        </div>
+        <div class="full">
+            <div class="label">Contact  Name</div>
+            <div class="field field1"><? echo $this->myform->Contact_Name?></div>
+            <div class="label">Fax</div>
+            <div class="field field1"><? echo $this->myform->Fax?></div>
+        </div>
+        <div class="clr"></div>
+    </div>                    
+    
+    <div class="fieldset">
+                    	<h2 class="legend">Header Banner &amp; logo</h2>
+                        <div class="upload_logo">
+                            <div class="logo_img">
+                                <div class="img"><img width="100" alt="" src="<?=IMAGES_URL?>company_logo2.jpg"></div>
+                                <p class="align-center">Logo Size: 131x 131</p>
+                            </div>
+                            <div class="floatleft logo_info"><input type="button" class="upload_btn" value="Upload"></div>
+                        </div>
+                        <div class="upload_banner">
+                            <div class="banner_img">
+                                <div class="img"><img alt="" src="<?=IMAGES_URL?>company_banner.jpg"></div>
+                                <p class="align-center">Header Banner Size: 1025x284</p>
+                            </div>
+                            <div class="floatleft logo_info">
+                            	<p><a class="black underline" href="#">View Example</a></p>
+                                <input type="button" class="upload_btn" value="Upload">
+                           	</div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+	<div class="fieldset">
+                    	<h2 class="legend">Content Banner</h2>
+                        <div class="upload_banner">
+                            <div class="banner_img">
+                                <div class="img"><img alt="" src="<?=IMAGES_URL?>company_img1.jpg"></div>
+                                <p class="align-center">Banner Size: 750x245</p>
+                            </div>
+                            <div class="floatleft logo_info">
+                                <input type="button" class="upload_btn" value="Upload">
+                           	</div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+    
+    <div class="fieldset">
+                    	<h2 class="legend">Theme Color</h2>
+                        
+                        <link href="<?=JPICKER?>jpicker-1.1.6.min.css" type="text/css" rel="Stylesheet">
+                        <link href="<?=JPICKER?>jPicker.css" type="text/css" rel="Stylesheet">
+                        <script type="text/javascript" src="<?=JPICKER?>jpicker-1.1.6.min.js"></script>
+                        <script type="text/javascript">
+						  $(document).ready(
+							function()
+							{
+							  $('.Expandable').jPicker(
+								{
+								  window:
+								  {
+									expandable: true
+								  }
+								});
+							});
+						</script>						
+                        <div class="color_picker">
+                        	<div class="col col1">
+                            	<div class="label">Choose a backgound color:</div>
+                                <div class="picker"><span class="Expandable"></span><span class="jPicker"><span class="Icon"><span class="Color" style="background-color: rgb(86, 255, 170);">&nbsp;</span><span class="Alpha" style="background-image: url(&quot;/jPicker/images/bar-opacity.png&quot;); visibility: hidden;">&nbsp;</span><span title="Click To Open Color Picker" class="Image" style="background-image: url(&quot;/jPicker/images/picker.gif&quot;);">&nbsp;</span><span class="Container">&nbsp;</span></span></span></div>
+                            </div>
+                            <div class="col col2">
+                            	<div class="label">Choose a foregound color:</div>
+                                <div class="picker"><span class="Expandable"></span><span class="jPicker"><span class="Icon"><span class="Color" style="background-color: rgb(255, 0, 0);">&nbsp;</span><span class="Alpha" style="background-image: url(&quot;/jPicker/images/bar-opacity.png&quot;); visibility: hidden;">&nbsp;</span><span title="Click To Open Color Picker" class="Image" style="background-image: url(&quot;/jPicker/images/picker.gif&quot;);">&nbsp;</span><span class="Container">&nbsp;</span></span></span></div>
+                            </div>
+                            <div class="clr"></div>
+                            <div class="col col1">
+                            	<div class="label">Choose a logo background color:</div>
+                                <div class="picker"><span class="Expandable"></span><span class="jPicker"><span class="Icon"><span class="Color" style="background-color: rgb(127, 255, 0);">&nbsp;</span><span class="Alpha" style="background-image: url(&quot;/jPicker/images/bar-opacity.png&quot;); visibility: hidden;">&nbsp;</span><span title="Click To Open Color Picker" class="Image" style="background-image: url(&quot;/jPicker/images/picker.gif&quot;);">&nbsp;</span><span class="Container">&nbsp;</span></span></span></div>
+                            </div>
+                            <div class="col col2">
+                            	<div class="label">Choose a Menu foregound color:</div>
+                                <div class="picker"><span class="Expandable"></span><span class="jPicker"><span class="Icon"><span class="Color" style="background-color: rgb(0, 255, 255);">&nbsp;</span><span class="Alpha" style="background-image: url(&quot;/jPicker/images/bar-opacity.png&quot;); visibility: hidden;">&nbsp;</span><span title="Click To Open Color Picker" class="Image" style="background-image: url(&quot;/jPicker/images/picker.gif&quot;);">&nbsp;</span><span class="Container">&nbsp;</span></span></span></div>
+                            </div>
+                            <div class="clr"></div>
+                            <div class="col col1">
+                            	<div class="label">Choose a Menu  color:</div>
+                                <div class="picker"><span class="Expandable"></span><span class="jPicker"><span class="Icon"><span class="Color" style="background-color: rgb(255, 0, 0);">&nbsp;</span><span class="Alpha" style="background-image: url(&quot;/jPicker/images/bar-opacity.png&quot;); visibility: hidden;">&nbsp;</span><span title="Click To Open Color Picker" class="Image" style="background-image: url(&quot;/jPicker/images/picker.gif&quot;);">&nbsp;</span><span class="Container">&nbsp;</span></span></span></div>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>               
+    <div class="form_btns">
+    	<input type="button" class="preview_btn" value="preview"> 
+        <input type="button" class="post_btn" value="post as prefered job">
+	</div>
+    
+</form>
+                    
+
+                </div>
+            </div>
+
+
+            <div class="content_right">
+            	<div class="block stats">
+                	<h2 class="title">Profile Stats</h2>
+                    <ul>
+                    	<li><a href="#"><span class="number number_green">8</span> Jobs Applied</a></li>
+                        <li><a href="#"><span class="number">8</span> Jobs Saved</a></li>
+                        <li><a href="#"><span class="number">12</span> Notifications</a></li>
+                        <li><a href="#"><span class="number">45</span> Profile Views</a></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <div class="block recommended font12">
+                	<h2 class="title">My Jobs</h2>
+                    <ul>
+                    	<li>
+                        	<div class="img"><img alt="" src="<?=IMAGES_URL?>company_logo1.jpg"></div>
+                            <div class="info">
+                            	<h3>Program Manager</h3>
+                                <p><strong>Posted by</strong> Media Group for Qatar</p>
+                                <p><a href="#" class="blue1">View &amp; Apply</a> - 15 June 2013</p>
+                            </div>
+                        </li>
+                        <!--<li>
+                        	<div class="img"><img alt="" src="<?=IMAGES_URL?>company_logo1.jpg"></div>
+                            <div class="info">
+                            	<h3>Program Manager</h3>
+                                <p><strong>Posted by</strong> Media Group for Qatar</p>
+                                <p><a href="#" class="blue1">View &amp; Apply</a> - 15 June 2013</p>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="img"><img alt="" src="<?=IMAGES_URL?>company_logo1.jpg"></div>
+                            <div class="info">
+                            	<h3>Program Manager</h3>
+                                <p><strong>Posted by</strong> Media Group for Qatar</p>
+                                <p><a href="#" class="blue1">View &amp; Apply</a> - 15 June 2013</p>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="img"><img alt="" src="<?=IMAGES_URL?>company_logo1.jpg"></div>
+                            <div class="info">
+                            	<h3>Program Manager</h3>
+                                <p><strong>Posted by</strong> Media Group for Qatar</p>
+                                <p><a href="#" class="blue1">View &amp; Apply</a> - 15 June 2013</p>
+                            </div>
+                        </li>
+                        <li>
+                        	<div class="img"><img alt="" src="<?=IMAGES_URL?>company_logo1.jpg"></div>
+                            <div class="info">
+                            	<h3>Program Manager</h3>
+                                <p><strong>Posted by</strong> Media Group for Qatar</p>
+                                <p><a href="#" class="blue1">View &amp; Apply</a> - 15 June 2013</p>
+                            </div>
+                        </li>-->
+                        <li class="align-right"><a href="#" class="black">View All →</a></li>
+                    </ul>
+                </div>
+               <div class="block ad align-center"><img alt="" src="<?=IMAGES_URL?>google_ad2.jpg"></div>
+            </div>
+            <div class="blue_footer">
+            	<h2 class="title align-center">Benefits of Featured Jobs</h2>
+                <ul class="list_3">
+                	<li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>Occupancy.png"></div>
+                        <div class="info">
+                        	<h4>Occupancy</h4>
+                            <p>Don’t ever experience downtime again on your rental property</p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>Exposure.png"></div>
+                        <div class="info">
+                        	<h4>Exposure</h4>
+                            <p>Unlike local agents, our service gives you access to 50+ million travelers to Africa .</p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>Service.png"></div>
+                        <div class="info">
+                        	<h4>Service</h4>
+                            <p>Our additional services make it easy for you to be anywhere and 	rent your place</p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>Make-Money.png"></div>
+                        <div class="info">
+                        	<h4>Make Money</h4>
+                            <p>Let us know your nightly rate, and we make it all happen</p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>Security.png"></div>
+                        <div class="info">
+                        	<h4>Security</h4>
+                            <p>We verify both you and your guests.</p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>Save.png"></div>
+                        <div class="info">
+                        	<h4>Save</h4>
+                            <p>- You don’t have to spend on advertising your property as long as you 	are listed with us.</p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>No-Hidden-Costs.png"></div>
+                        <div class="info">
+                        	<h4>No Hidden Costs</h4>
+                            <p>Let us know your nightly rate, and we make it all happen</p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>Control.png"></div>
+                        <div class="info">
+                        	<h4>Control </h4>
+                            <p>Decide at anytime to change availability</p>
+                        </div>
+                    </li>
+                    <li>
+
+                    	<div class="img"><img alt="" src="<?=IMAGES_URL?>No-Worries.png"></div>
+                        <div class="info">
+                        	<h4>No Worries </h4>
+                            <p>We are here for you 24/7</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="clr"></div>
+        </div>	
+ 
+

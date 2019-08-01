@@ -1,0 +1,138 @@
+<?
+global $mySessionFront;
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php	
+	if($this->pagetitle==''){
+		$pgt  = 'Job Portal | Welcome';
+	} else {
+		$pgt = $this->pagetitle;
+	}
+	$cnname = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+	$actname = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+?>
+
+<head>
+	<script>var APPLICATION_URL = '<? echo APPLICATION_URL?>';</script>
+<title><?php echo $pgt;?></title>
+<!--============================================ Java Script & Css ===========================================-->	
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> 
+<link rel="stylesheet" type="text/css" href="<? echo CSS_URL?>main.css"/>
+
+ <script type="text/javascript" language="javascript">
+ 	function msgDiv() {
+   		document.getElementById('divError').style.display = "block";
+	}
+</script>
+
+
+<script language="javascript">var calImagesPath='<?=APPLICATION_URL?>'</script>
+
+
+<link rel="stylesheet" href="<?=CSS_URL?>dhtmlgoodies_calendar.css?random=20051112" media="screen">
+<script type="text/javascript" src="<?=JS_URL?>dhtmlgoodies_calendaren.js?random=20060118"></script>
+<!--============================================ Java Script & Css ===========================================-->
+<script src="<?=JS_URL?>jquery-1.5.js" type="text/javascript"></script>
+<!--<script src="<?=CK_Edit?>ckeditor.js" type="text/javascript"></script>
+<script src="<?=CK_Edit?>adapters/jquery.js" type="text/javascript"></script>-->
+
+<script src="<?=CK_Edit?>ckeditor.js" type="text/javascript"></script>
+<!--============================================ ADMIN Java Script & Css ===========================================-->
+
+<!--============================================ Java Script & Css ===========================================-->
+<script language="javascript">
+function checknumber(e)
+{
+	evt=e || window.event;
+	var keypressed=evt.which || evt.keyCode;
+	//alert(keypressed);
+	if(keypressed!="48" &&  keypressed!="49" && keypressed!="50" && keypressed!="51" && keypressed!="52" 
+		&& keypressed!="53" && keypressed!="54" && keypressed!="55" && keypressed!="8" && keypressed!="56" 
+		&& keypressed!="57" && keypressed!="45" && keypressed!="46" && keypressed!="37" && keypressed!="39" 
+		&& keypressed!="9")
+	{
+		return false;
+	}
+}
+function checknumbercomma(e)
+{
+	evt=e || window.event;
+	var keypressed=evt.which || evt.keyCode;
+	//alert(keypressed);
+	if( keypressed!="44" && keypressed!="48" &&  keypressed!="49" && keypressed!="50" && keypressed!="51" && keypressed!="52" 
+		&& keypressed!="53" && keypressed!="54" && keypressed!="55" && keypressed!="8" && keypressed!="56" 
+		&& keypressed!="57" && keypressed!="46" && keypressed!="37" && keypressed!="39" 
+		&& keypressed!="9")
+	{
+		return false;
+	}
+}
+
+</script>
+
+
+<script>
+	   //getajax('url','','pro_edit');
+function getajax(urlval,elm_id)
+{	
+	//params = param.replace("?","");
+	document.getElementById(elm_id).innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+		$.ajax({ url: urlval,
+		type: "POST",
+		data: urlval,
+		success: function(data){			
+			$("#"+elm_id).html(data);			
+			}
+		});
+		
+	/* document.getElementById(elm_id).innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0' >";
+	jQuery.ajax({ url: urlval,
+				type: "GET",
+				data : urlval,
+				success: function(data){			
+					jQuery("#"+elm_id).html(data);
+				}
+				
+			  });*/
+		
+}
+
+function Send_Ajax(urlval,elm_id,popupbox)
+		{
+			
+	document.getElementById(elm_id).innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+		$.ajax({ url: urlval,
+		type: "POST",
+		data: urlval,
+		success: function(data){			
+			$("#"+elm_id).html(data);			
+			}
+		});
+			
+		}
+</script>
+
+<!--============================================ Java Script & Css ===========================================-->
+</head>
+<body class="page">
+<!--============================================ Start Header ===========================================-->
+<header>
+  <?php include "header.phtml"; ?>
+</header>
+<!--============================================ End Header ===========================================-->
+
+<!--============================================ Start Container ===========================================-->        
+
+<?php echo $this->layout()->content; ?>  
+<!--============================================ End Container ===========================================-->
+            
+<!--============================================ Start Footer ===========================================-->
+<footer>
+<?php include "footer.phtml"; ?>        	
+</footer>
+<!--============================================ End Footer ===========================================-->
+    </body>
+</html>

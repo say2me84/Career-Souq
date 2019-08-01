@@ -1,0 +1,136 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$res=$this->Personal_Data;
+?>
+
+
+<script language = "Javascript">
+function personaledit(){
+	var user_id=$("#user_id").val();
+	//alert(user_id);
+	
+	var user_id =$("#user_id").val();
+	//alert (user_id);
+	var user_dob=$("#user_dob").val();
+	//alert (user_dob);
+	var user_marital_status =$("#user_marital_status").val();
+	//alert (user_marital_status);
+	var user_email=$("#user_email").val();
+	//alert (user_email);
+	var user_phone=$("#user_phone").val();
+	//alert (user_phone);
+	var user_gender=$("#user_gender").val();
+	//alert (user_gender);
+	var nation_title=$("#nation_title").val();
+	//alert (nation_title);
+	var career_level_title=$("#career_level_title").val();
+	//alert (career_level_title);
+	
+	document.getElementById('personal').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'personaledit'),'default',false);?>",
+	type: "POST",
+	data: ({user_id:user_id, user_dob:user_dob, user_marital_status:user_marital_status, user_email:user_email, user_phone:user_phone, user_gender:user_gender,nation_title:nation_title, career_level_title:career_level_title}),
+		success: function(data){			
+		$("#personal").html(data);			
+		}
+	});
+}
+
+$(function() {
+	$( "#user_dob" ).datepicker({
+	changeMonth: true,
+	changeYear: true,
+	dateFormat: 'yy-mm-dd'
+	});
+});
+//CKEDITOR.replace('editor1');
+</script>
+                        
+<div class="block1_content">
+<ul class="view_list ftrd_form">
+    <li>
+        <div class="label">Date of Birth</div>
+
+    <div class="info">
+        <input type="hidden" name="user_id" id="user_id" class="inputbox" value="<?php echo $res['user_id']?>"/>
+        <input type="text" name="user_dob" id="user_dob" class="inputbox" value="<?php echo $res['user_dob']?>" readonly="readonly"/>
+    </div>
+    </li>
+    
+    <li>
+        <div class="label">Marital Status</div>
+        <div class="info">
+            <select name="user_marital_status" id="user_marital_status" class="inputbox">
+                <option value="Unmarried">Unmarried</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+            </select>
+        </div>
+    </li>
+    <li>
+        <div class="label">Email Address</div>
+        <div class="info">
+        	<input type="text" name="user_email" id="user_email" class="inputbox" value="<?php echo $res['user_email']?>"/>
+        </div>
+    </li>
+    <li>
+        <div class="label">Phone Number</div>
+        <div class="info">
+        	<input type="text" name="user_phone" id="user_phone" class="inputbox" value="<?php echo $res['user_phone']?>"/>
+        </div>
+    </li>
+    <li>
+        <div class="label">Gender</div>
+        <div class="info">
+        	<input type="text" name="user_gender" id="user_gender" class="inputbox" value="<?php echo $res['user_gender']?>"/>
+        </div>
+    </li>
+    <li>
+        <div class="label">Nationality</div>
+        <div class="info">
+        	<select name="nation_title" id="nation_title" class="inputbox">
+				<option value="">Select Nationality</option>
+				<? 
+					$Nationality_Qry = "select * from tbl_nationalities";
+                	$Nationality_Data=$db->runQuery("$Nationality_Qry");
+					//prd($Nationality_Data);
+					foreach($Nationality_Data as $Nationality_List)
+                    {	
+                ?>
+				<option value="<?=$Nationality_List['id']?>" <? if($Nationality_List['id']== $res['user_nationality']){ echo "selected"; }?>><?=$Nationality_List['nation_title']?></option>
+		<? }?>
+		</select>
+        </div>
+    </li>
+    <li>
+        <div class="label">Career Level</div>
+        <div class="info">
+<select name="career_level_title" id="career_level_title" class="inputbox">
+    <option value="">Select Career Levels</option>
+    <? 
+        $Career_Level_Qry = "select * from tbl_career_levels";
+        $Career_Level_Data=$db->runQuery("$Career_Level_Qry");
+        //prd($Career_Level_Data);
+        foreach($Career_Level_Data as $Career_Level)
+        {	
+    ?>
+    <option value="<?=$Career_Level['career_level_id']?>" <? if($Career_Level['career_level_id']== $res['user_career_level']){ echo "selected"; }?>><?=$Career_Level['career_level_title']?></option>
+<? }?>
+</select>
+        </div>
+    </li>
+</ul>
+
+<div class="form_btns form_btns1 floatright">
+<input type="button" class="save_job_btn" value="Update" onclick="personaledit(); getajax('<?=BASE_PATH?>dashboard/reloadpersonal','personal');">
+<input type="submit" class="post_job_btn" value="Cancel" onclick="getajax('<?=BASE_PATH?>dashboard/reloadpersonal','personal');">
+</div>                            
+	<div class="clr"></div>
+</div>
+
+
+
+	
+

@@ -1,0 +1,423 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+?>
+<script src="<?=CK_Edit?>ckeditor.js" type="text/javascript"></script>
+<script>
+$(document).ready(function() {
+		//$('textarea#user_skills_n_expertise').addClass('ckeditor');
+        });	
+		
+/*$(function() {
+	$( "#user_dob" ).datepicker({
+	changeMonth: true,
+	changeYear: true,
+	dateFormat: 'yy-mm-dd'
+	});
+});*/
+</script>
+<? $res=$this->Job_Seeker_Data;?>
+<div class="container job_apply">
+        	<div class="content_left">
+            	
+                
+                <div class="profile_head">
+                	<div class="img">
+                    	<?php 
+						if($res['user_image']=='')
+						{
+						?>
+							<img width="167" height="167"  src="<?=IMAGES_URL?>no-avator.png" >
+                        <?php }else{ ?>
+							<img width="167" height="167" src="<?=ADMIN_IMG?>user_pic/<?php echo $res['user_image']?>" alt="">
+						<? }?>
+                    </div>
+                    
+                    <div class="info">
+                    	<h1 class="title captl"><? echo $res['user_fname'].' '.$res['user_lname']?></h1>
+                    <?
+                    	$Credit_Qry="SELECT * FROM tbl_users where user_id ='".$mySessionFront->user['FrontUserId']."'";
+						//prd($Credit_Qry);
+						$Job_Credit_Result=$db->runQuery($Credit_Qry);
+						
+						$User_Exp_Activ= "SELECT * FROM tbl_user_experience WHERE is_current ='1' and user_id = '".$mySessionFront->user['FrontUserId']."'";
+						$User_Exp_User_Exp_Activ_Data = $db->runQuery($User_Exp_Activ);
+					?>   
+<h3><?php echo @$User_Exp_User_Exp_Activ_Data[0]['position']?> at <?php echo @$User_Exp_User_Exp_Activ_Data[0]['company']?></h3>
+                       
+                        <div class="floatright edit_btn1"><!--<a onclick="" href="javascript:void(0)" >Edit</a>-->
+
+<!--<a onclick="getajax('<?=BASE_PATH?>dashboard/edit/','edit_user_data');" href="javascript:void(0)" >Edit</a>-->
+                        	</div>
+                        <p class="font12 exp_edu1"><?php echo $res['user_city']?>, <?php echo $res['country_name']?> <span>|</span> <!--Information Technologies and Services--><?php echo $res['category_title']?></p>
+                        <ul class="exp_edu font12">
+                        	<li><span>Current</span> <?php echo @$User_Exp_User_Exp_Activ_Data[0]['company']?></li>
+                        </ul>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+<form name="myform" id="myform" enctype="multipart/form-data" action="" method="post"> 
+    <div class="profiel_list">
+        <div class="block1">
+            <h2 class="floatleft title">Profile Summery</h2>
+            <!--<div class="floatright"><a href="#" class="edit_btn2">Edit</a></div>-->
+            <div class="clr"></div>
+            <?php //echo $this->myform->user_skills_n_expertise?>
+            <div class="block1_content">
+                <div class="edit_form">
+                <?php echo $this->myform->user_profile_summary?>
+                    
+                </div>
+            </div>
+            <!--<div class="floatright"><a href="#" class="edit_btn3">Save</a></div>-->
+            <div class="clr"></div>
+        </div>
+        
+        <div class="block1">
+            <h2 class="floatleft title">Skills &amp; Expertise</h2>
+            <!--<div class="floatright"><a href="#" class="edit_btn2">Edit</a></div>-->
+            <div class="clr"></div>
+            <?php //echo $this->myform->user_skills_n_expertise?>
+            <div class="block1_content">
+                <div class="edit_form">
+                <?php echo $this->myform->user_skills_n_expertise?>
+                    
+                </div>
+            </div>
+            <!--<div class="floatright"><a href="#" class="edit_btn3">Save</a></div>-->
+            <div class="clr"></div>
+        </div>
+<?php 
+$Total_User_Qry= "Select * FROM tbl_users  WHERE user_id = '".$mySessionFront->user['FrontUserId']."'";
+	//prd($Total_User_Qry); 31839b036f63806cba3f47b93af8ccb5
+$Total_User_Qry_Data = $db->runQuery($Total_User_Qry);
+	if($Total_User_Qry_Data[0]['user_is_new']=='1'){
+?>        
+        <div class="block1 selectForm jqtransformdone">
+        <h2 class="floatleft title">Experience <?php //@$Total_User_Qry_Data[0]['user_is_new'] ?></h2>
+        <div class="clr"></div>
+        
+        <div class="block1_content">
+            <ul class="view_list edit_form edit_form1">
+                <li>
+                    <div class="label">Position</div>
+                    <div class="info">
+                        <?php echo $this->myform->Position?>
+                        <!--<input type="text" name="user_dob" id="user_dob" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Company Name</div>
+                    <div class="info">
+                          <?php echo $this->myform->Company?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Location</div>
+                    <div class="info">
+                          <?php echo $this->myform->Location?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Employment Period From</div>
+                    <div class="info">
+                          <?php echo $this->myform->employment_period_from?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Employment Period To</div>
+                    <div class="info">
+                          <?php echo $this->myform->employment_period_to?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Year</div>
+                    <div class="info">
+                          <?php echo $this->myform->Year?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Month</div>
+                    <div class="info">
+                          <?php echo $this->myform->Month?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Responsibility</div>
+                    <div class="info">
+                          <?php echo $this->myform->Responsibility?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Salary</div>
+                    <div class="info">
+                          <?php echo $this->myform->Salary?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+               </ul>
+            <div class="clr"></div>
+        </div>
+        <div class="clr"></div>
+	</div> 
+   		<div class="block1 selectForm jqtransformdone">
+        <h2 class="floatleft title">Education <?php //@$Total_User_Qry_Data[0]['user_is_new'] ?></h2>
+        <div class="clr"></div>
+        
+        <div class="block1_content">
+            <ul class="view_list edit_form edit_form1">
+                <li>
+                    <div class="label">Degree Name</div>
+                    <div class="info">
+                        <?php echo $this->myform->Education?>
+                        <!--<input type="text" name="user_dob" id="user_dob" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">University Name</div>
+                    <div class="info">
+                          <?php echo $this->myform->UniversityName?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Starting Year</div>
+                    <div class="info">
+                          <?php echo $this->myform->StartingYear?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+                <li>
+                    <div class="label">Finishing Year</div>
+                    <div class="info">
+                          <?php echo $this->myform->FinishingYear?>
+                        <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                    </div>
+                </li>
+               </ul>
+            <div class="clr"></div>
+        </div>
+        <div class="clr"></div>
+	</div>
+<?php }else{ ?>
+	<div></div>
+<?php } ?>     
+        <div class="block1 selectForm jqtransformdone">
+            <h2 class="floatleft title">Personal Information</h2>
+           <!-- <div class="floatright"><a href="#" class="edit_btn2">Edit</a></div>-->
+            <div class="clr"></div>
+            
+            <div class="block1_content">
+                <ul class="view_list edit_form edit_form1">
+                    <li>
+                        <div class="label">First Name</div>
+                        <div class="info">
+                            <?php echo $this->myform->user_fname?>
+                            <!--<input type="text" name="user_dob" id="user_dob" class="inputbox" readonly="readonly"/>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Last Name</div>
+                        <div class="info">
+                              <?php echo $this->myform->user_lname?>
+                            <!--<input type="text" name="lastname" id="lastname" class="inputbox" readonly="readonly"/>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Email Address</div>
+                        <div class="info">
+                            <?php echo $this->myform->user_email?>
+                            <!--<input type="text" name="user_email" id="user_email" class="inputbox" >-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Phone Number</div>
+                        <div class="info">
+                            <?php echo $this->myform->user_phone?>
+                            <!--<input type="text" name="user_phone" id="user_phone" class="inputbox" >-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Gender</div>
+                        <div class="info">
+                           <?php echo $this->myform->user_gender?>
+                            <!--<select name="Gender" id="Gender" class="inputbox">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Nationality</div>
+                        <div class="info">
+                                <?php echo $this->myform->Nationality_id?>
+                            <!--<select name="nation_title" id="nation_title" class="inputbox">
+                                <option value="">Select Nationality</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Indian">Indian</option>
+                        </select>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Country</div>
+                        <div class="info">
+                        <?php echo $this->myform->Country_id?>
+                            <!--<select name="career_level_title" id="career_level_title" class="inputbox">
+                                <option value="">Select Career Levels</option>
+                                <option value="Career_Levels">Career Levels</option>
+                                <option value="Career_Levels1">Career Levels1</option>
+                            </select>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">City</div>
+                        <div class="info">
+                        <?php echo $this->myform->user_city?>
+                            <!--<select name="career_level_title" id="career_level_title" class="inputbox">
+                                <option value="">Select Career Levels</option>
+                                <option value="Career_Levels">Career Levels</option>
+                                <option value="Career_Levels1">Career Levels1</option>
+                            </select>-->
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="label">Date of Birth</div>
+                        <div class="info">
+                        <?php  echo $this->myform->user_dob ?>
+                            <!--<input type="text" placeholder="20 April 1985" class="inputbox" value="">-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Marital Status</div>
+                        <div class="info">
+                            <?php  echo $this->myform->user_marital_status?>
+                            <!--<input type="text" placeholder="20 April 1985" class="inputbox" value="">-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">Career Level</div>
+                        <div class="info">
+                            <?php  echo $this->myform->Career_Level?>
+                            <!--<input type="text" placeholder="Not Mentioned" class="inputbox" value="">-->
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="label">Select Industry</div>
+                        <div class="info">
+                            <?php  echo $this->myform->UserIndustry?>
+                            <!--<input type="text" placeholder="Not Mentioned" class="inputbox" value="">-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">User Image</div>
+                        <div class="info">
+                            <?php  echo $this->myform->user_image?>
+                            
+<?php //$Company_Data=$this->Company_Data;
+$result=$db->runQuery("SELECT * FROM tbl_users WHERE user_id='".$mySessionFront->user['FrontUserId']."'");
+
+?>
+                        
+<p><!--Here...-->
+
+<?php 
+if($result[0]['user_image']=='')
+{
+?>
+<img width="90" height="90"  src="<?=IMAGES_URL?>no-avator.png" >
+<?php }else{ ?>
+<img width="90" height="90" src="<?=ADMIN_USR_IMG?><? echo $result[0]['user_image']?>" />
+<? }?>
+<input name="OldImagePath" type="hidden" id="OldImagePath" value="<? echo $result[0]['user_image']?>">
+<? //echo ADMIN_USR_IMG ?>										
+                            <!--<input type="text" placeholder="Not Mentioned" class="inputbox" value="">-->
+                        </div>
+                    </li>
+                   
+                </ul>
+                <div class="clr"></div>
+            </div>
+            
+            <div class="floatright">
+            <!--<a href="#" class="edit_btn3">Save</a>-->
+            <input type="submit" class="edit_btn3" value="Save"  />
+            </div>
+            <div class="clr"></div>
+        </div>
+        
+    </div>
+</form>
+            </div>
+            <div class="content_right">
+            	<div class="block stats">
+                	<h2 class="title">Profile Stats</h2>
+                    	<?php 	
+							$MyApply_Job=$this->Apply_Job;
+							$MyTotalSave=$this->SaveJobs; 
+							$MyTotalNoti=$this->Job_Noti;
+						?>
+                    <ul>
+                    	<li><a href="<?=APPLICATION_URL?>user/jobsapplied"><span class="number number_green"><?php echo $MyApply_Job['TotalApply']?></span>Apply Jobs</a></li>
+                         <li><a href="<?=APPLICATION_URL?>user/jobsaved"><span class="number"><?php echo $MyTotalSave['TotalSave']?></span> Jobs Saved</a></li>
+                        <li><a href="<?=APPLICATION_URL?>user/notification"><span class="number"><?php echo $MyTotalNoti['TotalNoti']?></span> Notifications</a></li>
+                        <li><a href="<?=APPLICATION_URL?>user/alljobs"><span class="number">45</span> Profile Views</a></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <div class="block recommended font12">
+                	<h2 class="title">Recommended Jobs</h2>
+                    <ul>
+						<?php 
+                            $i=1;
+                            foreach($this->Rec_Job as $MyRec_Job) {
+                        ?>
+                    	<li>
+                        	<div class="img">
+                            	<?php 
+								if($MyRec_Job['user_image']=='')
+								{
+								?>
+									 <img width="100" height="70"  src="<?=IMAGES_URL?>no-avator.png" >
+									
+								<?php }else{ ?>
+									 <img width="100" height="70" src="<?=ADMIN_IMG?>user_pic/<?php echo $MyRec_Job['user_image']?>" alt="">
+								<? }?>
+                                
+                                
+                                
+                            </div>
+                            <div class="info">
+                            	<h3><?php echo $MyRec_Job['job_title']?></h3>
+                                <p><strong>Posted by</strong> <?php echo $MyRec_Job['user_company']?> for <?php echo $MyRec_Job['job_city']?></p>
+                                <p><a href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$MyRec_Job['id']?>" class="blue1">View &amp; Apply</a> - <?php echo date("d-m-Y", strtotime($MyRec_Job['job_posted_on']))?></p>
+                            </div>
+                        </li>
+                        <?php } ?>
+                        <!--<li class="align-right"><a href="#" class="black">View All →</a></li>-->
+                    </ul>
+                </div>
+                <?php 
+					$i=1;
+					foreach($this->Add_Banner_Data as $Add_Banner_List) {
+				?>
+                <div class="block ad align-center">
+                <!--<img alt="" src="images/google_ad1.jpg">	banner_window_open	banner_link	-->
+                <!--<a target="_blank" href="http://google.com">-->
+                <a target="<?php echo $Add_Banner_List['banner_window_open']?>" href="<?php echo $Add_Banner_List['banner_link']?>">
+	                <img width="300" height="268" src="<?=ADMIN_IMG?>banners/<?php echo $Add_Banner_List['banner_image']?>" alt="">
+                </a>    
+                </div>
+                <!--<div class="block ad align-center"><img alt="" src="images/google_ad2.jpg"></div>-->
+                <?php }?>
+            </div>
+            <div class="clr"></div>
+        </div>

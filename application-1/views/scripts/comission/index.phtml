@@ -1,0 +1,343 @@
+<?
+global $mySession;
+?>
+<script>
+function changeserachbymode(vl) {
+	if(vl==1) {
+		document.getElementById("smodediv1").style.display="block";
+		document.getElementById("smodediv2").style.display="none";
+	} else if(vl==2) {
+		document.getElementById("smodediv1").style.display="none";
+		document.getElementById("smodediv2").style.display="block";
+	}
+}
+function changedtmode(vl) {
+	if(vl==2) {
+		document.getElementById("dtrange").style.display="block";
+	} else {
+		document.getElementById("dtrange").style.display="none";
+	}
+}
+function getBranchEmployee(branchId,vl)
+{
+//alert("bbb"+vl);
+
+	document.getElementById('AdvisorIdDiv').innerHTML="<img src='<?=APPLICATION_URL_ADMIN?>images/load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'index','action'=>'getempagent'),'default',true);?>",
+	type: "POST",
+	data: ({branchId : branchId, vl : vl,noagax : 1}),
+	success: function(data){			
+	$("#AdvisorIdDiv").html(data);			
+	}});	
+}
+function getEmployeeAgent(empId,vl)
+{
+//alert("eee");
+	document.getElementById('AdvisorIdDiv').innerHTML="<img src='<?=APPLICATION_URL_ADMIN?>images/load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'index','action'=>'getempagent'),'default',true);?>",
+	type: "POST",
+	data: ({empId : empId, vl : vl, noagax : 1}),
+	success: function(data){			
+	$("#AdvisorIdDiv").html(data);			
+	}});	
+}
+
+function getAgentCustomer(agentId,vl)
+{
+//alert("aaa");
+return true;
+	document.getElementById('CustomerIdDiv').innerHTML="<img src='<?=APPLICATION_URL_ADMIN?>images/load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'report','action'=>'getagentcust'),'default',true);?>",
+	type: "POST",
+	data: ({agentId : agentId, vl : vl}),
+	success: function(data){			
+	$("#CustomerIdDiv").html(data);			
+	}});	
+}
+
+
+function prntthis()
+{
+
+	obj_win = window.open('about:blank', 'new_win','toolbars=no,maximize=no,scrollbars=yes,menubar=no,width=950,height=680,directories=no,resizable=0,screenX=0,screenY=0,left=0,top=0'  ) ; 
+ //alert obj_win;
+	obj_win.document.write('<html><title>RBI</title><head>');
+
+	obj_win.document.write('</head><link rel="stylesheet" type="text/css" href="<? echo CSS_URL?>mainprint.css"/>');
+	obj_win.document.write('<body style="background-color:#ffffff"><div style="width:900px; color:#000000; margin:5px; border:0px solid #999999;font-size:12px; font-family:Arial, Helvetica, sans-serif;background-repeat:no-repeat">');
+
+	obj_win.document.write(document.getElementById('printmiddiv').innerHTML);
+
+	obj_win.document.write("</div></body></html>");
+
+	obj_win.document.close();
+
+
+
+	obj_win.focus();
+
+	obj_win.print();
+
+	obj_win.close();
+
+}
+</script>
+<?
+$db = new Db();
+?>
+<div style="">
+<table width="100%" cellpadding="0" cellspacing="0" align="center" >
+<tr>
+<td align="left" valign="top" style="padding:15px"><div style="padding-bottom:5px"><strong>Filter</strong></div>
+<form id="searchform" name="searchform" action="" method="post">
+<table style="padding:0px;margin:0px;" width="100%" align="center" class="frmtable">
+<tr>
+	<td>Search By <label for="smode1"><input type="radio" name="smode" id="smode1" value="1" onclick="changeserachbymode(this.value)" />Select Mode</label>&nbsp;&nbsp;<label for="smode2"><input type="radio" name="smode" id="smode2" value="2" onclick="changeserachbymode(this.value)" />Specific Id</label>&nbsp;&nbsp;</td>	
+</tr>
+<tr>
+	<td><div id="smodediv1"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:0px">
+  <tr>
+    <td width="13%">Branch</td>
+    <td width="46%">
+	<?
+	if($mySession->user['branchonly']['isbranch'])
+	{
+		$wherea = " and ru.userid = '".$mySession->user['branchonly']['branchid']."' ";
+	}
+	$branchData=$db->runQuery("select ru.userid, ru.fname, rb.profileId  from rbi_user as ru left join rbi_branch as rb on(ru.userid=rb.userId) where usrRole='B' ".@$wherea." order by fname"); ?>		
+			<select name="searchfor_sb" id="searchfor_sb" onchange="getBranchEmployee(this.value,0)"  style="width:300px">
+				<option value="">Select Branch</option>
+				<?
+				if($branchData!="" and count($branchData)>0)
+				{
+					$i=1;
+					foreach($branchData as $key=>$branchValue)
+					{ 
+					$sel='';
+					if(@$this->searchfor_sb==$branchValue['userid']) { $sel='selected="selected"'; }
+					?>
+						<option value="<?=$branchValue['userid']?>" <?=$sel?> title="<?=$branchValue['fname'].'('.$branchValue['profileId'].')'?>"><?=$branchValue['fname'].'('.$branchValue['profileId'].')'?></option>
+					<?
+					$i++;
+					}
+				}
+				?>
+			
+		</select>
+	</td>
+    <td width="10%"><?php /*?>Employee<?php */?></td>
+    <td width="31%" id="EmployeeIdDiv"><?php /*?><select name="searchfor_se" id="searchfor_se">
+			<option value=""></option>
+		</select><?php */?>
+	</td>
+  </tr>
+  <tr>
+    <td>Agent</td>
+    <td id="AdvisorIdDiv"><select name="searchfor_sa" id="searchfor_sa" >
+			<option value=""></option>
+		</select>
+	</td>
+    <td><?php /*?>Customer<?php */?></td>
+    <td id="CustomerIdDiv"><?php /*?><select name="searchfor_sc" id="searchfor_sc">
+			<option value=""></option>
+		</select><?php */?>
+	</td>
+  </tr>
+</table>
+</div>
+	<div id="smodediv2">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="13%">Account No.</td>
+    <td width="87%"><input type="text" name="searchfor_ac" id="searchfor_ac" value="<?=@$_POST['searchfor_ac']?>" /></td>    
+  </tr>
+</table></div>
+	</td>	
+</tr>
+<tr>
+	<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="27%"><label for="dtmode1"><input type="radio" name="dtmode" id="dtmode1" value="1" onclick="changedtmode(this.value)" />
+    Last Month </label></td>
+    <td width="73%"><label for="dtmode2"><input type="radio" name="dtmode" id="dtmode2" value="2" onclick="changedtmode(this.value)" />
+        Selected Month</label></td>   
+  </tr>
+  
+  <tr>
+    <td colspan="2"><div id="dtrange" style="display:none; float:left">
+	<?
+	if(isset($_REQUEST['sel_month']) && $_REQUEST['sel_month']!='')
+	{
+		$selmonth = $_REQUEST['sel_month'];
+	} else {
+		$selmonth = date("m");
+	}
+	?>
+	<select name="sel_month" id="sel_month">
+		<option value="1" <? if($selmonth==1) { ?> selected="selected"<? } ?>>January </option>
+		<option value="2" <? if($selmonth==2) { ?> selected="selected"<? } ?>>February </option>
+		<option value="3" <? if($selmonth==3) { ?> selected="selected"<? } ?>>March </option>
+		<option value="4" <? if($selmonth==4) { ?> selected="selected"<? } ?>>April </option>
+		<option value="5" <? if($selmonth==5) { ?> selected="selected"<? } ?>>May </option>
+		<option value="6" <? if($selmonth==6) { ?> selected="selected"<? } ?>>June </option>
+		<option value="7" <? if($selmonth==7) { ?> selected="selected"<? } ?>>July </option>
+		<option value="8" <? if($selmonth==8) { ?> selected="selected"<? } ?>>August </option>
+		<option value="9" <? if($selmonth==9) { ?> selected="selected"<? } ?>>September </option>
+		<option value="10" <? if($selmonth==10) { ?> selected="selected"<? } ?>>October </option>
+		<option value="11" <? if($selmonth==11) { ?> selected="selected"<? } ?>>November </option>
+		<option value="12" <? if($selmonth==12) { ?> selected="selected"<? } ?>>December </option>
+	</select>
+	<?
+	if(isset($_REQUEST['sel_year']) && $_REQUEST['sel_year']!='')
+	{
+		$selyear = $_REQUEST['sel_year'];
+	} else {
+		$selyear = date("Y");
+	}
+	?>&nbsp;&nbsp;&nbsp;
+	<select name="sel_year" id="sel_year" >
+		<?
+		$cyear = date('Y');
+			for($y = 2010; $y <= $cyear; $y++) {
+				$sel='';
+				if($selyear==$y) { $sel='selected="selected"'; }
+				echo '<option value="'.$y.'" '.$sel.'>'.$y.'</option>';
+			}
+		?>
+		
+	</select></div>
+	<div style="float:right; padding-right:85px"><input type="submit" name="searchbutton" id="searchbutton" value="Filter" />&nbsp;&nbsp;<input type="button" name="prtbutton" id="prtbutton" value="Print" onclick="prntthis()" /></div></td> 
+  </tr>
+</table>
+</td>	
+</tr>
+</table>
+</form>
+</td>
+</tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0" align="center">
+<tr>
+<td align="left" valign="top" style="padding:5px 15px">
+<? if(@$this->nextmonth==1) { ?>
+<? } else { ?>
+<div id="printmiddiv">
+<div>Agent Commission Report of <?=$this->monthyear?></div>
+<? 
+if($this->alreadyfile==false) 
+{ 
+
+	if(isset($this->commission)) {
+  $tbcontent = '<table width="100%" border="0" cellspacing="0" cellpadding="0" class="adminlist">
+  <tr>
+  	<th height="25"><strong>S.NO.</strong></th>
+  	<th><strong>Agent</strong></th>
+	<th><strong>Branch</strong></th>
+    <th><strong>New Amount</strong></th>
+	<th><strong>Inst. Amount</strong></th>
+    <th><strong>Commission</strong></th>
+	<th><strong>TDS 10%</strong></th>
+	<th><strong>T Commission</strong></th>
+  </tr>';
+  
+  $x=0;
+  $total = 0;
+  $useriid = 0;
+  foreach($this->commission as $comm_result) {
+  	$com_amount = $comm_result['comission'];
+	
+  	$tds =((10*$com_amount)/100);
+  	 $tbcontent .= '<tr>
+		<td>'.($x+1).'</td>
+		<td>'.$comm_result['agname'].'<br>'.$comm_result['profileId'].'&nbsp;</td>
+		<td>'.getusername($comm_result['branchId']).'<br>'.getprofileid($comm_result['branchId']).'&nbsp;</td>
+		<td>'.$comm_result['amount'].'</td>
+		<td>'.$comm_result['inst_amount'].'</td>
+		<td>'.$comm_result['comission'].'/-</td>
+		<td>'.$tds.'/-</td>
+		<td>'.($com_amount-$tds).'/-</td>
+	  </tr>';
+	  $x++;
+  }   
+$tbcontent .='</table> ';
+echo $tbcontent;
+
+ $File = "Reports/Commission".$this->monthyear.".txt"; 
+ $Handle = fopen($File, 'w');
+ $Data = $tbcontent; 
+ fwrite($Handle, $Data);
+ 
+?>
+
+
+<?
+	} else {
+	
+	} 
+} else {
+	
+	$File = $this->alreadyfile; 
+	$Handle = fopen($File, 'r');
+	$tbcontent =  fread($Handle,filesize($File));
+	fclose($Handle);
+	echo $tbcontent;
+} ?>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div>
+<? } ?>
+</td>
+</tr>
+</table>
+</div>
+<?
+if(@$_REQUEST['smode']) { ?>
+	<script>
+		document.getElementById("smode<?=$_REQUEST['smode']?>").checked=true;
+		changeserachbymode(<?=$_REQUEST['smode']?>);
+		<?
+		    if(@$_POST['searchfor_sb']!='') { ?>
+				
+				getBranchEmployee('<?=$_POST['searchfor_sb']?>','<?=@$_POST['searchfor_se']?>');
+			<?
+			} 
+			if(@$_POST['searchfor_se']!='') { ?>
+				
+				getEmployeeAgent('<?=$_POST['searchfor_se']?>','<?=@$_POST['searchfor_sa']?>');
+			<?
+			} 
+			if(@$_POST['searchfor_sa']!='') { ?>
+				getAgentCustomer('<?=$_POST['searchfor_sa']?>','<?=@$_POST['searchfor_sc']?>');
+			<?
+			} 
+			
+		?>
+	</script>
+<?	
+} else { ?>
+	<script>
+		document.getElementById("smode1").checked=true;
+		changeserachbymode(1);
+	</script>
+<?
+}
+?>
+<?
+if(@$_REQUEST['dtmode']) { ?>
+	<script>
+		document.getElementById("dtmode<?=$_REQUEST['dtmode']?>").checked=true;
+		changedtmode(<?=$_REQUEST['dtmode']?>);
+	</script>
+<?	
+} else { ?>
+	<script>
+		document.getElementById("dtmode1").checked=true;
+		changedtmode(1);
+	</script>
+<?
+}
+?>

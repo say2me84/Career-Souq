@@ -1,0 +1,7 @@
+
+<?php if($mySessionFront->user['userRole']=='Job Seeker') { ?>
+	<li id=""><a href="<?=APPLICATION_URL?>user/home">Home</a></li>
+<?php }else{ ?>
+	<li id=""><a href="<?=APPLICATION_URL?>company/home">Home</a></li>
+<?php } ?>
+

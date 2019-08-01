@@ -1,0 +1,235 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="adminlist">
+  <tr>
+  	<th height="25"><strong>S.NO.</strong></th>
+  	<th><strong>Agent</strong></th>
+	<th><strong>Branch</strong></th>
+	<th><strong>Scheme</strong></th>
+	<th><strong>Month</strong></th>
+	<th><strong>New Amount</strong></th>
+	<th><strong>Inst. Amount</strong></th>
+    <th><strong>Commission</strong></th>
+	
+  </tr><tr>
+		<td>1</td>
+		<td>AMARDEEP <br>ADB0000003&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>24&nbsp;</td>
+		<td>864.00</td>
+		<td>0.00</td>
+		<td>51.84/-</td>
+		
+	  </tr><tr>			
+		<td style="background-color:#FFFF99"><strong>&nbsp;</strong></td>
+		<td style="background-color:#FFFF99"><strong>AMARDEEP <br>ADB0000003</strong></td>
+		<td style="background-color:#FFFF99"><strong>Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>51.84</strong></td>
+		<td style="background-color:#FFFF99"><strong>TDS(10%)</strong></td>
+		<td style="background-color:#FFFF99"><strong>5.184/-</strong></td>
+		<td style="background-color:#FFFF99"><strong>Grand Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>46.656/-</strong></td>
+	</tr><tr>
+		<td>2</td>
+		<td>SANTOSH KANWAR <br>ADB0000004&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>12&nbsp;</td>
+		<td>600.00</td>
+		<td>0.00</td>
+		<td>30.00/-</td>
+		
+	  </tr><tr>
+		<td>3</td>
+		<td>SANTOSH KANWAR <br>ADB0000004&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>24&nbsp;</td>
+		<td>5300.00</td>
+		<td>0.00</td>
+		<td>318.00/-</td>
+		
+	  </tr><tr>
+		<td>4</td>
+		<td>SANTOSH KANWAR <br>ADB0000004&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>36&nbsp;</td>
+		<td>4500.00</td>
+		<td>0.00</td>
+		<td>450.00/-</td>
+		
+	  </tr><tr>			
+		<td style="background-color:#FFFF99"><strong>&nbsp;</strong></td>
+		<td style="background-color:#FFFF99"><strong>SANTOSH KANWAR <br>ADB0000004</strong></td>
+		<td style="background-color:#FFFF99"><strong>Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>798</strong></td>
+		<td style="background-color:#FFFF99"><strong>TDS(10%)</strong></td>
+		<td style="background-color:#FFFF99"><strong>79.8/-</strong></td>
+		<td style="background-color:#FFFF99"><strong>Grand Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>718.2/-</strong></td>
+	</tr><tr>
+		<td>5</td>
+		<td>BAJRANG SINGH <br>ADB0000005&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>12&nbsp;</td>
+		<td>7300.00</td>
+		<td>0.00</td>
+		<td>365.00/-</td>
+		
+	  </tr><tr>
+		<td>6</td>
+		<td>BAJRANG SINGH <br>ADB0000005&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>24&nbsp;</td>
+		<td>1200.00</td>
+		<td>0.00</td>
+		<td>72.00/-</td>
+		
+	  </tr><tr>
+		<td>7</td>
+		<td>BAJRANG SINGH <br>ADB0000005&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>36&nbsp;</td>
+		<td>2464.00</td>
+		<td>0.00</td>
+		<td>246.40/-</td>
+		
+	  </tr><tr>
+		<td>8</td>
+		<td>BAJRANG SINGH <br>ADB0000005&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>66&nbsp;</td>
+		<td>1500.00</td>
+		<td>0.00</td>
+		<td>330.00/-</td>
+		
+	  </tr><tr>			
+		<td style="background-color:#FFFF99"><strong>&nbsp;</strong></td>
+		<td style="background-color:#FFFF99"><strong>BAJRANG SINGH <br>ADB0000005</strong></td>
+		<td style="background-color:#FFFF99"><strong>Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>1013.4</strong></td>
+		<td style="background-color:#FFFF99"><strong>TDS(10%)</strong></td>
+		<td style="background-color:#FFFF99"><strong>101.34/-</strong></td>
+		<td style="background-color:#FFFF99"><strong>Grand Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>912.06/-</strong></td>
+	</tr><tr>
+		<td>9</td>
+		<td>TEJPAL SINGH CHOUHAN <br>ADB0000006&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>66&nbsp;</td>
+		<td>900.00</td>
+		<td>0.00</td>
+		<td>198.00/-</td>
+		
+	  </tr><tr>			
+		<td style="background-color:#FFFF99"><strong>&nbsp;</strong></td>
+		<td style="background-color:#FFFF99"><strong>TEJPAL SINGH CHOUHAN <br>ADB0000006</strong></td>
+		<td style="background-color:#FFFF99"><strong>Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>198</strong></td>
+		<td style="background-color:#FFFF99"><strong>TDS(10%)</strong></td>
+		<td style="background-color:#FFFF99"><strong>19.8/-</strong></td>
+		<td style="background-color:#FFFF99"><strong>Grand Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>178.2/-</strong></td>
+	</tr><tr>
+		<td>10</td>
+		<td>AMAR SINGH <br>ADB0000007&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>12&nbsp;</td>
+		<td>900.00</td>
+		<td>0.00</td>
+		<td>45.00/-</td>
+		
+	  </tr><tr>
+		<td>11</td>
+		<td>AMAR SINGH <br>ADB0000007&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>36&nbsp;</td>
+		<td>900.00</td>
+		<td>0.00</td>
+		<td>90.00/-</td>
+		
+	  </tr><tr>
+		<td>12</td>
+		<td>AMAR SINGH <br>ADB0000007&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>48&nbsp;</td>
+		<td>900.00</td>
+		<td>0.00</td>
+		<td>90.00/-</td>
+		
+	  </tr><tr>
+		<td>13</td>
+		<td>AMAR SINGH <br>ADB0000007&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>66&nbsp;</td>
+		<td>1500.00</td>
+		<td>0.00</td>
+		<td>330.00/-</td>
+		
+	  </tr><tr>			
+		<td style="background-color:#FFFF99"><strong>&nbsp;</strong></td>
+		<td style="background-color:#FFFF99"><strong>AMAR SINGH <br>ADB0000007</strong></td>
+		<td style="background-color:#FFFF99"><strong>Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>555</strong></td>
+		<td style="background-color:#FFFF99"><strong>TDS(10%)</strong></td>
+		<td style="background-color:#FFFF99"><strong>55.5/-</strong></td>
+		<td style="background-color:#FFFF99"><strong>Grand Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>499.5/-</strong></td>
+	</tr><tr>
+		<td>14</td>
+		<td>GANGA RAM <br>ADB0000008&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>66&nbsp;</td>
+		<td>700.00</td>
+		<td>0.00</td>
+		<td>154.00/-</td>
+		
+	  </tr><tr>			
+		<td style="background-color:#FFFF99"><strong>&nbsp;</strong></td>
+		<td style="background-color:#FFFF99"><strong>GANGA RAM <br>ADB0000008</strong></td>
+		<td style="background-color:#FFFF99"><strong>Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>154</strong></td>
+		<td style="background-color:#FFFF99"><strong>TDS(10%)</strong></td>
+		<td style="background-color:#FFFF99"><strong>15.4/-</strong></td>
+		<td style="background-color:#FFFF99"><strong>Grand Total</strong></td>
+		<td style="background-color:#FFFF99"><strong>138.6/-</strong></td>
+	</tr><tr>
+		<td>15</td>
+		<td>FATTA RAM <br>ADB0000011&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>12&nbsp;</td>
+		<td>800.00</td>
+		<td>0.00</td>
+		<td>40.00/-</td>
+		
+	  </tr><tr>
+		<td>16</td>
+		<td>FATTA RAM <br>ADB0000011&nbsp;</td>
+		<td>Jodhpur Main <br>ADB&nbsp;</td>
+		<td>Plot area allotment monthly investment plan</td>
+		<td>36&nbsp;</td>
+		<td>300.00</td>
+		<td>0.00</td>
+		<td>30.00/-</td>
+		
+	  </tr><tr>			
+			<td style="background-color:#FFFF99"><strong>&nbsp;</strong></td>
+			<td style="background-color:#FFFF99"><strong>FATTA RAM <br>ADB0000011</strong></td>
+			<td style="background-color:#FFFF99"><strong>Total</strong></td>
+			<td style="background-color:#FFFF99"><strong>70</strong></td>
+			<td style="background-color:#FFFF99"><strong>TDS(10%)</strong></td>
+			<td style="background-color:#FFFF99"><strong>7/-</strong></td>
+			<td style="background-color:#FFFF99"><strong>Grand Total</strong></td>
+			<td style="background-color:#FFFF99"><strong>63/-</strong></td>
+		</tr></table> 

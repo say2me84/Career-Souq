@@ -1,0 +1,263 @@
+<script language="javascript">
+
+function selectAvalue(comboid,valueid)
+
+{	
+
+	if(document.getElementById(comboid))
+
+	{
+
+		var len=document.getElementById(comboid).options.length;
+
+		var combo=document.getElementById(comboid);
+
+		for(i=0;i<len;i++)
+
+		{
+
+		if(combo.options[i].value==valueid)
+
+		{
+
+		combo.options[i].selected=true;
+
+		}
+
+		else{combo.options[i].selected=false;}
+
+		}
+
+	}
+
+}
+
+function getBranchAgent(branchId)
+{
+
+	document.getElementById('EmployeeIdDiv').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'agent','action'=>'getbranchagent'),'default',true);?>",
+	type: "POST",
+	data: ({branchId : branchId}),
+	success: function(data){			
+	$("#EmployeeIdDiv").html(data);			
+	}});
+
+
+}
+
+function getStatecity(stateId)
+
+{
+
+	document.getElementById('CityIdDiv').innerHTML="<img src='<?=APPLICATION_URL_ADMIN?>images/load.gif' border='0'>";
+
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'agent','action'=>'getstatecity'),'default',true);?>",
+
+	type: "POST",
+
+	data: ({stateId : stateId}),
+
+	success: function(data){			
+
+	$("#CityIdDiv").html(data);			
+
+	}});
+
+}
+
+</script>
+
+<div id="big_box" align="center" >
+
+ <form name="myform" id="myform" action="<?php echo $this->url(array('controller'=>'agent', 'action'=>'insert'), 'default', true)?>" method="post">      
+
+ <table width="100%" border="0" cellspacing="5" cellpadding="0" class="frmtable">
+  
+  <tr>
+
+  <td width="21%" align="left" valign="top">Choose Branch:<span class="errormsg">*</span></td>
+
+  <td width="79%" align="left" valign="top"><?php echo $this->Form->branch_Id?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Choose Agent:<span class="errormsg">*</span></td>
+
+  <td align="left" valign="top" id="EmployeeIdDiv"><?php echo $this->Form->agent_Id?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">First Name:<span class="errormsg">*</span></td>
+
+  <td align="left" valign="top"><?php echo $this->Form->first_name?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Last Name:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->last_name?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Father Name:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->father_name?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Husband Name:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->husbandname?></td>
+
+  </tr>
+  <tr>
+
+  <td align="left" valign="top">Date of Registration:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->date_of_reg?>&nbsp;<img src="<?=APPLICATION_URL?>images/Cal.gif" name="cmdbusinessunit" align="absmiddle" id="cmdbusinessunit" onclick="return displayCalendar(document.myform.date_of_reg,'dd-mm-yyyy',this)"/></td>
+
+  </tr>
+  <tr>
+
+  <td align="left" valign="top">Email Address:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->email_address?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Phone Number:<span class="errormsg">*</span></td>
+
+  <td align="left" valign="top"><?php echo $this->Form->phone_number?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Mobile Number:<span class="errormsg">*</span></td>
+
+  <td align="left" valign="top"><?php echo $this->Form->mobile_number?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">State:<span class="errormsg">*</span></td>
+
+  <td align="left" valign="top"><?php echo $this->Form->state_id?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">City:<span class="errormsg">*</span></td>
+
+  <td align="left" valign="top" id="CityIdDiv"><?php echo $this->Form->city_id?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Address:<span class="errormsg">*</span></td>
+
+  <td align="left" valign="top"><?php echo $this->Form->address?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Date of Birth:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->date_of_birth?>&nbsp;<img src="<?=APPLICATION_URL?>images/Cal.gif" name="cmdbusinessunit" align="absmiddle" id="cmdbusinessunit" onclick="return displayCalendar(document.myform.date_of_birth,'dd-mm-yyyy',this)"/></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Date of Apply:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->date_of_apply?>&nbsp;<img src="<?=APPLICATION_URL?>images/Cal.gif" name="cmdbusinessunit" align="absmiddle" id="cmdbusinessunit" onclick="return displayCalendar(document.myform.date_of_apply,'dd-mm-yyyy',this)"/></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Quallification:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->quallification?></td>
+
+  </tr>    
+
+  <tr>
+
+  <td align="left" valign="top">Proffession:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->proffession?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">PAN Card Number:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->pan_card_number?></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Amount Deposited:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->amount_deposit?></td>
+
+  </tr>  
+
+  <tr>
+
+  <td align="left" valign="top">Username:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->username?> <span class="errormsg">Keep Blank for default generated username</span></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Password:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->user_password?> <span class="errormsg">Keep Blank for default password (Phone Number)</span></td>
+
+  </tr>
+
+  <tr>
+
+  <td align="left" valign="top">Confirm Password:</td>
+
+  <td align="left" valign="top"><?php echo $this->Form->user_confirm_password?></td>
+
+  </tr> 
+
+  <tr>
+
+  <td align="left" valign="top" style="font-size:11px;"><span class="errormsg">*</span> Required fields</td>
+
+  <td align="left" valign="top"><input type="submit" name="mySubmit" id="mySubmit" value="Submit" /></td>
+
+  </tr>  
+
+</table>
+
+</form>
+
+</div>

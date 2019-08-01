@@ -1,0 +1,89 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+$user_experience=$this->experience;
+?>
+
+
+<script language = "Javascript">
+function summeryedit(){
+	//alert('Hello...');
+	var job_id=$("#job_id").val();
+	//alert(job_id);
+	
+	var position=$("#position").val();
+	//alert(position);
+	
+	var company=$("#company").val();
+	//alert(company);
+	
+	var location=$("#location").val();
+	//alert(location);
+	
+	var employment_period_from=$("#employment_period_from").val();
+	//alert(employment_period_from);
+	
+	var employment_period_to=$("#employment_period_to").val();
+	//alert(employment_period_to);
+	
+	var responsibility=$("#responsibility").val();
+	//alert(responsibility);
+	
+	document.getElementById('experience').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'dashboard','action'=>'experienceedit'),'default',false);?>",
+	type: "POST",
+	data: ({job_id: job_id,position: position,company:company,location:location,employment_period_from:employment_period_from,employment_period_to:employment_period_to,responsibility:responsibility}),
+		success: function(data){			
+		//$("#experience").html(data);			
+		}
+	});
+
+}
+</script>
+<script type="text/javascript">       
+	//CKEDITOR.replace('responsibility');
+</script>
+
+<div class="ftrd_form selectForm jqtransformdone">
+    <div class="full">
+        <div class="label">Position</div>
+        <div class="field">
+        	<input type="hidden" class="inputbox" value="<?php echo $user_experience['id']?>" id="job_id" name="job_id">
+        	<input type="text" class="inputbox" value="<?php echo $user_experience['position']?>" id="position" name="position">
+        </div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Company Name</div>
+        <div class="field">
+            <input type="text" class="inputbox" value="<?php echo $user_experience['company']?>" id="company" name="company"></div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Location</div>
+        <div class="field">
+            <input type="text" class="inputbox" value="<?php echo $user_experience['location']?>" id="location" name="location"></div>
+    </div>
+    
+    <div class="full">
+        <div class="label">Employment Period From</div>
+        <div class="field field1"><input type="text" class="inputbox" value="<?php echo $user_experience['employment_period_from']?>" id="employment_period_from" name="employment_period_from"></div>
+        <div class="label">Employment Period To</div>
+        <div class="field field1"><input type="text" class="inputbox" value="<?php echo $user_experience['employment_period_to']?>" id="employment_period_to" name="employment_period_to"></div>
+    </div>
+   	
+    <div class="full">
+        <div class="label">Responsibility</div>
+        <div class="field">
+            <textarea cols="80" id="responsibility" name="responsibility" rows="10" class="textarea"><?php echo $user_experience['responsibility']?></textarea></div>
+    </div>
+    <div class="clr"></div>
+</div>
+
+<div class="form_btns form_btns1 floatright">
+	<input type="button" class="save_job_btn" value="Update" onclick="summeryedit(); getajax('<?=BASE_PATH?>dashboard/reloadexperience','experience');">
+    <input type="submit" class="post_job_btn" value="Cancel" onclick="getajax('<?=BASE_PATH?>dashboard/reloadexperience','experience');">
+</div>
+
+<br />

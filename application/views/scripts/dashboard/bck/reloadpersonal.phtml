@@ -1,0 +1,152 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+
+if($mySessionFront->user['userRole']=='Job Seeker') { 
+		$res=$this->Personal_Data;
+?>
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+<h2 class="floatleft title">Personal Information</h2>
+                        <div class="floatright">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/personal/user_id/<?=$res['user_id']?>','personal');" href="#" class="edit_btn2" >Edit</a>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        	<ul class="view_list">
+                            	<li>
+                                	<div class="label">Date of Birth</div>
+
+                                    <div class="info"><?php echo date("d-M-Y", strtotime($res['user_dob']))?></div>
+                                </li>
+                                
+                                <li>
+                                	<div class="label">Marital Status</div>
+                                    <div class="info"><?php echo $res['user_marital_status']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Email Address</div>
+                                    <div class="info"><?php echo $res['user_email']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Phone Number</div>
+                                    <div class="info"><?php echo $res['user_phone']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Gender</div>
+                                    <div class="info"><?php echo $res['user_gender']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Nationality</div>
+                                    <div class="info"><?php echo $res['nation_title']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Career Level</div>
+                                    <div class="info"><?php echo $res['career_level_title']?></div>
+                                </li>
+                            </ul>
+                            <div class="clr"></div>
+                        </div>
+
+<? 
+//echo "Hello Job Seeker";
+	} else { 
+?>
+	
+<h2 class="floatleft title">Personal Information</h2>
+                        <div class="floatright">
+<a onclick="getajax('<?=BASE_PATH?>dashboard/personal/user_id/<?=$res['user_id']?>','personal');" href="#" class="edit_btn2" >Edit</a>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="block1_content">
+                        	<ul class="view_list">
+                            	<li>
+                                	<div class="label">Date of Birth</div>
+
+                                    <div class="info"><?php echo date("d-M-Y", strtotime($res['user_dob']))?></div>
+                                </li>
+                                
+                                <li>
+                                	<div class="label">Marital Status</div>
+                                    <div class="info"><?php echo $res['user_marital_status']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Email Address</div>
+                                    <div class="info"><?php echo $res['user_email']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Phone Number</div>
+                                    <div class="info"><?php echo $res['user_phone']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Gender</div>
+                                    <div class="info"><?php echo $res['user_gender']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Nationality</div>
+                                    <div class="info"><?php echo $res['nation_title']?></div>
+                                </li>
+                                <li>
+                                	<div class="label">Career Level</div>
+                                    <div class="info"><?php echo $res['career_level_title']?></div>
+                                </li>
+                            </ul>
+                            <div class="clr"></div>
+                        </div>
+
+<? } ?>
+  
+ 
+

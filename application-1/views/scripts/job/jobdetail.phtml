@@ -1,0 +1,368 @@
+<?php 
+global $mySessionFront;
+$db=new Db();
+$myjob=$this->Job_Details;
+//echo $myjob['job_responsibilities'];
+?>
+ 
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+          $('body').removeClass('home');
+        });
+	
+	$(document).ready(function() {
+        $('li#home').removeClass('active');
+        });	
+				
+	$(document).ready(function() {
+        $('li#myjob').addClass('active');
+        });	
+		
+	 
+		  
+</script>
+<!--======================================== Loading Forms vai Ajax ===================================-->
+<script>
+function Save_Job_Fun(){
+	//alert('Hello...');
+	var job_id=<?php echo $myjob['id']?>;
+	alert(job_id);
+	document.getElementById('Job_msg').innerHTML="<img src='<?=IMAGES_URL?>load.gif' border='0'>";
+	$.ajax({ url: "<?php echo $this->url(array('controller'=>'job','action'=>'savejob'),'default',false);?>",
+	type: "POST",
+	data: ({job_id: job_id}),
+		success: function(data){			
+		$("#divError").html(data);	
+			//alert('Hello...');	
+		}
+	});
+
+}
+
+</script>
+
+<div class="container job_post">
+	<div id="Job_msg" ></div>
+    	
+    <div id="divError">
+        <?php if(isset($mySessionFront->errorMsg)){ ?>
+        <div id="message-red">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+            <td class="red-left">
+            <?php echo $mySessionFront->errorMsg; ?>
+            </td>
+            <td class="red-right">
+            <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+                <img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+            </a>
+            </td>
+        </tr>
+        </tbody></table>
+        </div>
+        <?php unset($mySessionFront->errorMsg);} ?>
+        
+        <?php if(isset($mySessionFront->sucMsg)){ ?>
+        <div id="message-green">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody><tr>
+            <td class="green-left">
+                <?php echo $mySessionFront->sucMsg; ?>
+            </td>
+            <td class="green-right">
+            <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+                <img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+            </a>
+            </td>
+        </tr>
+        </tbody></table>
+        </div>
+        <?php unset($mySessionFront->sucMsg); } ?>
+        
+        <?php if(isset($mySessionFront->warningMsg)){ ?>
+        <div id="message-red">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+            <td class="red-left">
+            <?php echo $mySessionFront->warningMsg; ?>
+            </td>
+            <td class="red-right">
+            <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+                <img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+            </a>
+            </td>
+        </tr>
+        </tbody></table>
+        </div>
+        <?php unset($mySessionFront->warningMsg); } ?>
+    </div>
+	
+    
+
+<div id="Mymsg" >
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    	<div id="message-red">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+            <td class="red-left">
+            <?php echo $mySessionFront->errorMsg; ?>
+            </td>
+            <td class="red-right">
+            <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+                <img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+            </a>
+            </td>
+        </tr>
+        </tbody></table>
+        </div>
+	<?php unset($mySessionFront->errorMsg);} ?>
+        
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+        <div id="message-green">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody><tr>
+            <td class="green-left">
+                <?php echo $mySessionFront->sucMsg; ?>
+            </td>
+            <td class="green-right">
+            <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+                <img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+            </a>
+            </td>
+        </tr>
+        </tbody></table>
+        </div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+        
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+        <div id="message-red">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+            <td class="red-left">
+            <?php echo $mySessionFront->warningMsg; ?>
+            </td>
+            <td class="red-right">
+            <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+                <img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+            </a>
+            </td>
+        </tr>
+        </tbody></table>
+        </div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--================================================ Error Message ===========================================-->
+<div id="divError">
+	<?php if(isset($mySessionFront->errorMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->errorMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->errorMsg);} ?>
+    
+    <?php if(isset($mySessionFront->sucMsg)){ ?>
+    <div id="message-green">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody><tr>
+		<td class="green-left">
+        	<?php echo $mySessionFront->sucMsg; ?>
+        </td>
+		<td class="green-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';" class="close-green">
+        	<img alt="" src="<?=IMAGES_URL?>icon_close_green.gif">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->sucMsg); } ?>
+    
+    <?php if(isset($mySessionFront->warningMsg)){ ?>
+    <div id="message-red">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="red-left">
+        <?php echo $mySessionFront->warningMsg; ?>
+        </td>
+		<td class="red-right">
+        <a onclick="Javascript:document.getElementById('divError').style.display='none';">
+        	<img src="<?=IMAGES_URL?>icon_close_red.gif" alt="">
+        </a>
+        </td>
+	</tr>
+	</tbody></table>
+	</div>
+    <?php unset($mySessionFront->warningMsg); } ?>
+</div>
+<!--============================================ end Error Message ===========================================-->
+    <div class="content_left">
+   
+	
+        <div class="job_head" id="job_head">
+                	<div class="img">
+                    <?php 
+						if($myjob['user_image']=='')
+						{
+						?>
+							<img width="120" height="100"  src="<?=IMAGES_URL?>no-avator.png" >
+                        <?php }else{ ?>
+							<img width="120" height="100" src="<?=ADMIN_IMG?>user_pic/<?php echo $myjob['user_image']?>" alt="">
+					<? }?>
+                    </div>
+                    <div class="info">
+                    	<h1 class="title captl">
+							<?php 
+                            if($myjob['user_company']=='')
+                            {
+                            ?>
+							<br />
+	                        <?php }else{ ?>
+								<?php echo $myjob['user_company']?>
+							<? }?>
+						</h1>
+                      	<?php if(isLoggedFront())
+						{
+					?>
+                    
+<div class="apply_btn">
+<a href="<?=BASE_PATH?>job/jobapply/job_id/<?php echo $myjob['id']?>" class="blue1">Apply Now!</a>
+</div>
+                     <? } else {?>
+	<h2><a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'login'), 'default', true)?>" class="blue1">Login to apply this job</a></h2>
+                     <? } ?>
+                        
+                        <p class="font12">San Francisco, California </p>
+                        <p class="job_title"><span class="blue">Job Title</span>: <? echo $myjob['job_title']?></p>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                
+               
+                <div class="list">
+                	<div class="block2">
+                    	<h2>Job Descriptions</h2>
+                        <div class="block2_content">
+                            <p> <?php echo $myjob['job_description']?>
+                            	<?php //substr($myjob['job_description'],0,100) ?>
+                            </p>
+                        </div>
+                  	</div>
+                    <div class="block2">
+                    	<h2>Skills Required</h2>
+                        <ul class="bullet3 font12">
+                        	<p><?php echo $myjob['job_skills_required']?></p>
+                        </ul>
+                  	</div>
+                    <div class="block2">
+                    	<h2>Job Responsibilities</h2>
+                        <ul class="bullet3 font12">
+                        	<p><?php echo $myjob['job_responsibilities']?></p>
+                        </ul>
+                  	</div>
+                    <div class="block2">
+                    	<h2>Job Key Words</h2>
+                        <ul class="bullet3 font12">
+                        	<p><?php echo $myjob['job_keywords']?></p>
+                        </ul>
+                  	</div>
+                    
+                    <div class="block2">
+                    	<h2>Job Snapshot</h2>
+                        <ul class="bullet3 font12">
+                        
+                        	<li><label>City</label><?php echo $myjob['job_city']?></li>
+                            <li><label>Country</label><?php echo $myjob['country_name']?></li>
+                            <li><label>Company Industry</label><?php echo $myjob['category_title']?></li>
+                            <li><label>Sub Category</label><?php echo $myjob['sub_category_title']?></li>
+                            <li><label>Monthly Salary</label><?php echo $myjob['job_sallary']?></li>
+                            <li><label>Career Level</label><?php echo $myjob['career_level_title']?></li>
+                            <li><label>Years of Experience</label><?php echo $myjob['experience_title']?></li>
+                           	<li><label>Education</label><?php echo $myjob['education_title']?></li>
+                            <li><label>Employment Type</label><?php echo $myjob['employment_title']?></li>
+                            <li><label>Travel Required</label><?php echo $myjob['job_travel_required']?></li>
+                            <li><label>Relocation</label><?php echo $myjob['job_relocation']?></li>
+                            <li><label>Job Role</label><?php echo $myjob['job_role_title']?></li>
+                            <li><label>Email</label><?php echo $myjob['job_email']?></li>
+                            <li><label>Phone Number</label><?php echo $myjob['job_phone_number']?></li>
+                            <li><label>Contact Name</label><?php echo $myjob['job_contact_name']?></li>
+                            <li><label>Fax No.</label><?php echo $myjob['job_fax']?></li>
+                            
+                        </ul>
+                  	</div>
+                    <?php if(isLoggedFront())
+						{
+					?>
+                    <div class="job_btns">
+                    	<a class="save_btn" href="<?=BASE_PATH?>job/savejob/job_id/<?php echo $myjob['id']?>">Save this job</a>
+                        <a class="apply_btn" href="<?=BASE_PATH?>job/jobapply/job_id/<?php echo $myjob['id']?>">apply now</a>
+                    </div>
+                    
+                    
+                     <? } else {?>
+    	<h2><a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'login'), 'default', true)?>" class="blue1">Login to apply this job</a></h2>
+                     <? } ?>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            
+            <div class="content_right">
+            	
+                <?php 
+					$i=1;
+					foreach($this->Add_Banner_Data as $Add_Banner_List) {
+				?>
+                <div class="block ad align-center">
+                <!--<img alt="" src="images/google_ad1.jpg">	banner_window_open	banner_link	-->
+                <!--<a target="_blank" href="http://google.com">-->
+                <a target="<?php echo $Add_Banner_List['banner_window_open']?>" href="<?php echo $Add_Banner_List['banner_link']?>">
+	                <img width="300" height="268" src="<?=ADMIN_IMG?>banners/<?php echo $Add_Banner_List['banner_image']?>" alt="">
+                </a>    
+                </div>
+                <!--<div class="block ad align-center"><img alt="" src="images/google_ad2.jpg"></div>-->
+                <?php }?>
+                
+                <div class="block recommended font12">
+                	<h2 class="title">Similar Jobs</h2>
+                    <ul>
+						<?php 
+                            $i=1;
+                            foreach($this->Rec_Job as $MyRec_Job) {
+                        ?>
+                    	<li>
+                        	<div class="img">
+                            	<?php 
+								if($MyRec_Job['user_image']=='')
+								{
+								?>
+									 <img width="100" height="70"  src="<?=IMAGES_URL?>no-avator.png" >
+									
+								<?php }else{ ?>
+									 <img width="100" height="70" src="<?=ADMIN_IMG?>user_pic/<?php echo $MyRec_Job['user_image']?>" alt="">
+								<? }?>
+                            </div>
+                            <div class="info">
+                            	<h3><?php echo $MyRec_Job['job_title']?></h3>
+                                <p><strong>Posted by</strong> <?php echo $MyRec_Job['user_company']?> for <?php echo $MyRec_Job['job_city']?></p>
+                                <p><a href="<?=APPLICATION_URL?>job/jobdetail/id/<?=$MyRec_Job['id']?>" class="blue1">View &amp; Apply</a> - <?php echo date("d-m-Y", strtotime($MyRec_Job['job_posted_on']))?></p>
+                            </div>
+                        </li>
+                        <?php } ?>
+                        <li class="align-right"><a href="<?=APPLICATION_URL?>job/alljobs" class="black">View All →</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clr"></div>
+        </div>
+ 
+
+					
